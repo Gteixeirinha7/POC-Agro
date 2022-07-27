@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>EndDate__c</fullName>
+    <description>Data da vigência final do Catalogo de preço, este campo armazena os valores KONH - DATBi no SAP.</description>
+    <externalId>false</externalId>
+    <inlineHelpText>Data da vigência final do Catalogo de preço, este campo armazena os valores KONH - DATBi no SAP.</inlineHelpText>
+    <label>Data Vigência Fim</label>
+    <required>false</required>
+    <trackHistory>true</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Date</type>
+</CustomField>

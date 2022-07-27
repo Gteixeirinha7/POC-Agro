@@ -1,0 +1,306 @@
+<template>
+	<div class="slds-modal__container" style={componentStyle}>
+		<header
+			style="position: relative; border-top-right-radius: .25rem; border-top-left-radius: .25rem; padding: 1rem;  background-color: #fff;">
+			<div style="float:right">
+				<lightning-button-icon icon-name="utility:close" alternative-text="Fechar" title="Fechar"
+					onclick={closeModal}> </lightning-button-icon>
+			</div>
+			<div class="header">
+				<lightning-icon icon-name="standard:change_request" alternative-text="Account" title="Account">
+				</lightning-icon>
+				<h2 class="slds-m-left_x-small slds-text-heading_medium slds-hyphenate" style="font-weight: bold;">
+					Informações Barter</h2>
+			</div>
+		</header>
+		<div class="slds-scrollable_y" style="padding-top: 0px;padding: 15px;background-color: #fff; border-bottom-right-radius: 0.25rem; border-bottom-left-radius: 0.25rem; max-height: 40rem">
+			<div> 
+				<div class="slds-m-top_medium" >
+                        
+			<lightning-layout multiple-rows horizontal-align="spread" style="width: 100%;">
+				<lightning-layout-item size="3" small-device-size="3" medium-device-size="3" large-device-size="3" style="padding:15px; border-radius: 5px 5px 0px 0px; box-shadow: 0 0 3px rgb(0 0 0 / 10%);border-bottom: 3px solid #0070d2; border-top: 1px solid #ddd; border-right: 1px solid #ddd; border-left: 1px solid #ddd;">
+					<lightning-layout multiple-rows horizontal-align="spread" style="width: 100%;">
+						<lightning-layout-item size="12" small-device-size="12" medium-device-size="12"
+							large-device-size="12">
+							<lightning-layout multiple-rows horizontal-align="spread" style="width: 100%;">
+								<lightning-layout-item size="12" small-device-size="12" medium-device-size="12"
+									large-device-size="12">
+									<div class="lb-commom" style="margin-top: 4px;">
+										Safra de Entrega <span class="field-required">*</span>
+									</div>
+									<div class="content">
+										<c-custom-lookup object-api-name="Crop__c" field-api-name="Name"
+											input-label="Safra" field-api-names="Name" object-icon-name="custom:custom5"
+											filter=" AND Active__c = true" custom-lookup-name="customLookupCrop">
+										</c-custom-lookup>
+									</div>
+								</lightning-layout-item>
+								<lightning-layout-item size="12" small-device-size="12" medium-device-size="12"
+									large-device-size="12">
+									<div class="lb-commom" style="margin-top: 4px;">
+										Safra de Faturamento <span class="field-required">*</span>
+									</div>
+									<div class="content">
+										<c-custom-lookup object-api-name="Crop__c" field-api-name="Name"
+											input-label="Safra" field-api-names="Name" object-icon-name="custom:custom5"
+											filter=" AND Active__c = true" custom-lookup-name="customLookupCrop">
+										</c-custom-lookup>
+									</div>
+								</lightning-layout-item>
+							</lightning-layout>
+							<lightning-layout multiple-rows horizontal-align="spread" style="width: 100%;">
+								<lightning-layout-item size="12" small-device-size="12" medium-device-size="12"
+									large-device-size="12">
+									<div class="lb-commom">
+										Janela de Entrega (Inicio)
+									</div>
+									<div class="customlookup">
+										<lightning-input type="date" name="inputDueDate" variant="label-hidden">
+										</lightning-input>
+									</div>
+								</lightning-layout-item>
+								<lightning-layout-item size="12" small-device-size="12" medium-device-size="12"
+									large-device-size="12">
+									<div class="lb-commom">
+										Janela de Entrega (Fim)
+									</div>
+									<div class="customlookup">
+										<lightning-input type="date" name="inputDueDate" variant="label-hidden">
+										</lightning-input>
+									</div>
+								</lightning-layout-item>
+								<lightning-layout-item size="12" small-device-size="12" medium-device-size="12"
+									large-device-size="12">
+									<div class="lb-commom">
+										Data de Inicio do Contrato
+									</div>
+									<div class="customlookup">
+										<lightning-input type="date" name="inputDueDate" variant="label-hidden">
+										</lightning-input>
+									</div>
+								</lightning-layout-item>
+								<lightning-layout-item size="12" small-device-size="12" medium-device-size="12"
+									large-device-size="12">
+									<div class="lb-commom">
+										Data de Fim do Contrato
+									</div>
+									<div class="customlookup">
+										<lightning-input type="date" name="inputDueDate" variant="label-hidden">
+										</lightning-input>
+									</div>
+								</lightning-layout-item>
+							</lightning-layout>
+						</lightning-layout-item>
+						<lightning-layout-item size="12" small-device-size="12" medium-device-size="12"
+							large-device-size="12">
+							<lightning-layout-item size="12" small-device-size="12" medium-device-size="12"
+								large-device-size="12">
+								<div class="lb-form">
+									Observação
+								</div>
+								<div class="lb-input">
+									<lightning-input type="number" name="qtde_cx_input" label="" variant="label-hidden">
+									</lightning-input>
+								</div>
+
+							</lightning-layout-item>
+						</lightning-layout-item>
+						<lightning-layout-item size="12" small-device-size="12" medium-device-size="12"
+							large-device-size="12">
+							<lightning-layout-item size="12" small-device-size="12" medium-device-size="12"
+								large-device-size="12">
+								<div class="row box-action-add mt-4">
+									<div class="col-12">
+										<button class="btn btn-cta-consultar shadow mb-2" onclick={showMessage}>
+											<span>Consultar Crédito</span>
+										</button>
+									</div>
+								</div>
+							</lightning-layout-item>
+						</lightning-layout-item>
+					</lightning-layout>
+				</lightning-layout-item>
+				<lightning-layout-item size="9" small-device-size="9" medium-device-size="9" large-device-size="9" >
+					<lightning-layout multiple-rows horizontal-align="spread" style="width: 100%;">
+						<lightning-layout-item size="12" small-device-size="12" medium-device-size="12"
+							large-device-size="12">
+							<lightning-layout multiple-rows horizontal-align="spread"
+								style="width: 100%; ">
+								<lightning-layout-item size="5" small-device-size="5" medium-device-size="5"
+									large-device-size="5">
+									<div class="slds-section slds-is-open slds-card "
+										style="margin:10px; margin-top: 0px; border-radius: 5px 5px 0px 0px;margin-bottom: 30px;box-shadow: 0 0 3px rgb(0 0 0 / 10%);border-bottom: 3px solid #0B827C; border-top: 1px solid #0B827C; border-right: 1px solid #ddd; border-left: 1px solid #ddd;">
+										<div
+											style="margin:auto;display:flex;justify-content:space-between; width: 100%;">
+											<lightning-layout multiple-rows horizontal-align="spread"
+												style="padding: 10px;">
+												<lightning-layout-item size="12"
+													class="slds-grid slds-grid_align-spread slds-wrap"
+													style="border-bottom: 1px solid grey;">
+													<lightning-layout multiple-rows>
+														<lightning-layout-item size="12" class="slds-m-bottom_xx-small"
+															style="font-size: 15px;color:#0070d2">
+															<p style="margin: 0px; font-weight: 600;"> 
+															<lightning-icon icon-name="utility:wellness" size="medium">
+															</lightning-icon> Contrato de Insumos</p>
+														</lightning-layout-item>
+													</lightning-layout>
+												</lightning-layout-item>
+                        						<template for:each={products} for:item="record">
+                        							<template for:each={record.center} for:item="center">
+														<template if:true={center.showCart}>												
+															<lightning-layout-item key={center.key} size="12"
+																style="border-bottom: 1px dashed grey;">
+																<lightning-layout multiple-rows horizontal-align="spread"
+																	style="width: 100%;">
+																	<lightning-layout-item size="9">
+																		<div class="slds-m-bottom_x-small"
+																			style="font-size:1rem; padding-top: 5px">
+																			<b>{center.key}</b>
+																		</div>
+																	</lightning-layout-item>
+																	<lightning-layout-item size="3">
+																		<div class="slds-media__body slds-col" style="font-size: 18px; padding-top: 5px">
+																			<div class="slds-m-bottom_x-small" style="color:green; font-size:0.6rem;font-weight:bold; text-align-last: center;">
+																				Estoque
+																			</div>
+																			<div class="slds-m-bottom_x-small" style="font-size:0.6rem;font-weight:bold; text-align-last: center;">
+																				{center.stock}({record.stockUn})
+																			</div>
+																		</div>
+																	</lightning-layout-item>
+																	<lightning-layout-item size="6" style="padding-left: 10px;">
+																		<lightning-input type="number" name="qtde_cx_input" label="Quantidade" value={center.quantity} data-key={center.key} data-field='quantity' oncommit={changeValue}></lightning-input>
+																	</lightning-layout-item>
+																	<lightning-layout-item size="6" style="padding-right: 10px;">
+																		<lightning-input type="number" name="qtde_cx_input" label="Desconto" value={center.discount} data-key={center.key} data-field='discount' oncommit={changeValue}></lightning-input>
+																	</lightning-layout-item>
+																	<lightning-layout-item size="12">
+																		<div class="slds-m-bottom_x-small" style=" width: 100%; text-align: center; margin-top: 15px; color: #A9A9A9 ">
+																			Valor Total: <b> <lightning-formatted-number value={center.totalPrice} format-style="currency" currency-code={account.currency} currency-display-as="code"></lightning-formatted-number></b>
+																		</div>
+																	</lightning-layout-item>
+																</lightning-layout>
+															</lightning-layout-item>
+														</template>
+													</template>
+												</template>
+											</lightning-layout>
+										</div>
+									</div>
+								</lightning-layout-item>
+								<lightning-layout-item size="2" small-device-size="2" medium-device-size="2"
+									large-device-size="2" style="margin-top: 150px; text-align: center;">
+									<lightning-icon icon-name="utility:product_transfer" size="xx-large">
+									</lightning-icon>
+								</lightning-layout-item>
+
+								<lightning-layout-item size="5" small-device-size="5" medium-device-size="5"
+									large-device-size="5">
+									<div class="slds-section slds-is-open slds-card "
+										style="margin:10px; padding: 10px; margin-top: 0px; border-radius: 5px 5px 0px 0px;margin-bottom: 30px;box-shadow: 0 0 3px rgb(0 0 0 / 10%);border-bottom: 3px solid #0B827C; border-top: 1px solid #0B827C; border-right: 1px solid #ddd; border-left: 1px solid #ddd;">
+										<div
+											style="margin:auto;display:flex;justify-content:space-between; width: 100%;">
+											<lightning-layout multiple-rows horizontal-align="spread"
+												style="width: 100%;">
+												<lightning-layout-item size="12"
+													class="slds-grid slds-grid_align-spread slds-wrap"
+													style="border-bottom: 1px solid grey;">
+													<lightning-layout multiple-rows>
+														<lightning-layout-item size="12" class="slds-m-bottom_xx-small"
+															style="font-size: 15px;color:#0070d2">
+															<p style="margin: 0px; font-weight: 600;"><lightning-icon icon-name="utility:moneybag" size="medium"></lightning-icon> Contrato de Commodity
+															</p>
+														</lightning-layout-item>
+													</lightning-layout>
+												</lightning-layout-item>
+												<lightning-layout-item size="12"
+													style="border-bottom: 1px dashed grey;">
+													<div style="display: flex; flex-direction: column; ">
+														<lightning-layout-item >
+															<div class="slds-m-bottom_x-small"
+																style="font-size:14px; ">
+																<div class="lb-input">
+																	<lightning-combobox name="progress11" value=""
+																		label="Commodity"
+																		placeholder="Selecione uma Commodity..."
+																		options={optionsBarter}></lightning-combobox>
+																</div>
+															</div>
+														</lightning-layout-item>
+														<lightning-layout-item >
+															<div class="slds-m-bottom_x-small"
+																style="font-size:1rem; ">
+																<div class="lb-form">
+																	Valor de Mercado <lightning-helptext content="Valor segundo a flutuação de valores da Commodity"></lightning-helptext>
+																</div>
+																<div class="lb-input">
+																	<lightning-input type="number" name="qtde_cx_input"
+																		label="" value="0" oncommit={calcQuatidade}
+																		variant="label-hidden">
+																	</lightning-input>
+																</div>
+															</div>
+														</lightning-layout-item>
+														<lightning-layout-item>
+															<div class="slds-m-bottom_x-small"
+																style="font-size:14px; ">
+																Quantidade <b>{allQuantity}</b> (Sacas)  <lightning-helptext content="Quantidade de sacas a serem recebidas na Janela de Entrega."></lightning-helptext>
+															</div>
+														</lightning-layout-item>
+													</div>
+												</lightning-layout-item>
+											</lightning-layout>
+										</div>
+									</div>
+									<div class="slds-section slds-is-open slds-card "
+										style="margin:10px; margin-top: 0px; border-radius: 5px 5px 0px 0px;margin-bottom: 30px;box-shadow: 0 0 3px rgb(0 0 0 / 10%);border-bottom: 3px solid purple; border-top: 1px solid purple; border-right: 1px solid #ddd; border-left: 1px solid #ddd;">
+										<div
+											style="margin:auto;display:flex;justify-content:space-between; width: 100%;">
+											<lightning-layout multiple-rows horizontal-align="spread"
+												style="width: 100%;">
+												<lightning-layout-item size="12"
+													style="padding: 10px;border-bottom: 1px dashed grey;">
+													<div style="font-size: 14px">
+														<b>Valor do Contrato de Insumos</b><p> <lightning-formatted-number value={sumprod.totalAmount} format-style="currency" currency-code={account.currency} currency-display-as="code"></lightning-formatted-number> </p>
+													</div>
+												</lightning-layout-item>
+												<lightning-layout-item size="12"
+													style="padding: 10px;border-bottom: 1px dashed grey;">
+													<div style="font-size: 14px">
+														<b>Valor do Contrato de Grãos</b><p> <lightning-formatted-number value={commodityPrice} format-style="currency" currency-code={account.currency} currency-display-as="code"></lightning-formatted-number> </p>
+													</div>
+												</lightning-layout-item>
+												<lightning-layout-item size="12"
+													style="padding: 10px;border-bottom: 1px dashed grey;">
+													<div style="font-size: 14px">
+														<b>Viabilidade do Contrato</b><p> {viability} <lightning-helptext content="Viabilidade seguindo contrato de insumos"></lightning-helptext></p>
+													</div>
+												</lightning-layout-item>
+												<lightning-layout-item size="12"
+													style="padding: 10px;border-bottom: 1px dashed grey;">
+													<div style="font-size: 14px">
+														<b>Margem do Contrato</b><p> {marginContrato}% <lightning-helptext content="Valor de Insumos X Valor de Commoodity"></lightning-helptext></p>
+													</div>
+												</lightning-layout-item>
+												<lightning-layout-item size="12"
+													style="padding: 10px;border-bottom: 1px dashed grey;">
+													<div style="font-size: 14px">
+														<b>Lucro do Contrato</b><p> <lightning-formatted-number value={lucroContrato} format-style="currency" currency-code={account.currency} currency-display-as="code"></lightning-formatted-number> <lightning-helptext content="Lucro segundo previsões"></lightning-helptext> </p>
+													</div>
+												</lightning-layout-item>
+											</lightning-layout>
+										</div>
+									</div>
+								</lightning-layout-item>
+							</lightning-layout>
+						</lightning-layout-item>
+					</lightning-layout>
+				</lightning-layout-item> 
+			</lightning-layout>
+			</div>	
+			</div>
+		</div>
+	</div>
+	</div>
+</template>

@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>AvaliableNegotiations__c</fullName>
+    <externalId>false</externalId>
+    <label>Negociações Liberadas</label>
+    <required>false</required>
+    <trackFeedHistory>false</trackFeedHistory>
+    <type>MultiselectPicklist</type>
+    <valueSet>
+        <restricted>true</restricted>
+        <valueSetDefinition>
+            <sorted>false</sorted>
+            <value>
+                <fullName>All</fullName>
+                <default>true</default>
+                <label>Todos</label>
+            </value>
+            <value>
+                <fullName>AccountOrder</fullName>
+                <default>false</default>
+                <label>Conta e Ordem</label>
+            </value>
+            <value>
+                <fullName>BarterSale</fullName>
+                <default>false</default>
+                <label>Negociação Barter</label>
+            </value>
+            <value>
+                <fullName>ZVTR</fullName>
+                <default>false</default>
+                <label>Venda Barter</label>
+            </value>
+            <value>
+                <fullName>CurrencySale</fullName>
+                <default>false</default>
+                <label>Venda moeda</label>
+            </value>
+            <value>
+                <fullName>ZVTF</fullName>
+                <default>false</default>
+                <label>Venda Triangulada</label>
+            </value>
+            <value>
+                <fullName>ZVTS</fullName>
+                <default>false</default>
+                <label>Remessa Venda Triangulação</label>
+            </value>
+            <value>
+                <fullName>ExchangeSale</fullName>
+                <default>false</default>
+                <label>Venda Troca e Permuta</label>
+            </value>
+            <value>
+                <fullName>FutureSale</fullName>
+                <default>false</default>
+                <label>Venda Futura</label>
+            </value>
+            <value>
+                <fullName>IndustryBonification</fullName>
+                <default>false</default>
+                <label>Bonificação origem Industria</label>
+            </value>
+            <value>
+                <fullName>Bonification</fullName>
+                <default>false</default>
+                <label>Bonificação</label>
+            </value>
+            <value>
+                <fullName>ZCCO</fullName>
+                <default>false</default>
+                <label>Contrato Conta e Ordem</label>
+            </value>
+            <value>
+                <fullName>ZCEF</fullName>
+                <default>false</default>
+                <label>Contrato Venda Futura</label>
+            </value>
+            <value>
+                <fullName>ZCNO</fullName>
+                <default>false</default>
+                <label>Contrato Venda Normal</label>
+            </value>
+        </valueSetDefinition>
+    </valueSet>
+    <visibleLines>4</visibleLines>
+</CustomField>

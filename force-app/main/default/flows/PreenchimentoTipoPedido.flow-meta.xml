@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Flow xmlns="http://soap.sforce.com/2006/04/metadata">
+    <apiVersion>54.0</apiVersion>
+    <decisions>
+        <description>Se caso o campo tipo de pedido estiver em branco, selecionar todos os valores para esse campo com exceção dos valores que são caracterizados como Bonificação.</description>
+        <name>TipoPedido</name>
+        <label>Tipo de pedido Preenchido?</label>
+        <locationX>182</locationX>
+        <locationY>431</locationY>
+        <defaultConnectorLabel>Sim</defaultConnectorLabel>
+        <rules>
+            <name>Nao</name>
+            <conditionLogic>and</conditionLogic>
+            <conditions>
+                <leftValueReference>$Record.OrderRecordType__c</leftValueReference>
+                <operator>IsNull</operator>
+                <rightValue>
+                    <booleanValue>true</booleanValue>
+                </rightValue>
+            </conditions>
+            <connector>
+                <targetReference>Preenchimento</targetReference>
+            </connector>
+            <label>Não</label>
+        </rules>
+    </decisions>
+    <description>Fluxo para Preenchimento do campo Tipo de Pedido durante criação de Campanha, se o campo estiver em Branco preencher com todas opções ( Exceto Tipo Bonificações )</description>
+    <interviewLabel>Preenchimento Tipo de Registro {!$Flow.CurrentDateTime}</interviewLabel>
+    <label>Preenchimento Tipo de Pedido</label>
+    <processMetadataValues>
+        <name>BuilderType</name>
+        <value>
+            <stringValue>LightningFlowBuilder</stringValue>
+        </value>
+    </processMetadataValues>
+    <processMetadataValues>
+        <name>CanvasMode</name>
+        <value>
+            <stringValue>AUTO_LAYOUT_CANVAS</stringValue>
+        </value>
+    </processMetadataValues>
+    <processMetadataValues>
+        <name>OriginBuilderType</name>
+        <value>
+            <stringValue>LightningFlowBuilder</stringValue>
+        </value>
+    </processMetadataValues>
+    <processType>AutoLaunchedFlow</processType>
+    <recordUpdates>
+        <name>Preenchimento</name>
+        <label>Preenchimento</label>
+        <locationX>50</locationX>
+        <locationY>551</locationY>
+        <inputAssignments>
+            <field>OrderRecordType__c</field>
+            <value>
+                <stringValue>AccountOrder; ZVTR; ZVTS; ZVTF; ZCCO; ZCEF; ZCNO; BarterSale; FutureSale; CurrencySale; ExchangeSale</stringValue>
+            </value>
+        </inputAssignments>
+        <inputReference>$Record</inputReference>
+    </recordUpdates>
+    <recordUpdates>
+        <name>Status</name>
+        <label>Status</label>
+        <locationX>182</locationX>
+        <locationY>311</locationY>
+        <connector>
+            <targetReference>TipoPedido</targetReference>
+        </connector>
+        <inputAssignments>
+            <field>Status</field>
+            <value>
+                <stringValue>In Progress</stringValue>
+            </value>
+        </inputAssignments>
+        <inputReference>$Record</inputReference>
+    </recordUpdates>
+    <start>
+        <locationX>56</locationX>
+        <locationY>0</locationY>
+        <connector>
+            <targetReference>Status</targetReference>
+        </connector>
+        <object>Campaign</object>
+        <recordTriggerType>CreateAndUpdate</recordTriggerType>
+        <triggerType>RecordBeforeSave</triggerType>
+    </start>
+    <status>Active</status>
+    <variables>
+        <name>Valores</name>
+        <dataType>Multipicklist</dataType>
+        <isCollection>true</isCollection>
+        <isInput>false</isInput>
+        <isOutput>false</isOutput>
+    </variables>
+    <variables>
+        <name>ValoresTipoPedido</name>
+        <dataType>Multipicklist</dataType>
+        <isCollection>true</isCollection>
+        <isInput>false</isInput>
+        <isOutput>false</isOutput>
+    </variables>
+</Flow>

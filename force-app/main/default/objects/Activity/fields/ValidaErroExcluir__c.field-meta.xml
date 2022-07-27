@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>ValidaErroExcluir__c</fullName>
+    <defaultValue>false</defaultValue>
+    <description>Campo para ser usado no flow de não permissão de exclusão caso um registro de Visita esteja com checkin realizado.</description>
+    <externalId>false</externalId>
+    <label>Valida Erro Excluir</label>
+    <type>Checkbox</type>
+</CustomField>

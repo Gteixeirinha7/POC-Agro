@@ -1,0 +1,598 @@
+<template>
+	<!-- GARRA INTERNACIONAL -->
+	<div class="slds-grid slds-gutters" style="display: block;">
+		<div class='slds-col slds-size_5-of-5'>
+					<div class="slds-card__body" style="padding: 15px;background: white;border-radius: 5px;">
+						<!-- HEADER INFO DO CLIENTE -->
+						<div style="border: 1px dashed #ddd;border-radius: 5px;"
+							class="slds-m-around_xx-small slds-m-bottom_small slds-border_top slds-border_bottom slds-border_left slds-border_right slds-page-header">
+							<div class="slds-media slds-media_center slds-media_small">
+								
+								<lightning-layout multiple-rows style="width: 100%;">
+									<lightning-layout-item size="7" small-device-size="7" medium-device-size="7"
+										large-device-size="7">
+										<div class="slds-media__body">
+											<lightning-layout multiple-rows style="width: 100%;">
+												<lightning-layout-item size="12" small-device-size="12"
+													medium-device-size="12" large-device-size="12">
+													<div class="slds-page-header__title slds-text-heading_small"
+														style="width: 100%;">{account.name} - CNPJ:
+														{account.key}</div>
+												</lightning-layout-item>
+
+												<lightning-layout-item size="12" small-device-size="12"
+													medium-device-size="12" large-device-size="12">
+													<ul class="slds-list_horizontal slds-has-dividers_left" style="margin: 0px">
+														<li class="slds-item">
+															<div style="font-size: 0.8125rem;">
+																<p style="margin: 0px">{account.aditionalInfo}: {account.aditional}</p>
+															</div>
+														</li>
+													</ul>
+												</lightning-layout-item>
+											</lightning-layout>
+										</div>
+									</lightning-layout-item>
+									<lightning-layout-item style="margin-bottom: 2px; display: flex; justify-content: flex-end;" size="5">
+        								<lightning-button-group>
+											<lightning-button icon-name="utility:new_window"
+												variant="brand-outline" onclick={showCheckout} label="Carrinho">
+											</lightning-button>
+											<lightning-button icon-name="utility:work_order_type"
+												variant="brand-outline" onclick={showHeaderButton} label="Dados">
+											</lightning-button>
+											<template if:true={isBarter}>
+												<lightning-button icon-name="utility:change_record_type"
+													variant="brand-outline" onclick={openBarter} label="Barter">
+												</lightning-button>
+											</template>
+											<lightning-button icon-name="utility:einstein"
+												variant="brand" onclick={openRecommendation} label="Recomendação">
+											</lightning-button>
+											<lightning-button icon-name="utility:calculated_insights"
+												variant="brand" onclick={openMixClient} label="Historico">
+											</lightning-button>
+											<lightning-button icon-name="utility:approval"
+												variant="brand" onclick={openApprovers} label="Aprovadores">
+											</lightning-button>
+            								<!-- <lightning-button-menu alternative-text="Show menu" variant="border-filled">
+												<lightning-menu-item icon-name="utility:einstein"
+												onclick={openRecommendation} label="Recomendação">
+												</lightning-menu-item>
+												<lightning-menu-item icon-name="utility:calculated_insights"
+													onclick={openMixClient} label="Historico">
+												</lightning-menu-item>
+											</lightning-button-menu> -->
+										</lightning-button-group>
+									</lightning-layout-item>
+								</lightning-layout>
+							</div>
+						</div>
+
+			</div>
+		</div>
+		<div class='slds-col slds-size_5-of-5 slds-grid'>
+			<template if:true={showHeader}>
+				<!-- Cabeálho-->
+					<div class="slds-size_2-of-12">
+						<div style="padding: 8px;background: white;border-radius: 5px;">
+							<div class="slds-card__body_inner">
+								<div style="padding:0 8px;">
+									<lightning-layout multiple-rows style="width: 100%;">
+										<lightning-layout-item size="12" small-device-size="12"
+											medium-device-size="12" large-device-size="12" style="margin-top: 10px; margin-right: 10px">								
+            	        					<div class="lb-commom" style="margin-top: 4px;">
+            	        					    Safra <span class="field-required">*</span>
+            	        					</div>
+            	                			<div class="content">
+            	                			    <c-custom-lookup 
+            	                			    object-api-name="Crop__c" 
+            	                			    field-api-name="Name"
+												input-label="Safra"
+            	                			    field-api-names="Name"
+            	                			    object-icon-name="custom:custom5"
+            	                			    filter=" AND Active__c = true"
+            	                			    onselectrecord={handleNewRecordCrop}
+            	                			    custom-lookup-name="customLookupCrop"
+            	                			    selected-record={orderObjectCrop}
+            	                			    disabled-custom-lookup={disabledCustomLookupCrop}>
+            	                			    </c-custom-lookup>
+            	                			</div>
+										</lightning-layout-item>
+										<lightning-layout-item size="12" small-device-size="12"
+											medium-device-size="12" large-device-size="12" style="margin-top: 10px; margin-right: 10px">
+            	                			<div class="content">
+    											<lightning-combobox
+    											    name="progress"
+    											    value=""
+													label="Tipo de Pedido"
+    											    placeholder="Selecione um Tipo..."
+    											    options={options}
+													onchange={handleChangeType}
+    											></lightning-combobox>
+            	                			</div>
+										</lightning-layout-item>
+										<lightning-layout-item size="12" small-device-size="12"
+											medium-device-size="12" large-device-size="12" style="margin-top: 10px; margin-right: 10px">
+            	                			<div class="content">
+    											<lightning-combobox
+    											    name="progressC"
+    											    value=""
+													label="Condição de Venda"
+    											    placeholder="Selecione um Tipo..."
+    											    options={optionsCondition}
+    											></lightning-combobox>
+            	                			</div>
+										</lightning-layout-item>
+										<lightning-layout-item size="12" small-device-size="12"
+											medium-device-size="12" large-device-size="12" style="margin-top: 10px; margin-right: 10px">
+            	                			<div class="content">
+    											<lightning-combobox
+    											    name="progressC"
+    											    value=""
+													label="Condição de Pagamento"
+    											    placeholder="Selecione um Tipo..."
+    											    options={optionsPayment}
+    											></lightning-combobox>
+            	                			</div>
+										</lightning-layout-item>
+										<template if:true={isBarter}>
+											<lightning-layout-item size="12" small-device-size="12"
+												medium-device-size="12" large-device-size="12" style="margin-top: 10px; margin-right: 10px">
+            	                				<div class="content">
+    												<lightning-combobox
+    												    name="progressC"
+    												    value=""
+														label="Tipo de Barter"
+    												    placeholder="Selecione um Tipo..."
+    												    options={getBarterType}
+    												></lightning-combobox>
+            	                				</div>
+											</lightning-layout-item>
+										</template>
+										<lightning-layout-item size="12" small-device-size="12"
+											medium-device-size="12" large-device-size="12" style="margin-top: 10px; margin-right: 10px">
+            	            				<div class="unique-data">
+            	            				    <div class="lb-commom">Moeda</div>
+            	            				</div>
+            	            				<div class="box-moeda" style="width: 450px;">
+            	            				    <div class="form-check form-check-inline bg-white border rounded" style="padding: 7px;">
+            	            				        <input class="form-check-input" checked={checkedCurrencyReal} type="radio" name="inlineRadio" id="inlineRadio1" value="BRL" onclick={handleCurrency}>
+            	            				        <label class="form-check-label" for="inlineRadio1">Real (R$)</label>
+            	            				    </div>
+            	            				    <div class="form-check form-check-inline bg-white border rounded" style="padding: 7px;">
+            	            				        <input class="form-check-input" checked={checkedCurrencyDol} type="radio" name="inlineRadio" id="inlineRadio2" value="USD" onclick={handleCurrency}>
+            	            				        <label class="form-check-label" for="inlineRadio2">Dolar (US$)</label>
+            	            				    </div>
+            	            				</div>
+										</lightning-layout-item>
+									</lightning-layout>
+								</div>
+							</div>
+						</div>
+					</div>
+				<!-- /Cabeálho-->
+			</template>
+			<div class='slds-col slds-size_12-of-12' data-name="left_div">				
+				<lightning-accordion  allow-multiple-sections-open style=" background: white; border-top-right-radius: 20px; border-top-left-radius: 10px;">
+					<lightning-accordion-section name="cdaccordion" data-name="accordion" label="Filtros" class="divAccordionSection" style="display:block;">
+						
+							<lightning-layout multiple-rows style="width: 100%;" >
+								<lightning-layout-item size="12" small-device-size="12" medium-device-size="12"
+									large-device-size="12">
+									<div class="slds-media__body">
+										<lightning-layout multiple-rows style="width: 100%;">
+											<lightning-layout-item size="3" small-device-size="3"
+												medium-device-size="3" large-device-size="3" style="margin-top: 10px; font-size: 13px">
+                            					<div class="content" style="padding: 10px">
+													<lightning-input 
+														type="text" 
+														name="progress1"
+														label="Nome do Produto"
+														data-filter="name"
+    												    onchange={handleFilter}>
+													</lightning-input>
+                            					</div>
+											</lightning-layout-item>
+											<lightning-layout-item size="3" small-device-size="3"
+												medium-device-size="3" large-device-size="3" style="margin-top: 10px; font-size: 13px">
+                            					<div class="content" style="padding: 10px">
+													<lightning-input 
+														type="text" 
+														name="progress1"
+														label="Código do produto"
+														data-filter="productCode"
+    												    onchange={handleFilter}>
+													</lightning-input>
+                            					</div>
+											</lightning-layout-item>
+											<lightning-layout-item size="3" small-device-size="3"
+												medium-device-size="3" large-device-size="3" style="margin-top: 10px; font-size: 13px" >
+                            					<div class="content" style="padding: 10px">													
+    												<lightning-combobox
+    												    name="progressC"
+    												    value=""
+														label="Familia de Produto"
+														data-filter="family"
+    												    placeholder="Selecione um Tipo..."
+    												    options={optionsFamily}
+    												    onchange={handleFilter}
+    												></lightning-combobox>
+                            					</div>
+											</lightning-layout-item>
+											<lightning-layout-item size="3" small-device-size="3"
+												medium-device-size="3" large-device-size="3" style="margin-top: 10px; font-size: 13px" >
+                            					<div class="content" style="padding: 10px">
+    												<lightning-combobox
+    												    name="progressC"
+    												    value=""
+														label="Centro de Distribuição"
+														data-filter="name"
+    												    placeholder="Selecione um Tipo..."
+    												    options={optionsCenter}
+    												    onchange={handleFilterRelated}
+    												></lightning-combobox>
+                            					</div>
+											</lightning-layout-item>
+										</lightning-layout>
+									</div>
+								</lightning-layout-item>
+							</lightning-layout>
+					</lightning-accordion-section>
+				</lightning-accordion>
+				<lightning-card>
+					<div class="slds-card__body" style=" margin: 0;">
+						<div class="slds-section slds-is-open" >
+  						<div aria-hidden="false" class="slds-section__content" style="padding-left: 15px;">
+                        <template for:each={allProducts} for:item="record">
+							<template if:true={record.show}>
+						<div key={record.productCode} class="slds-section slds-is-open slds-card " style="padding:15px; border-radius: 5px 5px 0px 0px;margin-bottom: 30px;box-shadow: 0 0 3px rgb(0 0 0 / 10%);border-bottom: 3px solid #0070d2; border-top: 1px solid rgb(0, 112, 210); border-right: 1px solid rgb(0, 112, 210); border-left: 1px solid rgb(0, 112, 210); margin-right: 10px">
+							<div style="margin:auto;display:flex;justify-content:space-between; width: 100%; border-bottom: 1px solid #aaa;padding-bottom: 10px;">
+								<lightning-layout multiple-rows horizontal-align="spread" style="width: 100%;">
+									<lightning-layout-item size="1">
+										<div style="font-size:1rem;padding: 0 0 10px 0; color: #7F8DE1">
+											<strong>{record.productCode}</strong>
+										</div>
+									</lightning-layout-item>
+									<lightning-layout-item size="4">
+										<div class="slds-media__body slds-col" style="font-size: 18px;">
+											<p><strong>{record.name}</strong></p>
+										</div>
+									</lightning-layout-item>
+									<lightning-layout-item size="1">
+										<div class="slds-media__body slds-col" style="font-size: 18px;">
+											<div class="slds-m-bottom_x-small" style="color:green; font-size:0.6rem;font-weight:bold; text-align-last: center;">
+												Estoque
+											</div>
+											<div class="slds-m-bottom_x-small" style="font-size:1rem;font-weight:bold; text-align-last: center;">
+												{record.stock}({record.stockUn})
+											</div>
+										</div>
+									</lightning-layout-item>
+									<lightning-layout-item size="2">
+										<div class="slds-media__body slds-col" style="font-size: 18px;">
+											<div class="slds-m-bottom_x-small" style="color:grey; font-size:0.6rem;font-weight:bold; text-align-last: center;">
+												Preço Médio
+											</div>
+											<div class="slds-m-bottom_x-small" style="font-size:1rem;font-weight:bold; text-align-last: center;">
+												<lightning-formatted-number value={record.price} format-style="currency" currency-code={account.currency} currency-display-as="code"></lightning-formatted-number>
+											</div>
+										</div>
+									</lightning-layout-item>
+									<lightning-layout-item size="2">
+										<div class="slds-media__body slds-col" style="font-size: 18px;">
+											<div class="slds-m-bottom_x-small" style="color:grey; font-size:0.6rem;font-weight:bold; text-align-last: center;">
+												LeadTime Médio
+											</div>
+											<div class="slds-m-bottom_x-small" style="font-size:1rem;font-weight:bold; text-align-last: center;">
+												{record.leadTime} Dias
+											</div>
+										</div>
+									</lightning-layout-item>
+									<lightning-layout-item size="2">
+										<div style="display: flex; flex-direction: row; align-items: center;">
+											<img src="https://img.icons8.com/external-phatplus-lineal-color-phatplus/344/external-agronomy-ecology-phatplus-lineal-color-phatplus-3.png" width="30px"></img>
+                                        	<div style="max-width: 80px; margin-left: 10px;">
+												<div style="display: flex;border: 1px dashed #ddd;border-radius: 5px;min-width: 30px;justify-content: center;height: 30px;align-items: center;"
+													title="B">
+													{record.family}
+												</div>
+											</div>
+										</div>
+									</lightning-layout-item>
+								</lightning-layout>
+							</div>
+							<!-- Card info do produto -->
+
+
+							<!-- Accordion do CD -->
+							<div class="distributionCardDiv">
+								<lightning-accordion allow-multiple-sections-open>
+									<lightning-accordion-section name="cdaccordion" data-name="accordion" label="Centro de Distribuição" class="divAccordionSection" style="display:block;">
+										<div style="display:flex;">
+                        					<template for:each={record.center} for:item="center">
+												<template if:true={center.show}>
+											<div  key={center.key} class="slds-grid slds-wrap" style="flex: auto; place-content: center;">
+												<div class="slds-col slds-size_1-of-1 slds-medium-size_1-of-2 slds-large-size_1-of-3" style="width:auto">
+													<div style="min-height: 330px" class="card-custom">
+														<div class="card-header">
+															<div class="title">
+																<span>{center.name}</span>
+																<div class="box-icons">
+																	<div class="icon">
+																		<lightning-button-icon style="margin:auto;" tooltip="Informações CD - Clique + informações" icon-name="utility:fulfillment_order" size="medium" variant="bare"> </lightning-button-icon>
+																	</div>
+																</div>
+															</div>
+														</div>
+														<div class="card-body">
+															<div class="info">
+																<div class="qtde">
+																	<span >{center.stock} ({record.stockUn})</span>
+																</div>
+																<template if:true={center.showLastBuy}>
+																	<div >
+																		<span style="font-size: 12px;color: grey;" >Ultima Compra: {center.lastBuy}</span>
+																	</div>
+																</template>
+															</div>
+															<div class="info2">
+																<div>
+																	<span class="lb-sec dark">Preço &rArr; <lightning-formatted-number value={center.listPrice} format-style="currency" currency-code={account.currency} currency-display-as="code"></lightning-formatted-number></span>
+																	<span class="lb-sec">LeadTime &rarr; {center.leadTimeLabel}</span>
+																</div>
+															</div>
+															<div class="box-form">
+																<div class="row-form">
+																	<div class="col-form">
+																		<div class="lb-form">Qtde. ({record.stockUn})</div>
+																		<div class="lb-input">
+																			<lightning-input type="number" name="qtde_cx_input" label="" variant="label-hidden" value={center.quantity} data-key={center.key} data-field='quantity' oncommit={changeField}></lightning-input>
+																		</div>
+																	</div>
+																</div>
+																<div class="row-form">
+																	<div class="col-form">
+																		<div class="lb-form"> Desconto % </div>
+																		<div class="lb-input">
+																			<lightning-input type="number" name="qtde_cx_input" label="" step="0.01" variant="label-hidden" value={center.discount} data-key={center.key} data-field='discount' oncommit={changeField}></lightning-input>
+																		</div>
+																	</div>
+																	<div class="col-form">
+																		<div class="lb-form">Valor Total</div>
+																		<div class="lb-input"><lightning-formatted-number value={center.totalPrice} format-style="currency" currency-code={account.currency} currency-display-as="code"></lightning-formatted-number></div>
+																	</div>
+																</div>
+																<template if:false={center.showCart}>			
+																	<div class="row-form flex-end">
+																		<lightning-button class="slds-button_full-width  flex-end" icon-name="utility:add" variant="brand" onclick={addProduct} data-key={center.key} label="Adicionar"></lightning-button>
+																	</div>
+																</template>
+															</div>
+														</div>
+													</div>
+												</div>
+											</div>
+											</template>
+											</template>
+										</div>
+									</lightning-accordion-section>
+								</lightning-accordion>
+							</div>
+						</div>
+								
+							</template>
+						</template>
+						</div>
+						</div>	
+						<!-- Iteração info do produto / Card CD  -->
+					</div>
+				</lightning-card>
+			</div>
+			<!-- Checkout rápido-->
+			<template if:true={showCheckoutModal}>
+				<div class="slds-size_3-of-12" style="max-height: 900px;">
+					<article class="slds-card" style="bottom:0px;right:0px;margin:0px;height:100%;">
+						
+  						<div class="slds-card__header slds-grid" style=" background: white; margin: 0; padding-bottom: 10px; border-bottom: 1px dashed #999;">
+  						  <header class="slds-media slds-media_center slds-has-flexi-truncate" style="display: flex;">
+  						    <div class="slds-media__figure">
+  						      <span class="slds-icon_container slds-icon-standard-account" title="account">
+								<lightning-icon icon-name="standard:checkout" alternative-text="Event" title="Event"></lightning-icon>
+  						      </span>
+  						    </div>
+  						    <div class="slds-media__body">
+  						      <h2 class="slds-card__header-title">
+  						        <span style="font-size: 18px;display: flex;">Resumo</span>
+  						      </h2>
+  						    </div>
+  						    <div class="slds-no-flex">
+								<lightning-button-icon alternative-text="" icon-class="" variant="border-filled"
+									type="button" icon-name="utility:close" size="medium" onclick={closeCheckoutModal}>
+								</lightning-button-icon>
+  						    </div>
+  						  </header>
+  						</div>
+						<div class="slds-card__body_inner">
+							<div style="padding:0 8px; height:52vh; overflow:auto; background: #F2F2F2;">
+
+                        <template for:each={allProducts} for:item="record">
+                        	<template for:each={record.center} for:item="center">
+							<template if:true={center.showCart}>								
+								<div key={center.key} class="slds-section slds-is-open slds-card "
+									style="padding:10px; border-radius: 5px 5px 0px 0px;margin-bottom: 30px;box-shadow: 0 0 3px rgb(0 0 0 / 10%);border-bottom: 3px solid #00b835; border-top: 1px solid #00b835; border-right: 1px solid #ddd; border-left: 1px solid #ddd;">
+									<div style="margin:auto;display:flex;justify-content:space-between; width: 100%;">
+										<lightning-layout multiple-rows horizontal-align="spread" style="width: 100%;">
+											<lightning-layout-item size="2"  class="slds-grid slds-grid_align-spread slds-wrap">
+												<div style="margin:2px; top: 0px; left: 0px; padding: 3px; height: 24px; overflow: hidden; font-weight: 500; line-height: 18px; text-align: center; border-radius: 8px; position: absolute; color: rgb(255, 255, 255); background-color: rgb(245, 67, 55); font-size: 12px;">-{center.discount}%</div>
+												<img src={center.img} style="width: 100px; height: 50px;"></img>
+											</lightning-layout-item>
+											<lightning-layout-item size="10"  class="slds-grid slds-grid_align-spread slds-wrap" style="padding-left: 15px">
+												<lightning-layout multiple-rows horizontal-align="spread" style="width: 100%;">
+													<lightning-layout-item size="12"  class="slds-grid slds-grid_align-spread slds-wrap">
+														<div class="slds-media__body slds-col slds-size_10-of-12">
+															<lightning-layout multiple-rows>
+																<lightning-layout-item size="12" class="slds-m-bottom_xx-small"
+																	style="font-size: 15px;color:#0070d2">
+																	<p style="margin: 0px"><strong>{center.key}</strong></p>
+																</lightning-layout-item>
+																<lightning-layout-item size="12" class="slds-m-bottom_xx-small"
+																	style="font-size: 15px;color:#777">			
+																	<p style="margin: 0px">
+																		<s>
+																			<lightning-formatted-number value={center.listPrice} format-style="currency" currency-code={account.currency} currency-display-as="code"></lightning-formatted-number> 
+																		</s>
+																		<strong>
+																			<lightning-formatted-number value={center.unitPrice} format-style="currency" currency-code={account.currency} currency-display-as="code"></lightning-formatted-number>
+																		</strong>
+																	</p>
+																</lightning-layout-item>
+															</lightning-layout>
+														</div>
+														<div class="slds-col slds-size_2-of-12" style="text-align: center;display:flex;">
+															<lightning-layout class="slds-m-bottom_xx-small">
+																<lightning-layout-item>
+																	<lightning-button-icon icon-name="utility:delete" data-key={center.key}
+																		alternative-text="Delete" class="slds-m-left_xx-small"
+																		title="Delete" onclick={removeProduct}>
+																	</lightning-button-icon>
+																</lightning-layout-item>
+															</lightning-layout>
+														</div>
+													</lightning-layout-item>
+													<lightning-layout-item size="12">
+														<div style="display: flex; flex-direction: column; ">
+															<lightning-layout-item>
+																<div class="slds-m-left_xx-small" style="font-weight: 400; color: #666;  height: 40px; padding: 8px; display: flex; font-size: 14px; font-weight: 400; border-radius: 8px; -webkit-box-align: center; align-items: center; -webkit-box-pack: justify; justify-content: space-between; border: 1px solid rgb(230, 230, 230); color: rgb(153, 153, 153); margin-top: 8px; user-select: none; max-width: 250px;">
+																	<lightning-button-icon icon-name="utility:dash" variant="brand" data-quantity={center.quantity} data-key={center.key} data-operation="-1" onclick={changeQuantity}></lightning-button-icon>
+																	<span style="padding-left: 3px; padding-right: 3px;">{center.quantity}</span>
+																	<lightning-button-icon icon-name="utility:add"  variant="brand" data-quantity={center.quantity} data-key={center.key} data-operation="1"  onclick={changeQuantity}></lightning-button-icon>
+																</div>
+															</lightning-layout-item>
+														</div>
+													</lightning-layout-item>
+												
+												</lightning-layout>
+											</lightning-layout-item>
+										</lightning-layout>
+									</div>
+								</div>
+							</template>
+							</template>
+						</template>
+
+							</div>
+							<div style="display: flex">
+								<div class="cardNota"></div>
+								<div class="cardNota"></div>
+								<div class="cardNota"></div>
+								<div class="cardNota"></div>
+								<div class="cardNota"></div>
+								<div class="cardNota"></div>
+								<div class="cardNota"></div>
+								<div class="cardNota"></div>
+								<div class="cardNota"></div>
+								<div class="cardNota"></div>
+								<div class="cardNota"></div>
+								<div class="cardNota"></div>
+								<div class="cardNota"></div>
+								<div class="cardNota"></div>
+								<div class="cardNota"></div>
+								<div class="cardNota"></div>
+								<div class="cardNota"></div>
+								<div class="cardNota"></div>
+								<div class="cardNota"></div>
+								<div class="cardNota"></div>
+								<div class="cardNota"></div>
+								<div class="cardNota"></div>
+								<div class="cardNota"></div>
+							</div>
+							<div class="css-157ulrc">
+								<div class="css-q9yq3o">
+									<div id="progress-bar" class="css-mqhgri">
+										<div class="css-1kpqoqq" style={sumObject.width}><div></div>
+										</div>
+										<div class="css-a4hmbt">
+											<div class="css-1432vc3">Faltam <lightning-formatted-number value={sumObject.minimumOrder} format-style="currency" currency-code={account.currency} currency-display-as="code"></lightning-formatted-number> para o valor mínimo do pedido</div>
+										</div>
+									</div>
+								</div>
+								<div class="css-19t7vzy">
+									<div id="total-qty-products" class="css-14kcwq8">{sumObject.length} Produtos</div>
+									<div id="subtotal" class="css-5cm1aq"> <lightning-formatted-number value={sumObject.amount} format-style="currency" currency-code={account.currency} currency-display-as="code"></lightning-formatted-number></div>
+								</div>
+								<div class="css-19t7vzy">
+									<div class="css-14kcwq8">Frete</div>
+									<div id="shipping-price" class="css-5cm1aq"> <lightning-formatted-number value={sumObject.freight} format-style="currency" currency-code={account.currency} currency-display-as="code"></lightning-formatted-number></div>
+								</div>
+								<div class="css-19t7vzy">
+									<hr class="css-12tome2">
+								</div>
+								<div class="css-1pg8bi"></div>
+								<div class="css-19t7vzy">
+									<div class="css-14kcwq8">Total a pagar</div>
+									<div id="total-price" class="css-sioqkz"> <lightning-formatted-number value={sumObject.totalAmount} format-style="currency" currency-code={account.currency} currency-display-as="code"></lightning-formatted-number></div>
+								</div>
+									<div class="css-1ebprri">
+										<lightning-button variant="success" label="Salvar pedido" onclick={conclude}   icon-name="utility:save"  class="slds-m-left_x-small"></lightning-button>
+									</div>
+								<template if:true={isBarter}>
+									<div class="css-1ebprri">
+										<lightning-button variant="success" label="Preencher Barter" onclick={openBarter}  icon-name="utility:change_record_type"  class="slds-m-left_x-small"></lightning-button>
+									</div>
+								</template>
+							</div>
+						</div>
+					</article >
+				</div>
+			</template>
+			<!-- /Checkout rápido-->
+		</div>
+		
+			
+			<template if:true={isMixClientOpen}>
+				<div style="float: right; display:flex">
+					<section role="dialog" tabindex="-1" aria-labelledby="modal-heading-01"
+						aria-modal="true" aria-describedby="modal-content-id-1"
+						class="slds-modal slds-fade-in-open">
+						<c-show-account-orders onclosehistory={onclosehistory}>
+						</c-show-account-orders>
+					</section>
+					<div class="slds-backdrop slds-backdrop_open"></div>
+				</div>
+			</template>
+			<template if:true={isBarterOpen}>
+				<div style="float: right; display:flex">
+					<section role="dialog" tabindex="-1" aria-labelledby="modal-heading-01"
+						aria-modal="true" aria-describedby="modal-content-id-1"
+						class="slds-modal slds-fade-in-open">
+					<c-show-barter-screen onclosehistory={onclosebarter} onchangevalue={changeValueBarter} products={allProducts} account={account} sumprod={sumObject}>
+					</c-show-barter-screen>
+					</section>
+					<div class="slds-backdrop slds-backdrop_open"></div>
+				</div>
+			</template>
+			<template if:true={isRecommendation}>
+				<div style="float: right; display:flex">
+					<section role="dialog" tabindex="-1" aria-labelledby="modal-heading-01"
+						aria-modal="true" aria-describedby="modal-content-id-1"
+						class="slds-modal slds-fade-in-open">
+						<c-show-recommendation onclosehistory={oncloseRecommendation}>
+						</c-show-recommendation>
+					</section>
+					<div class="slds-backdrop slds-backdrop_open"></div>
+				</div>
+			</template>
+			<template if:true={isApprovers}>
+				<div style="float: right; display:flex">
+					<section role="dialog" tabindex="-1" aria-labelledby="modal-heading-01"
+						aria-modal="true" aria-describedby="modal-content-id-1"
+						class="slds-modal slds-fade-in-open">
+						<c-show-approvers onclosehistory={oncloseApprovers}>
+						</c-show-approvers>
+					</section>
+					<div class="slds-backdrop slds-backdrop_open"></div>
+				</div>
+			</template>
+	</div>
+</template>

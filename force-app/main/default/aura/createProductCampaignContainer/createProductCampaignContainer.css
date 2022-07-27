@@ -1,0 +1,24 @@
+.THIS .slds-modal__container .modal-container{
+    width: 954px !important;
+    min-width: 100%;
+}
+
+.THIS.slds-modal__container.modal-container{
+    width: 954px !important;
+    min-width: 100%;
+}
+
+.THIS.slds-modal__container{
+    width: 954px !important;
+    min-width: 100%;
+}
+
+.THIS.modal-container{
+    width: 954px !important;
+    min-width: 100%;
+}
+
+.THIS .modal-container{
+    width: 954px !important;
+    min-width: 100%;
+}

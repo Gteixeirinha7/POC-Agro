@@ -1,0 +1,485 @@
+<template>
+    <div class="container">
+        <div style="padding-bottom: 10px;">
+            <h3 slot="title">
+                <div style="padding-left: 2px">Consulta de Estoque</div>
+            </h3>
+            <div slot="footer">
+            </div>
+        </div>
+        <details open class="details" style="background-color: white;">
+            <summary class="summary-filter">Filtros de Consulta</summary> 
+            <div class="filtros-main">
+                <!-- Safra -->
+                <div class="filtros">
+                    <div class="slds-form-element">
+                        <div class="slds-form-element__control" style="margin-top: -15px;">
+                            <div class="slds-combobox_container">
+                                <div data-id="resultBox" aria-expanded="false" aria-haspopup="listbox" role="combobox">
+                                    <div class="slds-form-element__control slds-input-has-icon slds-input-has-icon slds-input-has-icon_left-right" role="none">
+                                        <div class="row">
+                                            <div class="col-12">
+                                                <div class="unique-data">
+                                                    <div class="lb-commom">Safra 
+                                                    </div>
+                                                    <div class="content cont-label">
+                                                        <c-custom-lookup-for-table-screen
+                                                            object-api-name="Crop__c" 
+                                                            field-api-name="Name"
+                                                            field-api-names="Name"
+                                                            object-icon-name="custom:custom5"
+                                                            filter=" AND Active__c = true "
+                                                            onselectrecord={setSelectedRecordCrop}
+                                                            custom-lookup-name="customLookupDistributionCenter">
+                                                        </c-custom-lookup-for-table-screen>
+                                                        <!-- <c-custom-lookup 
+                                                            object-api-name="Crop__c" 
+                                                            field-api-name="Name"
+                                                            field-api-names="Name"
+                                                            object-icon-name="custom:custom5"
+                                                            filter=" AND isActive__c true "
+                                                            onselectrecord={handleNewRecordSalesTeam}
+                                                            custom-lookup-name="handleNewRecordCrop"
+                                                            selected-record={filterObject.crop}>
+                                                        </c-custom-lookup> -->
+                                                    </div>
+                                                </div>
+                                            </div>      
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- Equipe de Vendas -->
+                <!-- <div class="filtros">
+                    <div class="slds-form-element">
+                        <div class="slds-form-element__control" style="margin-top: -15px;">
+                            <div class="slds-combobox_container">
+                                <div data-id="resultBox" aria-expanded="false" aria-haspopup="listbox" role="combobox">
+                                    <div class="slds-form-element__control slds-input-has-icon slds-input-has-icon slds-input-has-icon_left-right" role="none">
+                                        <div class="row">
+                                            <div class="col-12">
+                                                <div class="unique-data">
+                                                    <div class="lb-commom">Equipe de Vendas 
+                                                    </div>
+                                                    <div class="content cont-label">           
+                                                        <c-custom-lookup-sales-team
+                                                            object-api-name="SalesTeam__c" 
+                                                            field-api-name="Name;ExternalId__c "
+                                                            field-api-names=", DistributionCenter__r.City__c, SalesOrg__c, SalesOrg__r.Name, SalesOrg__r.Director__r.Name, ParentId__c, Manager__r.Name"
+                                                            object-icon-name="custom:custom27"
+                                                            record-id={account}
+                                                            filter=" AND Id IN (replace) "
+                                                            onselectrecord={setSelectedRecordCenter}
+                                                            custom-lookup-name="customLookupSalesTeam"
+                                                            sales-team-list={salesTeamList}>
+                                                        </c-custom-lookup-sales-team>
+                                                        <!-/- <c-custom-lookup 
+                                                            object-api-name="SalesTeam__c" 
+                                                            field-api-name="Name"
+                                                            field-api-names="Name"
+                                                            object-icon-name="custom:custom27"
+                                                            filter=" AND SalesOrg__c != null "
+                                                            onselectrecord={handleNewRecordSalesTeam}
+                                                            custom-lookup-name="customLookupSalesTeam"
+                                                            selected-record={filterObject.salesTeam}>
+                                                        </c-custom-lookup> -/->
+                                                    </div>
+                                                </div>
+                                            </div>      
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>  -->
+                <div class="filtros">
+                    <div class="slds-form-element">
+                        <div class="slds-form-element__control" style="margin-top: -15px;">
+                            <div class="slds-combobox_container">
+                                <div data-id="resultBox" aria-expanded="false" aria-haspopup="listbox" role="combobox">
+                                    <div class="slds-form-element__control slds-input-has-icon slds-input-has-icon slds-input-has-icon_left-right" role="none">
+                                        <div class="row">
+                                            <div class="col-12">
+                                                <div class="unique-data">
+                                                    <div class="lb-commom">Cliente 
+                                                    </div>
+                                                    <div class="content cont-label">                                                        
+                                                        <c-custom-lookup
+                                                        object-api-name="Account" 
+                                                        field-api-name="Name"
+                                                        field-api-names="Name "
+                                                        object-icon-name="standard:account"
+                                                        filter=' '
+                                                        custom-lookup-name="customLookupAccount"
+                                                        onselectrecord={handleNewRecordAccount}
+                                                        selected-record={filterObject.account}>
+                                                        </c-custom-lookup>
+                                                    </div>
+                                                </div>
+                                            </div>      
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div> 
+                <!-- </template>
+                <template if:true={hasActive}> 
+                <div class="filtros">
+                    <div class="slds-form-element">
+                        <div class="slds-form-element__control" style="margin-top: -15px;">
+                            <div class="slds-combobox_container">
+                                <div data-id="resultBox" aria-expanded="false" aria-haspopup="listbox" role="combobox">
+                                    <div class="slds-form-element__control slds-input-has-icon slds-input-has-icon slds-input-has-icon_left-right" role="none">
+                                        <div class="row">
+                                            <div class="col-12">
+                                                <div class="unique-data">
+                                                    <div class="lb-commom">Centro de Distribuição 
+                                                    </div>
+                                                    <div class="content cont-label">
+                                                        <c-custom-lookup-for-table-screen
+                                                            object-api-name="DistributionCenter__c" 
+                                                            field-api-name="Name;ExternalId__c"
+                                                            field-api-names="Name"
+                                                            object-icon-name="custom:custom98"
+                                                            filter=" AND Active__c = true "
+                                                            onselectrecord={setSelectedRecordCenter}
+                                                            custom-lookup-name="customLookupDistributionCenter">
+                                                        </c-custom-lookup-for-table-screen>
+                                                    </div>
+                                                </div>
+                                            </div>      
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                </template>
+                <template if:true={hasActive}> 
+                <div class="filtros">
+                    <div class="slds-form-element">
+                        <div class="slds-form-element__control" style="margin-top: -15px;">
+                            <div class="slds-combobox_container">
+                                <div data-id="resultBox" aria-expanded="false" aria-haspopup="listbox" role="combobox">
+                                    <div class="slds-form-element__control slds-input-has-icon slds-input-has-icon slds-input-has-icon_left-right" role="none">
+                                        <div class="row">
+                                            <div class="col-12">
+                                                <div class="unique-data">
+                                                    <div class="lb-commom">Cluster 
+                                                    </div>
+                                                    <div class="content cont-label">
+                                                        <c-custom-lookup 
+                                                            object-api-name="Cluster__c" 
+                                                            field-api-name="Name"
+                                                            field-api-names="Name"
+                                                            object-icon-name="custom:custom86"
+                                                            filter=" AND ExternalId__c != null "
+                                                            onselectrecord={handleNewRecordCluster}
+                                                            custom-lookup-name="customLookupCluster"
+                                                            selected-record={filterObject.cluster}>
+                                                        </c-custom-lookup>
+                                                    </div>
+                                                </div>
+                                            </div>      
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div> -->
+                <!-- Estoques Bloqueados? -->
+                <div class="filtros">
+                    <div class="slds-form-element">
+                        <div class="slds-form-element__control" style="margin-top: -15px;">
+                            <div class="slds-combobox_container">
+                                <div data-id="resultBox" aria-expanded="false" aria-haspopup="listbox" role="combobox">
+                                    <div class="slds-form-element__control slds-input-has-icon slds-input-has-icon slds-input-has-icon_left-right" role="none">
+                                       <div class="row">
+                                            <div class="col-12">
+                                                <div class="unique-data">
+                                                    <div class="lb-commom">Estoques Bloqueados?</div>
+                                                </div>
+                                                <div class="box-moeda" style="display: flex; justify-content: space-between;">
+                                                    <div class="form-check form-check-inline bg-white p-2 px-3 border rounded">
+                                                        <input class="form-check-input" checked={currencyActive} type="radio" name="inlineRadio" id="inlineRadio1" value="true" onclick={handleCurrency}>
+                                                        <label class="form-check-label" for="inlineRadio1">Bloqueados</label>
+                                                    </div>
+                                                    <div class="form-check form-check-inline bg-white p-2 px-3 border rounded">
+                                                        <input class="form-check-input" checked={currencyInactive} type="radio" name="inlineRadio" id="inlineRadio2" value="false" onclick={handleCurrency}>
+                                                        <label class="form-check-label" for="inlineRadio2">Liberados</label>
+                                                    </div>
+                                                    <div class="form-check form-check-inline bg-white p-2 px-3 border rounded">
+                                                        <input class="form-check-input" checked={currencyActiveAll} type="radio" name="inlineRadio" id="inlineRadio3" value="false" onclick={handleCurrencyAll}>
+                                                        <label class="form-check-label" for="inlineRadio2">Todas</label>
+                                                    </div>
+                                                </div>
+                                            </div>      
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- Familia de Produto -->
+                <div class="filtros">
+                    <div class="slds-form-element">
+                        <div class="slds-form-element__control" style="margin-top: -15px;">
+                            <div class="slds-combobox_container">
+                                <div data-id="resultBox" aria-expanded="false" aria-haspopup="listbox" role="combobox">
+                                    <div class="slds-form-element__control slds-input-has-icon slds-input-has-icon slds-input-has-icon_left-right" role="none">
+                                        <div class="row">
+                                            <div class="col-12">
+                                                <div class="unique-data">
+                                                    <div class="lb-commom">Família de Produto </div>
+                                                    <div class="content cont-label">
+                                                        <c-custom-lookup-for-table-screen
+                                                            object-api-name="Family__c" 
+                                                            field-api-name="Name"
+                                                            field-api-names="Name"
+                                                            object-icon-name="custom:custom27"
+                                                            filter=" AND Active__c = true "
+                                                            onselectrecord={setSelectedRecord}
+                                                            custom-lookup-name="customLookupDistributionCenter">
+                                                        </c-custom-lookup-for-table-screen>
+                                                        <!-- <c-custom-lookup 
+                                                            object-api-name="Family__c"
+                                                            field-api-name="Name"
+                                                            field-api-names="Name"
+                                                            object-icon-name="custom:custom13"
+                                                            filter=" AND Active__c = true "
+                                                            onselectrecord={handleNewRecordFamily}
+                                                            custom-lookup-name="customLookupFamily"
+                                                            selected-record={filterObject.family}>
+                                                        </c-custom-lookup> -->
+                                                    </div>
+                                                </div>
+                                            </div>      
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- Principio Ativo -->
+                <div class="filtros">
+                    <div class="slds-form-element">
+                        <div class="slds-form-element__control" style="margin-top: -15px;">
+                            <div class="slds-combobox_container">
+                                <div class={txtclassnameCrop} data-id="resultBox" aria-expanded="false" aria-haspopup="listbox" role="combobox">
+                                    <div class="slds-form-element__control slds-input-has-icon slds-input-has-icon slds-input-has-icon_left-right" role="none">
+                                       <div class="row">
+                                            <div class="col-12">
+                                                <div class="unique-data">
+                                                    <div class="lb-commom">Princípio Ativo </div>
+                                                    <div class="content cont-label">
+                                                        <c-custom-lookup-active-principle
+                                                            object-api-name="Product2" 
+                                                            field-api-name="ActivePrinciple__c"
+                                                            field-api-names="ActivePrinciple__c"
+                                                            object-icon-name="custom:custom13"
+                                                            onselectrecord={handleActivePrincible}
+                                                            filter="ActivePrinciple__c != null"
+                                                            selected-record={filterObject.activePrincible}
+                                                            custom-lookup-name="customLookupActivePrincible">
+                                                        </c-custom-lookup-active-principle>
+                                                    </div>
+                                                </div>
+                                            </div>      
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- Produtos -->
+                <div class="filtros">
+                    <div class="slds-form-element">
+                        <div class="slds-form-element__control" style="margin-top: -15px;">
+                            <div class="slds-combobox_container">
+                                <div data-id="resultBox" aria-expanded="false" aria-haspopup="listbox" role="combobox">
+                                    <div class="slds-form-element__control slds-input-has-icon slds-input-has-icon slds-input-has-icon_left-right" role="none">
+                                        <div class="row">
+                                            <div class="col-12">
+                                                <div class="unique-data">
+                                                    <div class="lb-commom">
+                                                        Produto 
+                                                    </div>
+                                                    <div class="content cont-label">
+                                                        <c-custom-lookup-for-table-screen
+                                                            object-api-name="Product2" 
+                                                            field-api-name="Name"
+                                                            field-api-names="Name"
+                                                            object-icon-name="custom:custom27"
+                                                            filter=" AND isActive = true "
+                                                            onselectrecord={setSelectedRecord}
+                                                            custom-lookup-name="customLookupDistributionCenter">
+                                                        </c-custom-lookup-for-table-screen>
+                                                        <!-- <c-custom-lookup 
+                                                            object-api-name="Product2" 
+                                                            field-api-name="Name"
+                                                            field-api-names="Name"
+                                                            object-icon-name="custom:custom13"
+                                                            filter=" AND isActive = true "
+                                                            onselectrecord={handleNewRecordProduct}
+                                                            custom-lookup-name="customLookupProduct"
+                                                            selected-record={filterObject.product}>
+                                                        </c-custom-lookup> -->
+                                                    </div>
+                                                </div>
+                                            </div>      
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="slds-form-element__control slds-input-has-icon slds-input-has-icon slds-input-has-icon_left-right" role="none">
+                <template for:each={selectedRecords} for:item="serecord">
+                    <span key={serecord.recId} class="filter-itens">
+                    <lightning-pill label={serecord.recName} name={serecord.recId} onremove={removeRecord} class="filter-itens-label">
+                            <lightning-icon icon-name={iconName} size="xx-small" variant="circle" alternative-text={serecord.recName} class="slds-icon_small"></lightning-icon>
+                        </lightning-pill>
+                    </span>
+                </template>
+            </div>
+            <div class="col-6 col-xs-6 text-right produtos filtros-main produtos row mx-auto col-md-12 col-sm-12 mb-3" style="display: flex;">
+                <button class="btn btn-outline-primary btn-nav-steps" onclick={search}>
+                    <span>Consultar</span>
+                </button>
+            </div>
+        </details>
+        <template  if:true={hasActive}> 
+            <template  if:false={LoadingTextForCards}> 
+                <div class="slds-grid slds-gutters" style="margin-left: auto; margin-right: auto;">
+                    <div class="slds-col">
+                        <button class="btn btn-outline-primary btn-nav-steps" onclick={activeList}>
+                            <span>Bloquear</span>
+                        </button>
+                    </div>
+                    <div class="slds-col">
+                        <button class="btn btn-outline-primary btn-nav-steps" onclick={inactiveList}>
+                            <span>Liberar</span>
+                        </button>
+                    </div>           
+                </div>
+            </template> 
+        </template> 
+        <div>
+            <div if:true={LoadingTextForCards} class='filtros-main'>
+                Nenhum dado de estoque a ser exibido, utilize os filtros para conseguir visualizar os Estoques da sua região.
+            </div>
+            <div class="filtros-main grid-container-cards">
+                <template if:true={loading}>
+                    <div class="demo-only">
+                        <div class="slds-spinner_container" style="position: fixed;">
+                            <div role="status" class="slds-spinner slds-spinner_medium slds-spinner_brand">
+                                <div class="slds-spinner__dot-a"></div>
+                                <div class="slds-spinner__dot-b"></div>
+                            </div>
+                        </div>
+                    </div>
+                </template>
+                <template for:each={selectedRecordsListPrice} for:item="record">
+                    <div class="produtos" key={record.recordId}>
+                        <div class="box-lista-produtos">
+                            <div class="row box-row">
+                                <div class="mx-auto col-md-12 col-sm-12 mb-3 card-holder">
+                                    <div class="card card-lista-pedido border-primary card-lista-pedido-padding" style={record.styleColor}>
+                                        <div class="card-body">    
+                                            <div class="row" >
+                                                <div class="col-12">
+                                                    <div class="content" style="text-align: center; padding-bottom: 10px;">
+                                                        <p style={record.styleTextColor}>{record.styleText}</p>
+                                                    </div>
+                                                </div>
+                                            </div>      
+                                            <template if:true={record.showActive}> 
+                                                <div class="row" >
+                                                    <div class="col-12">
+                                                        <div class="unique-data">
+                                                            <div class="lb-commom">
+                                                                Bloquear Venda?
+                                                            </div>
+                                                            <div class="content" style="color: green;">
+                                                                <lightning-input type="checkbox-button" label="Bloquear Venda?" checked={record.isBlocked} onchange={saveStock} data-records-id={record.recordId}></lightning-input>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div> 
+                                            </template>      
+                                            <div class="row" >
+                                                <div class="col-12">
+                                                    <div class="unique-data">
+                                                        <div class="lb-commom">
+                                                            Produto
+                                                        </div>
+                                                        <div class="content" style="color: green;">
+                                                            {record.productName}
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>      
+                                            <template if:true={record.hasCrop}>
+                                                <div class="row" >
+                                                    <div class="col-12">
+                                                        <div class="unique-data">
+                                                            <div class="lb-commom">
+                                                                Safra
+                                                            </div>
+                                                            <div class="content">
+                                                                {record.cropName}
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>    
+                                            </template>    
+                                            <div class="row" >
+                                                <div class="col-12">
+                                                    <div class="unique-data">
+                                                        <div class="lb-commom">
+                                                            Equipe de Vendas
+                                                        </div>
+                                                        <div class="content">
+                                                            {record.salesTeamName}
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>          
+                                            <template if:true={record.hasStock}>
+                                                <div class="row" >
+                                                    <div class="col-6">
+                                                        <div class="unique-data">
+                                                            <div class="lb-commom">
+                                                                Estoque Disponível ({record.unitmeasure})
+                                                            </div>
+                                                            <div class="content">
+                                                                {record.stock}
+                                                            </div>
+                                                        </div>
+                                                    </div>           
+                                                </div>   
+                                            </template>                   
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </template>
+            </div>
+        </div>
+    </div>
+</template>

@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<WaveDataset xmlns="http://soap.sforce.com/2006/04/metadata">
+    <application>Performance_das_Filiais</application>
+    <description>Criado com base na receita Clientes.</description>
+    <masterLabel>Talhão</masterLabel>
+    <type>default</type>
+</WaveDataset>

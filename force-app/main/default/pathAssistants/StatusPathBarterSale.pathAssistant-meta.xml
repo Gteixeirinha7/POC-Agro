@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<PathAssistant xmlns="http://soap.sforce.com/2006/04/metadata">
+    <active>true</active>
+    <entityName>Order</entityName>
+    <fieldName>StatusPath__c</fieldName>
+    <masterLabel>Contrato de Barter</masterLabel>
+    <pathAssistantSteps>
+        <info>&lt;p&gt;Nesta etapa do Contrato de Barter, é possível realizar adicionar novos produtos ou mudar informações sobre o contrato ao clicar em Editar.&lt;/p&gt;</info>
+        <picklistValueName>Em digitação</picklistValueName>
+    </pathAssistantSteps>
+    <pathAssistantSteps>
+        <fieldNames>ObservationRTV__c</fieldNames>
+        <info>&lt;p&gt;Pedido recusado pelo time Comercial/Gerentes, rever o motivo de ter sido Recusado!!&lt;/p&gt;</info>
+        <picklistValueName>Retorna RTV</picklistValueName>
+    </pathAssistantSteps>
+    <pathAssistantSteps>
+        <info>&lt;p&gt;Pedido está sendo revisado pela equipe da Mesa de grãos&lt;/p&gt;</info>
+        <picklistValueName>Em aprovação grãos</picklistValueName>
+    </pathAssistantSteps>
+    <pathAssistantSteps>
+        <fieldNames>DiscountApprover__c</fieldNames>
+        <fieldNames>DiscountApprover2__c</fieldNames>
+        <fieldNames>DiscountApprover3__c</fieldNames>
+        <fieldNames>DiscountApprover4__c</fieldNames>
+        <fieldNames>DiscountApprovalNote__c</fieldNames>
+        <info>&lt;p&gt;Pedido está sendo revisado pelo time Comercial&lt;/p&gt;</info>
+        <picklistValueName>Em aprovação</picklistValueName>
+    </pathAssistantSteps>
+    <pathAssistantSteps>
+        <fieldNames>TradeSlipCode__c</fieldNames>
+        <info>&lt;p&gt;Aguardando que o Contrato de grãos seja criado no SAP&lt;/p&gt;</info>
+        <picklistValueName>Aguardando Contrato de grãos SAP</picklistValueName>
+    </pathAssistantSteps>
+    <pathAssistantSteps>
+        <fieldNames>TradeSlipCode__c</fieldNames>
+        <fieldNames>ContractGrainCode__c</fieldNames>
+        <info>&lt;p&gt;Aguardando que o Contrato de insumos seja criado no SAP&lt;/p&gt;</info>
+        <picklistValueName>Aguardando Contrato de Insumos SAP</picklistValueName>
+    </pathAssistantSteps>
+    <pathAssistantSteps>
+        <fieldNames>ContainIntegrationError__c</fieldNames>
+        <fieldNames>IntegrationErrorMessage__c</fieldNames>
+        <info>&lt;p&gt;Tudo certo com seu pedido, aguardar retorno do SAP&lt;/p&gt;</info>
+        <picklistValueName>Integrado</picklistValueName>
+    </pathAssistantSteps>
+    <pathAssistantSteps>
+        <fieldNames>ExternalId__c</fieldNames>
+        <fieldNames>TradeSlipCode__c</fieldNames>
+        <fieldNames>ContractGrainCode__c</fieldNames>
+        <info>&lt;p&gt;Tudo certo com seu pedido, os status abaixo estão configurados no SAP&lt;/p&gt;</info>
+        <picklistValueName>1</picklistValueName>
+    </pathAssistantSteps>
+    <pathAssistantSteps>
+        <fieldNames>ExternalId__c</fieldNames>
+        <fieldNames>TradeSlipCode__c</fieldNames>
+        <fieldNames>ContractGrainCode__c</fieldNames>
+        <info>&lt;p&gt;Tudo certo com seu pedido, os status abaixo estão configurados no SAP&lt;/p&gt;</info>
+        <picklistValueName>3</picklistValueName>
+    </pathAssistantSteps>
+    <pathAssistantSteps>
+        <fieldNames>ExternalId__c</fieldNames>
+        <fieldNames>TradeSlipCode__c</fieldNames>
+        <fieldNames>ContractGrainCode__c</fieldNames>
+        <info>&lt;p&gt;Tudo certo com seu pedido, os status abaixo estão configurados no SAP&lt;/p&gt;</info>
+        <picklistValueName>4</picklistValueName>
+    </pathAssistantSteps>
+    <pathAssistantSteps>
+        <fieldNames>ExternalId__c</fieldNames>
+        <fieldNames>TradeSlipCode__c</fieldNames>
+        <fieldNames>ContractGrainCode__c</fieldNames>
+        <info>&lt;p&gt;Tudo certo com seu pedido, os status abaixo estão configurados no SAP&lt;/p&gt;</info>
+        <picklistValueName>5</picklistValueName>
+    </pathAssistantSteps>
+    <pathAssistantSteps>
+        <fieldNames>ExternalId__c</fieldNames>
+        <fieldNames>TradeSlipCode__c</fieldNames>
+        <fieldNames>ContractGrainCode__c</fieldNames>
+        <info>&lt;p&gt;Tudo certo com seu pedido, os status abaixo estão configurados no SAP&lt;/p&gt;</info>
+        <picklistValueName>2</picklistValueName>
+    </pathAssistantSteps>
+    <pathAssistantSteps>
+        <fieldNames>ExternalId__c</fieldNames>
+        <fieldNames>TradeSlipCode__c</fieldNames>
+        <fieldNames>ContractGrainCode__c</fieldNames>
+        <info>&lt;p&gt;Pedido Cancelado, se caso estiver com duvidas, entrar em contato com o Administrador do Sistema&lt;/p&gt;</info>
+        <picklistValueName>X</picklistValueName>
+    </pathAssistantSteps>
+    <recordTypeName>BarterSale</recordTypeName>
+</PathAssistant>

@@ -1,0 +1,54 @@
+<template>
+    <div class="slds-modal__container" style={componentStyle}>
+        <header style="position: relative; border-top-right-radius: .25rem; border-top-left-radius: .25rem; padding: 1rem; text-align: center; background-color: #fff;">
+                <div style="float:right">
+                    <lightning-button-icon icon-name="utility:close" alternative-text="Fechar" title="Fechar" onclick={closeModal}> </lightning-button-icon>
+                </div>
+            <div class="headerContainers">
+                <lightning-icon icon-name="standard:account" alternative-text="Account" title="Account"></lightning-icon>
+                <h2 class="slds-m-left_x-small slds-text-heading_medium slds-hyphenate" style="font-weight: bold;">Historico de Compras</h2>                    
+            </div>
+        </header>
+        <div class="slds-scrollable_y" style="padding-top: 0px;padding: 15px;background-color: #fff; border-bottom-right-radius: 0.25rem; border-bottom-left-radius: 0.25rem; max-height: 30rem">
+            <div>
+                <template for:each={prodList} for:item="record">
+                    <div key={record.key} class="slds-m-top_medium" style="padding:15px; border-radius: 5px 5px 0px 0px; box-shadow: 0 0 3px rgb(0 0 0 / 10%);border-bottom: 3px solid #0070d2; border-top: 1px solid #ddd; border-right: 1px solid #ddd; border-left: 1px solid #ddd;">
+                        <lightning-layout multiple-rows style="width: 100%;">
+                            <lightning-layout-item size="2">
+                                <div style="font-size: 15px; font-weight: bold;text-align: center;">
+                                    <p>{record.family} </p>
+						    		<img src="https://img.icons8.com/external-phatplus-lineal-color-phatplus/344/external-agronomy-ecology-phatplus-lineal-color-phatplus-3.png" width="50px"></img>
+                                </div>
+                            </lightning-layout-item>
+                            <lightning-layout-item size="6">
+                                <div style="font-size: 15px;color:#0070d2">
+                                    <p><strong>{record.name}</strong></p>
+                                </div>
+                                <div style="font-size: 14px;">
+                                    <p>{record.culture}</p>
+                                </div>
+                                <div style="font-size: 13px;color:#999">
+                                    <p>{record.salesTeam}</p>
+                                </div>
+                            </lightning-layout-item>
+                            <lightning-layout-item size="4">
+                                <a style="font-size: 14px; font-weight: bold;">
+                                    <p>{record.order}</p>
+                                </a>
+                                <div style="font-size: 13px;">
+                                    <p>{record.date}</p>
+                                </div>
+                                <div style="font-size: 13px;color:#999">
+                                    <p>Margem do pedido: {record.margin}%</p>
+                                </div>
+                                <div style="font-size: 13px;color:#999">
+                                    <p>{record.quantity} x R${record.price}</p>
+                                </div>
+                            </lightning-layout-item>
+                        </lightning-layout>
+                    </div>
+                </template>
+            </div>
+        </div>
+    </div>
+</template>

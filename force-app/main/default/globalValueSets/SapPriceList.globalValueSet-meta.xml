@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<GlobalValueSet xmlns="http://soap.sforce.com/2006/04/metadata">
+    <customValue>
+        <fullName>ALL</fullName>
+        <default>false</default>
+        <label>ALL</label>
+    </customValue>
+    <customValue>
+        <fullName>03</fullName>
+        <default>false</default>
+        <label>Verão</label>
+    </customValue>
+    <customValue>
+        <fullName>04</fullName>
+        <default>false</default>
+        <label>Safrinha</label>
+    </customValue>
+    <customValue>
+        <fullName>05</fullName>
+        <default>false</default>
+        <label>Inverno</label>
+    </customValue>
+    <customValue>
+        <fullName>06</fullName>
+        <default>false</default>
+        <label>HFF Verão</label>
+    </customValue>
+    <customValue>
+        <fullName>07</fullName>
+        <default>false</default>
+        <label>HFF Inverno</label>
+    </customValue>
+    <customValue>
+        <fullName>08</fullName>
+        <default>false</default>
+        <label>Pecuária</label>
+    </customValue>
+    <customValue>
+        <fullName>09</fullName>
+        <default>false</default>
+        <label>Café</label>
+    </customValue>
+    <customValue>
+        <fullName>10</fullName>
+        <default>false</default>
+        <label>Maq. E Impl.</label>
+    </customValue>
+    <customValue>
+        <fullName>11</fullName>
+        <default>false</default>
+        <label>Campanha Verão</label>
+    </customValue>
+    <customValue>
+        <fullName>12</fullName>
+        <default>false</default>
+        <label>Campanha Safrinha</label>
+    </customValue>
+    <customValue>
+        <fullName>13</fullName>
+        <default>false</default>
+        <label>Campanha Inverno</label>
+    </customValue>
+    <customValue>
+        <fullName>14</fullName>
+        <default>false</default>
+        <label>Campanha HFF Verão</label>
+    </customValue>
+    <customValue>
+        <fullName>15</fullName>
+        <default>false</default>
+        <label>Campanha HFF Inverno</label>
+    </customValue>
+    <customValue>
+        <fullName>16</fullName>
+        <default>false</default>
+        <label>Campanha Pecuária</label>
+    </customValue>
+    <customValue>
+        <fullName>17</fullName>
+        <default>false</default>
+        <label>Venda Intercompany</label>
+    </customValue>
+    <customValue>
+        <fullName>25</fullName>
+        <default>false</default>
+        <label>Blitz Agrichem_CN</label>
+    </customValue>
+    <customValue>
+        <fullName>01</fullName>
+        <default>false</default>
+        <label>Venda a vista</label>
+    </customValue>
+    <customValue>
+        <fullName>02</fullName>
+        <default>false</default>
+        <label>Venda Dolar</label>
+    </customValue>
+    <customValue>
+        <fullName>24</fullName>
+        <default>false</default>
+        <isActive>true</isActive>
+        <label>Bonificação</label>
+    </customValue>
+    <customValue>
+        <fullName>26</fullName>
+        <default>false</default>
+        <label>Baixo Giro</label>
+    </customValue>
+    <customValue>
+        <fullName>18</fullName>
+        <default>false</default>
+        <label>MarketPlace</label>
+    </customValue>
+    <masterLabel>Lista de Preços</masterLabel>
+    <sorted>false</sorted>
+</GlobalValueSet>

@@ -1,0 +1,72 @@
+<template>
+    <template if:true={showCustomLookup}>
+      <template if:true={recordsList}>
+        <div style="z-index: 90; width: 100%; height: 100%; position: fixed;top: 0; left:0" onclick={handleOnFocusOut}></div>
+      </template>
+      <div class="containerCL slds-is-relative" style="z-index: 92">
+        <template if:false={secondRecord}>
+          <lightning-input
+            type="search"
+            class="slds-container_fluid"
+            autocomplete="off"
+            label={inputLabel}
+            name="searchInput"
+            value={searchValue}
+            onchange={handleTyping}
+            onfocus={handleOnFocus}
+            is-loading={isLoading}
+            variant="label-hidden">
+        </lightning-input>
+          <template if:true={recordsList}>
+            <div class="containerCL-records-list slds-container_fluid slds-is-absolute">
+              <ul>
+                <template for:each={recordsList} for:item="record">
+                  <li
+                    key={record.ActivePrinciple__c}
+                    data-value={record.ActivePrinciple__c}
+                    onclick={handleSelectRecord}
+                    class="slds-var-p-vertical_small slds-var-p-horizontal_medium slds-list_horizontal slds-media_center list-item">
+                    <lightning-icon
+                      data-value={record.ActivePrinciple__c}
+                      icon-name={objectIconName}
+                      title={objectIconName}
+                      size="small"
+                      class="slds-var-m-right_small">
+                    </lightning-icon>
+                    <div data-value={record.ActivePrinciple__c}>{record.ActivePrinciple__c}</div>
+                  </li>
+                </template>
+              </ul>
+            </div>
+          </template>
+        </template>
+    
+        <template if:true={secondRecord}>
+          <div>  
+            <div class={changeColorSelectedRecord}>
+              <div class="slds-list_horizontal slds-media_center">
+                <lightning-icon 
+                  icon-name={objectIconName}
+                  title={objectIconName}
+                  size="small"
+                  class="slds-var-m-right_small">
+                </lightning-icon>
+                {secondRecord.ActivePrinciple__c}
+              </div>
+                <div class="slds-var-p-bottom_xx-small">
+                  <lightning-button-icon
+                    icon-name="utility:close"
+                    variant="bare"
+                    alternative-text="Settings"
+                    title="Settings"
+                    onclick={handleClearSelected}
+                    disabled={disabledCustomLookup}>
+                  </lightning-button-icon>
+                </div>
+              
+            </div>
+          </div>
+        </template>
+      </div>
+    </template>
+  </template>

@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Escolha_do_Produto_da_Campanha</fullName>
+    <active>true</active>
+    <description>Deve ser permitido escolher apenas um campo de produto da campanha ( produto, família ou fornecedor )</description>
+    <errorConditionFormula>
+		(IF(NOT ISBLANK(Product2__c), 1, 0)+
+		IF(NOT ISBLANK(Family__c), 1, 0)+
+		IF(NOT ISBLANK(Manufacturer__c), 1, 0)+
+		IF(NOT ISBLANK(ComercialName__c), 1, 0)) != 1
+	</errorConditionFormula>
+    <errorMessage>Apenas um parâmetro da Campanha deve ser preenchido!
+ ( Ou Produto, Ou Família, Ou Fornecedor, Ou Nome Comercial )</errorMessage>
+</ValidationRule>

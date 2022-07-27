@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>QuestionDescription__c</fullName>
+    <description>Descrição da pergunta que o usuário fará para o cliente final.</description>
+    <externalId>false</externalId>
+    <inlineHelpText>Descrição da pergunta que o usuário fará para o cliente final.</inlineHelpText>
+    <label>Descrição da Pergunta</label>
+    <length>255</length>
+    <required>true</required>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Text</type>
+    <unique>false</unique>
+</CustomField>

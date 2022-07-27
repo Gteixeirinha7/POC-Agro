@@ -1,0 +1,154 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>OrderMotive__c</fullName>
+    <externalId>false</externalId>
+    <label>Motivo da Ordem</label>
+    <required>false</required>
+    <trackHistory>false</trackHistory>
+    <type>Picklist</type>
+    <valueSet>
+        <valueSetDefinition>
+            <sorted>false</sorted>
+            <value>
+                <fullName>001</fullName>
+                <default>false</default>
+                <label>Visita</label>
+            </value>
+            <value>
+                <fullName>002</fullName>
+                <default>false</default>
+                <label>Contato estabelecido em feira comercial</label>
+            </value>
+            <value>
+                <fullName>003</fullName>
+                <default>false</default>
+                <label>Anúncio de televisão</label>
+            </value>
+            <value>
+                <fullName>BGD</fullName>
+                <default>false</default>
+                <label>Bonificação geração de demanda</label>
+            </value>
+            <value>
+                <fullName>BNC</fullName>
+                <default>false</default>
+                <label>Bonificação comercial</label>
+            </value>
+            <value>
+                <fullName>BNI</fullName>
+                <default>false</default>
+                <label>Bonificação Nota Indenização</label>
+            </value>
+            <value>
+                <fullName>004</fullName>
+                <default>false</default>
+                <label>Recomendação de cliente</label>
+            </value>
+            <value>
+                <fullName>005</fullName>
+                <default>false</default>
+                <label>Publicidade de jornal</label>
+            </value>
+            <value>
+                <fullName>006</fullName>
+                <default>false</default>
+                <label>Preço excelente</label>
+            </value>
+            <value>
+                <fullName>007</fullName>
+                <default>false</default>
+                <label>Fornecimento rápido</label>
+            </value>
+            <value>
+                <fullName>008</fullName>
+                <default>false</default>
+                <label>Bom serviço</label>
+            </value>
+            <value>
+                <fullName>009</fullName>
+                <default>false</default>
+                <label>Devolução acelerada</label>
+            </value>
+            <value>
+                <fullName>100</fullName>
+                <default>false</default>
+                <label>Diferença de preço: preço alto demais</label>
+            </value>
+            <value>
+                <fullName>101</fullName>
+                <default>false</default>
+                <label>Fraca qualidade</label>
+            </value>
+            <value>
+                <fullName>102</fullName>
+                <default>false</default>
+                <label>Danificado em trânsito</label>
+            </value>
+            <value>
+                <fullName>103</fullName>
+                <default>false</default>
+                <label>Diferença de quantidades</label>
+            </value>
+            <value>
+                <fullName>104</fullName>
+                <default>false</default>
+                <label>Mercadoria deteriorada</label>
+            </value>
+            <value>
+                <fullName>105</fullName>
+                <default>false</default>
+                <label>Amostra gratuita</label>
+            </value>
+            <value>
+                <fullName>200</fullName>
+                <default>false</default>
+                <label>Diferença preço: preço demasiado baixo</label>
+            </value>
+            <value>
+                <fullName>ACM</fullName>
+                <default>false</default>
+                <label>ACM motivo da ordem</label>
+            </value>
+            <value>
+                <fullName>EDI</fullName>
+                <default>false</default>
+                <label>Procedimento de nota de crédito</label>
+            </value>
+            <value>
+                <fullName>JDR</fullName>
+                <default>false</default>
+                <label>Direitos DRM - prot.prç., ShpDeb, reemb.</label>
+            </value>
+            <value>
+                <fullName>PNS</fullName>
+                <default>false</default>
+                <label>S2K: consulta de status de primas-notas</label>
+            </value>
+            <value>
+                <fullName>POS</fullName>
+                <default>false</default>
+                <label>S2K: consulta de status do pedido</label>
+            </value>
+            <value>
+                <fullName>QBI</fullName>
+                <default>false</default>
+                <label>SBWAP: compensação diferença (qtd./val.)</label>
+            </value>
+            <value>
+                <fullName>QOI</fullName>
+                <default>false</default>
+                <label>SBWAP: novas partidas aberto (qtd./val.)</label>
+            </value>
+            <value>
+                <fullName>VBI</fullName>
+                <default>false</default>
+                <label>SBWAP: compensação da diferença (valor)</label>
+            </value>
+            <value>
+                <fullName>VOI</fullName>
+                <default>false</default>
+                <label>SBWAP:  novas partidas aberto (valor)</label>
+            </value>
+        </valueSetDefinition>
+    </valueSet>
+</CustomField>

@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>StepStatus__c</fullName>
+    <description>Marca o status do passo de aprovação.</description>
+    <externalId>false</externalId>
+    <inlineHelpText>Marca o status do passo de aprovação.</inlineHelpText>
+    <label>Status da etapa</label>
+    <required>true</required>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Picklist</type>
+    <valueSet>
+        <restricted>true</restricted>
+        <valueSetDefinition>
+            <sorted>false</sorted>
+            <value>
+                <fullName>Started</fullName>
+                <default>true</default>
+                <label>Iniciado</label>
+            </value>
+            <value>
+                <fullName>Approved</fullName>
+                <default>false</default>
+                <label>Aprovado</label>
+            </value>
+            <value>
+                <fullName>Rejected</fullName>
+                <default>false</default>
+                <label>Rejeitado</label>
+            </value>
+            <value>
+                <fullName>Fault</fullName>
+                <default>false</default>
+                <label>Fault</label>
+            </value>
+            <value>
+                <fullName>Held</fullName>
+                <default>false</default>
+                <label>Held</label>
+            </value>
+            <value>
+                <fullName>NoResponse</fullName>
+                <default>false</default>
+                <label>NoResponse</label>
+            </value>
+            <value>
+                <fullName>Pending</fullName>
+                <default>false</default>
+                <label>Pending</label>
+            </value>
+            <value>
+                <fullName>Reassigned</fullName>
+                <default>false</default>
+                <label>Reassigned</label>
+            </value>
+            <value>
+                <fullName>Removed</fullName>
+                <default>false</default>
+                <label>Removed</label>
+            </value>
+        </valueSetDefinition>
+    </valueSet>
+</CustomField>

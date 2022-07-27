@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CompactLayout xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>SalesTeam</fullName>
+    <fields>Name</fields>
+    <fields>ExternalId__c</fields>
+    <fields>Manager__c</fields>
+    <fields>ParentId__c</fields>
+    <fields>DistributionCenter__c</fields>
+    <label>Equipe de Vendas</label>
+</CompactLayout>

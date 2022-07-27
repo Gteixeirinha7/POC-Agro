@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Accumulative__c</fullName>
+    <defaultValue>false</defaultValue>
+    <description>Se caso este campo esteja marcado, essa campanha poderá ser aplicada junto com outras campanhas no produto do pedido.</description>
+    <externalId>false</externalId>
+    <inlineHelpText>Se caso este campo esteja marcado, essa campanha poderá ser aplicada junto com outras campanhas no produto do pedido.</inlineHelpText>
+    <label>Campanha Acumulativa</label>
+    <trackHistory>true</trackHistory>
+    <type>Checkbox</type>
+</CustomField>

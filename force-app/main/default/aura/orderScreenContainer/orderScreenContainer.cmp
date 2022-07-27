@@ -1,0 +1,11 @@
+<aura:component 
+    implements="force:appHostable, 
+                flexipage:availableForAllPageTypes, 
+                flexipage:availableForRecordHome, 
+                force:hasRecordId,
+                lightning:actionOverride, 
+                forceCommunity:availableForAllPageTypes, 
+                force:lightningQuickAction">
+    <aura:attribute name="recordId" type="Id"/>
+    <aura:handler name="init" action="{!c.navigateToeDiscoverySearchCmp}" value="{!this}"/>
+</aura:component>

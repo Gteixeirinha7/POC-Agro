@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<RecordType xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>ProductMix</fullName>
+    <active>true</active>
+    <description>Com base nos produtos definidos na campanha, libera-se desconto conforme o conjunto de produtos definido. Exemplo:  Campanha contém 10 itens cadastrados mas se  no pedido for vendido 3 itens em conjunto, aplicar 5% de desconto</description>
+    <label>Mix de Produtos</label>
+</RecordType>

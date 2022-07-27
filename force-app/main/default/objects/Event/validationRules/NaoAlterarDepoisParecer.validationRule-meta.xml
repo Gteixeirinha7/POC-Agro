@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>NaoAlterarDepoisParecer</fullName>
+    <active>true</active>
+    <description>Não é permitido alteração depois de preencher o parecer!</description>
+    <errorConditionFormula>AND(NOT(ISBLANK(PRIORVALUE(VisitOpinion__c))), NOT ISBLANK (  VisitOpinion__c )  ,
+OR( ISCHANGED( Subject ) , ISCHANGED( Account__c ), ISCHANGED( EventType__c ) , ISCHANGED( ActivityDate ), ISCHANGED(  Checkin__c  ),ISCHANGED(  DurationInMinutes  ),ISCHANGED(  RelatedUser__c  ),ISCHANGED(  OwnerId  ), ISCHANGED(   WhatId   ),ISCHANGED(   Description   ),                 
+ ISCHANGED( Checkin__Latitude__s ), ISCHANGED(  Checkin__Longitude__s ), ISCHANGED( CheckInDone__c  ), ISCHANGED(    CheckinDate__c  ),ISCHANGED(   GeolocationPermission__c   ),ISCHANGED(    Crop__c   ) ) )</errorConditionFormula>
+    <errorMessage>Não é permitido alteração do campo depois de realizar o parecer da visita!</errorMessage>
+</ValidationRule>

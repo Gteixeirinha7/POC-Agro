@@ -1,0 +1,13 @@
+<template>
+    <lightning-card title="Informações do Usuário" icon-name="standard:user">
+        <template if:true={user.data}>
+            <div class="slds-var-m-around_medium">
+                <p><span style="font-weight: bold;">Nome:</span> {name}</p>
+                <p><span style="font-weight: bold;">Código SAP:</span> {externalId}</p>
+                <p><span style="font-weight: bold;">Perfil:</span> {profile}</p>
+                <p><span style="font-weight: bold;">Telefone:</span> {phone}</p>
+                <p><span style="font-weight: bold;">Última sincronização:</span> {syncDate}</p>
+            </div>
+        </template>
+    </lightning-card>
+</template>

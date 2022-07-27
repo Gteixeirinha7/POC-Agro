@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>AreaCultivatedLand__c</fullName>
+    <externalId>false</externalId>
+    <formula>AreaCultivated__c + AreaPasture__c</formula>
+    <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+    <inlineHelpText>Este Campo é a soma de Área de Plantio mais Área de Pastagem.</inlineHelpText>
+    <label>Total de Área Cultivada das Propriedades</label>
+    <precision>18</precision>
+    <required>false</required>
+    <scale>4</scale>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Number</type>
+    <unique>false</unique>
+</CustomField>

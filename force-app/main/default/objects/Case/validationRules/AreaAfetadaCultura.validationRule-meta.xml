@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>AreaAfetadaCultura</fullName>
+    <active>true</active>
+    <description>Área afetada na ocorrência não pode ser maior que área disponível para cultura selecionada</description>
+    <errorConditionFormula>AND(NOT  ISBLANK( CulturePlot__c ) ,  DamagedArea__c  &gt;   CulturePlot__r.AreaCultivated__c  )</errorConditionFormula>
+    <errorMessage>Área afetada  não pode ser maior que área disponível para cultura selecionada.</errorMessage>
+</ValidationRule>

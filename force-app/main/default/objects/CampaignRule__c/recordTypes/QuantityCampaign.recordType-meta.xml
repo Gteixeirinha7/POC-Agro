@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<RecordType xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>QuantityCampaign</fullName>
+    <active>true</active>
+    <description>Conforme o volume mínimo e máximo do produto para venda na campanha, é liberado um desconto com base na quantidade vendida. Exemplo: Se forem vendido Qtde entre  50 e 100 unidades deste produto, aplicar um desconto de 5%</description>
+    <label>Campanha por Quantidade</label>
+</RecordType>

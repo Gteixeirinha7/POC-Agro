@@ -1,0 +1,571 @@
+<template>
+    <div class="wrap commom">
+        <div class="container wmax-740">
+            <div class="row">
+                <div class="col-md-12 col-xs-12">
+                    <div class="box-steps">
+                        <div class="step done">
+                            <img src={imageCheck}>
+                            <span class='nr'>1</span>
+                            <span class='lb-step' >Pedido</span>
+                        </div>
+                        <div class="step done">
+                            <img src={imageCheck}>
+                            <span class='nr'>2</span>
+                            <span class='lb-step' >Itens</span>
+                        </div>
+                        <div class="step active">
+                            <img src={imageCheck}>
+                            <span class='nr'>3</span>
+                            <span class='lb-step' >Fechamento</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- NAV BACK -->
+            <div class="row">
+                <div class="col-6 col-xs-6">
+                    <button class="btn btn-outline-primary btn-nav-steps" onclick={onClickShowPedidoStep1ByPriceCar}>
+                        <img src={imageBack} class="ic-voltar"  alt="Voltar">
+                        <span>Voltar</span>
+                    </button>
+                </div>
+                <!-- <div class="col-6 col-xs-6 text-right">
+                    <button class="btn btn-outline-primary btn-nav-steps" onclick={onClickShowPedidoBarter}>
+                        <span>Continuar</span>
+                        <img src={imageContinueBlue} class="ic-continuar" alt="Continuar">
+                    </button>
+                </div> -->
+            </div>
+            <!-- /NAV BACK -->
+            <!-- TITULO -->
+            <div class="row">
+                <div class="col-md-12 col-sm-12 mt-3">
+                    <h3 class="titulo-carrinho"><strong>Item(s) Adicionado(s)</strong><span class="box-badge">{orderObject.OrderItem.length}</span></h3>
+                </div>
+            </div>
+            <!-- /TITULO -->
+
+            <div if:false={viewProduct}>
+                <div class="row box-action-add" style="justify-content: center;">
+                    <div class="col-10">
+                        <button class="btn btn-cta-success shadow" style="min-height: 45px;"
+                            onclick={onClickShowCampaignModal}>
+                            <span style="font-size: 14px;">Adicionar Campanha</span>
+                            <img src={imagePlusCircle} alt="Adicionar Campanha" style="width: 18px;top: calc(50% - 9px);">
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!--<template if:true={showCampaignModal}>-->
+            <c-campaign-modal
+                is-modal-open={showCampaignModal}
+                onclosemodal={closeModal}
+                onapplycampaigndiscounts={applyCampaignDiscounts}
+                order-object={orderObject}
+                campaign={campaignList}>
+            </c-campaign-modal>
+
+            <!--- BOX LISTA OS PRODUTOS -->
+            <div class="box-lista-produtos">
+                <!-- CARD PEDIDO ADICIONADO -->
+                <div class="row">
+                    <template if:true={orderObject.OrderItem}>
+                        <div class="mx-auto col-md-12 col-sm-12 mb-3">
+    
+                            <template for:each={orderObject.OrderItem} for:item="record">
+    
+                                <div class={record.BorderColor} key={record.Product2.Id}>
+                                    <!-- Inicio card-body -->
+                                    <div class="card-body">
+
+                                        <template if:true={record.hasInventoryErrorRTV}>
+                                            <div class="product_error_txt">
+                                                <span>Produto pode não ter estoque disponível</span>
+                                            </div>
+                                            <br>
+                                        </template>
+
+                                        <template if:true={record.ShowErrorDetails}>
+                                            <div class="product_error_txt">
+                                                <span>Produto sem estoque disponível</span>
+                                            </div>
+                                            <br>
+                                        </template>
+        
+                                        <template if:true={disabledReturnSap}>
+                                            <template if:true={record.DeletedProductSap}>
+                                                <div class="product_error_txt">
+                                                    <span>Produto Marcado para exclusão</span>
+                                                </div>
+                                                <br>
+                                            </template>
+                                        </template>
+
+                                        <template if:true={record.IsAvaliable}>
+                                            <div class="product_error_txt">
+                                                <span>Produto bloqueado</span>
+                                            </div>
+                                            <br>
+                                        </template>
+
+                                        <template if:true={record.invalidProduct}>
+                                            <div class="product_error_txt">
+                                                <span>Produto sem lista de preço disponível</span>
+                                            </div>
+                                            <br>
+                                        </template>
+
+                                        <template if:true={record.invalidListPrice}>
+                                            <div class="product_error_txt">
+                                                <span>Produto sem lista de preço disponível</span>
+                                            </div>
+                                            <br>
+                                        </template>
+    
+                                        <!-- ROW Código Pedido -->
+                                        <div class="row" >
+                                            <div class="col-4">
+                                                <div class="unique-data">
+                                                    <div class="lb-commom">
+                                                        Código Produto
+                                                    </div>
+                                                    <div class="content">
+                                                        {record.Product2.ProductCode}
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <template if:false={disabledReturnSap}>
+                                                <div class="col-4">
+                                                    <div class="nav-carrinho" style="justify-content: center;">
+                                                        <template if:false={viewProduct}>
+                                                            <button class="btn btn-excluir" onclick={onClickShowPedidoStep2aByCarScreenExclude} data-product-id={record.Product2.Id} disabled={disableLastPageProducts}>
+                                                                <img src={imageDelete} alt="Deletar">
+                                                                <span>Excluir</span>
+                                                            </button>
+                                                        </template>
+                                                    </div>
+                                                </div>
+        
+                                                <div class="col-4" if:true={record.ShowDetails}>
+                                                    <div class="nav-carrinho" style="justify-content: flex-end;">
+                                                        <template if:false={viewProduct}>
+                                                            <button class="btn btn-editar" onclick={onClickShowPedidoStep2aByCarScreenEdit} data-product-id={record.Product2.Id} disabled={disableLastPageProducts}>
+                                                                <img src={imageEdit} alt="Deletar">
+                                                                <span>Editar</span>
+                                                            </button>
+                                                        </template>
+                                                        <template if:true={viewProduct}>
+                                                            <button class="btn btn-editar" onclick={onClickShowPedidoStep2aByCarScreenView} data-product-id={record.Product2.Id} style="max-width: 80px;">
+                                                                <img src={imageView} alt="Deletar">
+                                                                <span>Visualizar</span>
+                                                            </button>
+                                                        </template>
+                                                    </div>
+                                                </div>
+                                            </template>
+    
+                                            <template if:true={disabledReturnSap}>
+                                                <div class="col-4">
+                                                    <div class="nav-carrinho" style="justify-content: center;">
+                                                        <template if:false={viewProduct}>
+                                                            <button class="btn btn-excluir" onclick={onClickShowPedidoStep2aByCarScreenExclude} data-product-id={record.Product2.Id} >
+                                                                <img src={imageDelete} alt="Deletar">
+                                                                <span>Excluir</span>
+                                                            </button>
+                                                        </template>
+                                                    </div>
+                                                </div>
+        
+                                                <div class="col-4">
+                                                    <div class="nav-carrinho" style="justify-content: flex-end;">
+                                                            <button class="btn btn-editar" onclick={onClickShowPedidoStep2aByCarScreenView} data-product-id={record.Product2.Id} style="max-width: 80px;">
+                                                                <img src={imageView} alt="Deletar">
+                                                                <span>Visualizar</span>
+                                                            </button>
+                                                    </div>
+                                                </div>
+                                            </template>    
+                                        </div>
+                                        <!-- /ROW -->
+        
+                                        <!-- ROW Produto -->
+                                        <div class="row">
+                                            <div class="col-12">
+                                                <div class="unique-data">
+                                                    <div class="lb-commom">
+                                                        Produto
+                                                    </div>
+                                                    <div class="content text-success">
+                                                        {record.Product2.Name}
+                                                    </div>
+                                                </div>
+                                            </div>
+        
+                                        </div>
+                                        <!-- /ROW -->
+        
+                                        <!-- ROW Valor Pedido -->
+                                        <div class="row" if:true={record.ShowDetails}>
+                                            <div class="col-7">
+                                                <div class="unique-data">
+                                                    <div class="lb-commom">
+                                                        Valor Unitário ({currencyScreenFormat})
+                                                    </div>
+                                                    <div class="content">
+                                                        <lightning-formatted-number value={record.UnitValue} format-style="currency" currency-code={currencyScreenFormat}></lightning-formatted-number>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-5 text-right">
+                                                <div class="unique-data  text-right">
+                                                    <div class="lb-commom">
+                                                        Valor Total do Item ({currencyScreenFormat})
+                                                    </div>
+
+                                                    <div class="content">
+                                                        <lightning-formatted-number value={record.TotalValueItem} format-style="currency" currency-code={currencyScreenFormat}></lightning-formatted-number>
+                                                    </div>
+                                                </div>
+                                            </div>   
+                                        </div>
+                                        <!-- /ROW -->     
+                                        <!-- ROW Valor Percent -->
+                                        <div class="row" if:true={record.ShowDetails}>
+                                            <template if:true={record.IsDiscount}>
+                                                <div class="col-7">
+                                                    <div class="unique-data">
+                                                        <div class="lb-commom">
+                                                            Desconto Comercial
+                                                        </div>
+                                                        <div class="content">
+                                                            <lightning-formatted-number value={record.DiscountPercent} format-style="percent-fixed" minimum-fraction-digits="3"></lightning-formatted-number>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </template>
+                                            <template if:false={record.IsDiscount}>
+                                                <div class="col-7">
+                                                    <div class="unique-data">
+                                                        <div class="lb-commom">
+                                                            Acréscimo Comercial
+                                                        </div>
+                                                        <div class="content">
+                                                            <lightning-formatted-number value={record.AdditionPercent} format-style="percent-fixed" minimum-fraction-digits="3"></lightning-formatted-number>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </template>
+
+                                            <div class="col-5 text-right">
+                                                <div class="unique-data  text-right">
+                                                    <div class="lb-commom">
+                                                        Quantidade
+                                                    </div>
+                                                    <div class="content">
+                                                        <lightning-formatted-number value={record.Quantity} format-style="decimal" minimum-fraction-digits="1"></lightning-formatted-number>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <!-- /ROW -->
+        
+                                        <!-- ROW Valor Percent -->
+                                        <div class="row" if:true={record.ShowDetails}>
+                                            <div class="col-7">
+                                                <div class="unique-data">
+                                                    <div class="lb-commom">
+                                                        Modalidade
+                                                    </div>
+                                                    <div class="content">
+                                                        {record.FreigthMode}
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-5 text-right">
+                                                <div class="unique-data  text-right">
+                                                    <div class="lb-commom">
+                                                        Valor Frete ({currencyScreenFormat})
+                                                    </div>
+                                                    <div class="content">
+                                                        <lightning-formatted-number value={record.Freigth} format-style="currency" currency-code={currencyScreenFormat}></lightning-formatted-number>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="row" if:true={record.hasCampaign}>
+                                            <div class="col-7">
+                                                <div class="unique-data">
+                                                    <div class="lb-commom">
+                                                        Desconto Total Campanha  ({currencyScreenFormat}) 
+                                                    </div>
+                                                    <div class="content">
+                                                        <lightning-formatted-number value={record.TotalCampaignDiscount} format-style="currency" currency-code={currencyScreenFormat}></lightning-formatted-number>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-5 text-right">
+                                                <div class="unique-data text-right">
+                                                    <div class="lb-commom">
+                                                        Valor Total Item s/ Campanha ({currencyScreenFormat})
+                                                    </div>
+                                                    <div class="content">
+                                                        <lightning-formatted-number value={record.TotalValueWithoutCampaign} format-style="currency" currency-code={currencyScreenFormat}></lightning-formatted-number>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div> 
+
+                                        <div class="row" if:true={record.ShowDetails}>
+                                            <div if:true={record.hasInventory}>
+                                                <div class="col-12">
+                                                    <div class="unique-data">
+                                                        <div class="lb-commom" if:true={record.showInventoryErrorMessage}>
+                                                            Estoque Disponivel ({record.QuantityUnitOfMeasure})
+                                                        </div>
+                                                        <div class="content" if:true={record.showInventoryErrorMessage}>
+                                                            {record.stockQuantity}
+                                                        </div>
+                                                        <div class="lb-commom" style="color: #dc3545;" if:true={record.showBlockMessage}>
+                                                            Estoque Disponivel ({record.QuantityUnitOfMeasure})
+                                                        </div>
+                                                        <div class="content" style="color: #dc3545;" if:true={record.showBlockMessage}>
+                                                            {record.stockQuantity}
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <template if:true={record.hasCampaign}>
+                                            <div class="row">
+                                                <div class="col-12">
+                                                    <div class="unique-data" style="width:100%;">
+                                                        <div class="lb-commom">
+                                                            Campanhas
+                                                        </div>
+                                                        <template for:each={record.Campaign} for:item='campaign'>
+                                                            <div class="campaign_item_card" key={campaign.id}>
+                                                                <div class="col-8" if:false={campaign.invalid} style="padding: 0;cursor: pointer;" onclick={viewCampaignDescription} data-campaign-id={campaign.campaignId}>{campaign.name}</div>
+                                                                <div class="col-8" if:true={campaign.invalid} style="padding: 0; color: #dc3545;cursor: pointer;" onclick={viewCampaignDescription} data-campaign-id={campaign.campaignId}>{campaign.name}</div>
+                                                                <lightning-formatted-number class="col-3" if:false={campaign.invalid} value={campaign.discountPercentage} format-style="percent-fixed" minimum-fraction-digits="2"></lightning-formatted-number>
+                                                                <lightning-formatted-number class="col-3" if:true={campaign.invalid} style="color: #dc3545;" value={campaign.discountPercentage} format-style="percent-fixed" minimum-fraction-digits="2"></lightning-formatted-number>
+                                                                <div class="col-1" style="padding: 0;text-align: center;">
+                                                                    <div if:false={viewProduct}>
+                                                                        <img src={cIRemove} alt="Remover Campanha" style="width: 12px; cursor: pointer;" onclick={removeCampaign} data-campaign-id={campaign.campaignId} data-product-id={record.Product2.Id}>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </template>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </template>
+
+                                        <div class="row" style="padding-left: 10px;padding-right: 10px;cursor: pointer;" onclick={onClickShowCampaignModalSpecific} data-product-id={record.Product2.Id} if:false={viewProduct}>
+                                            <div class="col-12 btn-add-campaign">
+                                                <div if:false={viewProduct}>
+                                                    <span style="font-weight: 600;">Adicionar Campanha +</span>
+                                                </div>
+                                           </div> 
+                                       </div>
+                                        <!-- /ROW -->
+                                    </div>
+                                    <!-- FIM card-body -->
+                                </div>
+                            </template>
+                        </div>
+                    </template>
+                </div>
+
+                <!-- ACTION MAIN -->
+                <div class="row box-action-add">
+                    <div class="col-12">
+                        <button class="btn btn-cta-primary shadow mb-2" onclick={onClickShowPedidoStep2aByCarScreen} disabled={disableLastPageProducts}>
+                            <span>Adicionar Item</span>
+                            <img src={imagePlusCircle} alt="Adicionar Item">
+                        </button>
+                    </div>
+                </div>
+                <!-- /ACTION MAIN -->
+
+                <template class="row" if:true={showRoute}>
+                    <div class="row">
+                        <div class="col-12">
+                            <div class="unique-data">
+                                <div class="lb-commom" style="font-size: 0.8rem;color: #727C8E;padding-bottom: 5px;">
+                                    Rota de Entrega <span class="field-required">*</span>
+                                </div>
+                                <div class="content">
+                                    <textarea class="form-control" name="" id="obs" cols="30" rows="6" placeholder="Informe a rota de entrega do pedido"
+                                        onchange={handleTextAreaRoute} disabled={disableRouteField}>{route}</textarea><br>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </template>
+
+                <div class="box-totalizador pb-3 box-white">
+                    <div class="col-12" style="padding-bottom: 10px;">
+                            <div class="py-2 text-center text-muted text-uppercase">
+                                <small><strong>Totalização</strong></small>
+                            </div>
+                            <div class="col-12" style="padding-bottom: 10px;" if:true={orderObject.hasCampaign}>
+                                <div class="row">
+                                    <div class="col-12">
+                                        <div class="box-tt-total text-center">
+                                            <span class="lb">Percentual Desconto Campanha</span>
+                                            <span class="vlr text-muted">
+                                                <lightning-formatted-number value={orderObject.TotalCampaignDisocuntPercentage} format-style="percent-fixed" minimum-fraction-digits="2"></lightning-formatted-number>
+                                            </span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-12">
+                                        <div class="box-tt-total text-center">
+                                            <span class="lb">Total Líquido s/ Campanha ({currencyScreenFormat})</span>
+                                            <span class="vlr text-muted">
+                                                <lightning-formatted-number value={orderObject.TotalPriceOrderWithoutCampaign} format-style="currency" currency-code={currencyScreenFormat}></lightning-formatted-number>
+                                            </span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-12">
+                                        <div class="box-tt-total text-center" style="padding-top: 10px;">
+                                            <span class="lb">Total Líquido c/ Campanha ({currencyScreenFormat})</span>
+                                            <span class="vlr text-muted">
+                                                <lightning-formatted-number value={orderObject.TotalPriceOrder} format-style="currency" currency-code={currencyScreenFormat}></lightning-formatted-number>
+                                            </span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-12" style="padding-bottom: 10px;" if:false={orderObject.hasCampaign}>
+                                <div class="row">
+                                    <div class="col-12">
+                                        <div class="box-tt-total text-center">
+                                            <span class="lb">Total Líquido ({currencyScreenFormat})</span>
+                                            <span class="vlr text-muted">
+                                                <lightning-formatted-number value={orderObject.TotalPriceOrder} format-style="currency" currency-code={currencyScreenFormat}></lightning-formatted-number>
+                                            </span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="box-tt-total text-center" if:true={isRefuseReason}>
+                                <span class="lb">Saldo de Crédito</span>
+                                <span class="vlr text-muted">
+                                    <lightning-formatted-number value={orderObject.TotalCredit} format-style="currency" currency-code={currencyScreenFormat}></lightning-formatted-number>
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row" if:true={showTotalQuantity}>
+                        <!-- <div class="col-12">
+                            <div class="box-tt-total text-center">
+                                <span class="lb">Quantidade Total de Entrega: </span>
+                                <span class="vlr text-muted">{orderObject.TotalDeliveryQuantity} {commUnitScreen}</span>
+                            </div>
+                        </div> -->
+                    </div>
+                    <div if:true={orderObject.hasFinManager} style="margin:0" class="box-tt-total text-center box-white">
+                        <ul class="text-muted slds-m-around_medium">
+                            <div class="row box-action-checkout authority">
+                                <template if:false={orderObject.ContractProduct}>
+                                    <b style="font-size:15px; margin:0;" class="aprovadores">Aprovador Financeiro:</b>
+                                    <li>
+                                        <b style="font-size:15px" class="pt-2">{finAuthority}</b>
+                                    </li>
+                                </template>
+                            </div>
+                        </ul>
+                    </div>
+                    <div if:true={orderObject.hasMktManager} style="margin:0" class="box-tt-total text-center box-white">
+                        <ul class="text-muted slds-m-around_medium">
+                            <div class="row box-action-checkout authority">
+                                <template if:false={orderObject.ContractProduct}>
+                                    <b style="font-size:15px; margin:0;" class="aprovadores">Aprovador de Bonificação:</b>
+                                    <li>
+                                        <b style="font-size:15px" class="pt-2">{mktAuthority}</b>
+                                    </li>
+                                </template>
+                                <!-- <template if:false={orderObject.needsMarginAppr}>
+                                    <b style="font-size:15px; margin:0;" class="aprovadores">Aprovador da margem:</b>
+                                    <li>
+                                        <b style="font-size:15px" class="pt-2">{orderObject.diretorName}</b>
+                                    </li>
+                                </template>                                 -->
+                            </div>
+                        </ul>
+                    </div>
+                    <div class="box-tt-total text-center box-white">
+                        <ul class="text-muted slds-m-around_medium">
+                            <template class="row box-action-checkout" for:each={authorityArray} for:item='item'>
+                                <template if:true={item.HasAuthority}>
+                                    <template if:false={orderObject.ContractProduct}>
+                                        <li key={item.Name} style="font-weight:320" class="pt-2" >
+                                            <strong class="aprovadores" style="font-size:15px">{item.Name} - {item.Discount}%</strong>
+                                            <br>
+                                            <b style="font-size:15px">Aprovadores Necessários:</b>
+                                            <br>
+                                            <template for:each={item.Authority} for:item='itemAuth'>
+                                                <li key={itemAuth.index} style="font-weight:320" >
+                                                    <b style="font-size:15px">{itemAuth.name}</b>
+                                                </li>
+                                            </template>
+                                        </li>
+                                    </template>
+                                </template>
+                            </template>
+                        </ul>
+                    </div>
+
+                    <div class="row box-action-checkout box-white" if:false={hideConclude}>
+                        <div class="col-12">
+                        <button type="button" class="btn btn-cta-main shadow mb-2" onclick={handleConcludeOrder} disabled={disableConclude}> 
+                            <span>Concluir pedido</span>
+                            <img src={imageCheck} alt="Concluir">
+                        </button>
+                        </div>
+                    </div>
+                    <div class="row box-action-checkout box-white" if:false={hideSave}>
+                        <div class="col-12">
+                        <button type="button" class="btn btn-cta-main btn-outline-primary shadow mb-2" onclick={handleSaveOrder} disabled={disableLastPageProducts}>
+                            <span>Salvar Informações do Pedido</span>
+                            <img src={imagePaper} alt="Salvar">
+                        </button>
+                        </div>
+                    </div>
+
+                    <!-- BOTÃO BARTER -->
+                    <div class="row box-action-checkout box-white" if:true={showBarterContractField}>
+                        <div class="col-12">
+                            <button class="btn btn-cta-consultar shadow mb-2"  onclick={onClickShowBarterStepA}>
+                                <span>Informações Barter</span>
+                                <img src={imageMoneyCheck} alt="Informações Barter">
+                            </button>
+                        </div>
+                    </div>
+                    <!-- /BOTÃO BARTER -->
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- LOADING SPINNER  -->
+    <template if:true={loading}>
+        <div class="demo-only">
+            <div class="slds-spinner_container" style="position: fixed;">
+                <div role="status" class="slds-spinner slds-spinner_medium slds-spinner_brand">
+                    <div class="slds-spinner__dot-a"></div>
+                    <div class="slds-spinner__dot-b"></div>
+                </div>
+            </div>
+        </div>
+    </template>
+    <!-- LOADING SPINNER  -->
+</template>

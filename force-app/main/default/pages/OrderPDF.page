@@ -1,0 +1,653 @@
+<apex:page applyBodyTag="false" docType="html-5.0" readOnly="true" controller="OrderPDFController">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/1.4.1/jspdf.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/canvas2image@1.0.5/canvas2image.min.js"></script>
+    <script src="https://raw.githack.com/eKoopmans/html2pdf/master/dist/html2pdf.bundle.js"></script>
+
+    <apex:includeScript value="{!URLFOR($Resource.libs, 'forcetk.js')}" />
+
+    <apex:includeScript value="/support/console/37.0/integration.js" />
+    <script>
+        window.onload = function () {
+            var element = document.getElementById('renderPDF');
+            var fileName = 'Pedido.pdf';
+            var orderId = '{!orderData.id}';
+            var options = {
+                margin: 1,
+                filename: fileName,
+                html2canvas: { scale: 2 },
+                jsPDF: { unit: 'mm', format: 'a4', orientation: 'portrait' }
+            };
+
+            html2pdf(element, options).output('blob').then(function (pdf) {
+
+                Visualforce.remoting.Manager.invokeAction(
+                    '{!$RemoteAction.OrderPDFController.getUserSessionKey}',
+                    function (result, event) {
+                        var sessionResult = result;
+
+                        var forceClient = new forcetk.Client();
+                        forceClient.setSessionToken(
+                            sessionResult
+                        );
+
+                        forceClient.createBlob('ContentVersion', {
+                            Origin: 'C',
+                            PathOnClient: fileName
+                        }, fileName, 'VersionData', pdf, function (response) {
+                            // Request positiva => próxima requisição.
+                            console.log(response);
+                            Visualforce.remoting.Manager.invokeAction(
+                                '{!$RemoteAction.OrderPDFController.createContentDistribuction}',
+                                response.id,
+                                orderId,
+                                fileName,
+                                function (result, event) {
+                                    if (event.status) { }
+                                    else if (event.type === 'exception') { }
+                                }, { escape: false, timeout: 120000 }
+                            );
+
+                        }, function (request, status, response) {
+
+                            console.log(status);
+                            console.log(response);
+                        });
+
+                    }, { escape: false, timeout: 120000 }
+                );
+
+            });
+
+        }
+
+    </script>
+    <style>
+        @charset "UTF-8";
+        html,
+        body {
+            background: #f7f7f7;
+            color: #333;
+            font-family: 'Salesforce Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', 'sans-serif';
+        }
+
+        table {
+            width: 100%;
+        }
+
+        .container {
+            max-width: 1140px;
+            margin: 0 auto;
+        }
+
+        .container h1 {
+            font-size: 2.0rem;
+            text-align: center;
+            padding: 1rem;
+            color: #253aa5;
+            padding: 30px 0;
+            font-weight: 400;
+        }
+
+        .text-center {
+            text-align: center;
+        }
+
+        .text-right {
+            text-align: right;
+        }
+
+        .text-danger {
+            color: #ff0000;
+        }
+
+        .text-lv1 {
+            color: #7036ae;
+        }
+
+        .text-lv2 {
+            color: #253aa5;
+        }
+
+        .text-obs {
+            color: #333;
+            font-size: 0.6rem;
+            background: #fff;
+            padding: 20px;
+            border-radius: 5px;
+            border: 1px solid #ddd;
+            margin: 5px;
+            font-weight: bold;
+        }
+
+        .color-border-lv2 {
+            border-bottom: 2px solid #7036ae;
+            color: #253aa5;
+        }
+
+        /* Listando produtos */
+
+        .tr-lista-header th {
+            font-size: 0.6rem;
+            text-transform: uppercase;
+            color: #253aa5;
+            padding: 2px 10px 8px 10px;
+        }
+
+        .tr-lista-valores td span.valor {
+            padding-left: 0 !important;
+            color: #000;
+            font-weight: bold;
+            text-transform: uppercase;
+            font-size: 0.6rem;
+            padding-left: 5px;
+        }
+
+        .td-border-top {
+            border-top: 1px solid #ddd;
+        }
+
+        .td-border-bottom {
+            border-bottom: 1px solid #ddd;
+        }
+
+        .mb-1 {
+            margin-bottom: 10px !important;
+        }
+
+        .mb-2 {
+            margin-bottom: 20px !important;
+        }
+
+        .mb-3 {
+            margin-bottom: 30px !important;
+        }
+
+        .py-2 td {
+            padding: 5px 0 !important;
+        }
+
+        .pb-0 {
+            padding-bottom: 0 !important;
+        }
+
+        .lb-pedido {
+            font-size: 0.9rem;
+            color: #7036ae;
+        }
+
+        .nr-pedido {
+            font-size: 1.2rem;
+        }
+
+        .no-padding td {
+            padding: 0;
+        }
+
+        table {
+            background: #fff;
+        }
+
+        table td,
+        table th {
+            padding: 8px 15px;
+        }
+
+        .tb-wrap {
+            border: 1px solid #ddd;
+            margin-bottom: 20px;
+        }
+
+        .tb-wrap .td-title {
+            font-size: 0.6rem;
+            color: #666;
+        }
+
+        .tb-wrap .td-title strong {
+            color: #000;
+        }
+
+        .tb-wrap .td-sub-title {
+            font-size: 0.6rem;
+            font-weight: bold;
+            padding: 12px ​5px 10px 10p;
+        }
+
+        .tb-wrap .bg-light {
+            background: #f2f2f2;
+        }
+
+        .tb-dados {
+            /* Aplica-se na TR */
+        }
+
+        .tb-dados td {
+            padding: 5px 10px;
+            color: #555;
+            border-bottom: 1px dashed #ddd;
+        }
+
+        .tb-dados td .valor {
+            color: #000;
+            font-weight: bold;
+            text-transform: uppercase;
+            font-size: 0.7rem;
+            padding-left: 5px;
+        }
+
+        .tb-dados td .valor.total {
+            font-size: 0.9rem;
+        }
+
+        .tb-dados .no-border td {
+            border: none !important;
+        }
+
+        .box-total {
+            border: 1px solid #fff59d !important;
+            background: #fffde7;
+            text-align: center;
+            border-radius: 5px;
+            padding: 8px;
+        }
+
+        .box-total .lb {
+            font-size: 0.6rem !important;
+            color: #333;
+        }
+
+        .box-assin {
+            background: #f9f9f9;
+        }
+
+        .box-assin td {
+            padding: 15px;
+        }
+
+        .box-assin .lb {
+            padding: 10px 0 !important;
+        }
+
+        .box-assin .valor {
+            padding-left: 0 !important;
+        }
+
+        .local-assin {
+            padding: 10px 10px;
+            border: 1px dashed #ddd;
+            border-radius: 5px;
+            margin-right: 20px;
+            height: 80px;
+            margin-top: 10px;
+            background: #fff;
+        }
+
+        .space-between {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .flex-end {
+            display: flex;
+            justify-content: flex-end;
+            align-items: center;
+        }
+
+        .flex-col {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .lb-status {
+            font-size: 0.8rem;
+            padding-top: 4px;
+        }
+
+        .lb-col {
+            color: #000;
+            font-weight: bold;
+            text-transform: uppercase;
+            font-size: 0.6rem;
+            padding-top: 5px;
+        }
+
+        .new-page {
+            /* page-break-before: always; */
+            page-break-inside: avoid;
+        }
+        .hide {
+            /* page-break-before: always; */
+            display: none;
+        }
+    </style>
+    <div id="renderPDF" class="container">
+        <!-- TABLE WRAP-->
+        <div style="margin: 10px 30px 10px 10px;">
+        <table width="100%" border="0" class="tb-wrap">
+
+            <tr>
+                <td class="pb-0">
+                    <!-- CABEÇALHO -->
+                    <table width="100%" border="0">
+                        <tbody>
+                            <tr>
+                                <td width="250" class="text-center" style="padding-bottom: 0;">
+                                    <apex:image value="{!URLFOR($Resource.images, 'LogoForcaAgro.png')}" width="170" height="110" style="padding-bottom: 10px;"/>
+                                    <span>{!($Label.ForcaAgroSiteURL)}</span>
+                                </td>
+                                <td class="td-title" style="padding-bottom: 0;">
+                                    <p>
+                                        <strong>{!orderData.salesTeamName}</strong>
+                                    </p>
+                                    <p>{!orderData.salesTeamAddress}</p>
+                                    <p>{!orderData.salesTeamCity} | CEP: {!orderData.salesTeamPostalCode}</p>
+                                    <p>CNPJ: {!orderData.salesTeamCNPJ} | IE: {!orderData.salesTeamIE}</p>
+                                    <p>Fone: <strong>{!orderData.salesTeamPhone}</strong></p>
+
+                                    <table class="td-border-top no-padding py-2">
+                                        <tr class="space-between">
+                                            <td class="lb-pedido flex-col" width="250">
+                                                <span>Pedido de {!orderData.orderTypeName}</span>
+                                                <span class="lb-status">{!orderData.status}</span>
+                                            </td>
+                                            <td class="text-danger nr-pedido flex-col">
+                                                <span class="lb-status">Nº {!orderData.orderName}</span>
+                                                {!orderData.orderNumber}
+                                            </td>
+                                        </tr>
+                                    </table>
+
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <!-- /CABEÇALHO -->
+                </td>
+            </tr>
+
+            <!-- INICIO A SECAO DE TABLE -->
+            <tr>
+                <td class="td-sub-title bg-light color-border-lv2">
+                    <!-- SUB-CABEÇALHO -->
+                    <span>&rsaquo;</span> DADOS DE FATURAMENTO
+                    <!-- /SUB-CABEÇALHO -->
+                </td>
+            </tr>
+
+            <tr>
+                <td style="padding: 0px 15px;">
+                    <!-- TABLE type 02 DADOS POPULADOS -->
+                    <table class="tb-dados">
+                        <tr>
+                            <td width="50%">
+                                <span class="lb">Emissão:</span>
+                                <span class="valor">{!orderData.issueDate}</span>
+                            </td>
+                            <td width="50%">
+                                <span class="lb">Validade da Proposta:</span>
+                                <span class="valor">{!orderData.expirationDate}</span>
+                            </td>
+                        </tr>
+                    </table>
+                    <!-- /TABLE type 02 DADOS POPULADOS -->
+
+                    <!-- TABLE type 02 DADOS POPULADOS -->
+                    <table class="tb-dados">
+                        <tr>
+                            <td width="100%">
+                                <span class="lb">Nome do Parceiro / Cliente:</span>
+                                <span class="valor">{!orderData.accountName}</span>
+                            </td>
+                        </tr>
+                    </table>
+                    <!-- /TABLE type 02 DADOS POPULADOS -->
+
+
+                    <!-- TABLE type 02 DADOS POPULADOS -->
+                    <table class="tb-dados">
+                        <tr class="{!orderData.borderStyleClass}">
+                            <td width="50%">
+                                <span class="lb">Safra do Pedido:</span>
+                                <span class="valor">{!orderData.cropName}</span>
+                            </td>
+                            <td width="50%">
+                                <span class="lb">Moeda do Pedido:</span>
+                                <span class="valor">{!orderData.coin}</span>
+                            </td>
+                        </tr>
+                    </table>
+                    <!-- /TABLE type 02 DADOS POPULADOS -->
+
+                    <!-- TABLE type 02 DADOS POPULADOS -->
+                    <table class="tb-dados {!orderData.hideInfoStyleClass}">
+                        <tr class="no-border">
+                            <td width="100%">
+                                <span class="lb">Tipo de Commodity: </span>
+                                <span class="valor">{!orderData.commodity}</span>
+                            </td>
+                        </tr>
+                    </table>
+                    <!-- /TABLE type 02 DADOS POPULADOS -->
+                </td>
+            </tr>
+
+            <!-- /FINAL A DE SECAO TABLE -->
+
+            <!-- INICIO D SECAO DE TABLE -->
+            <tr class="new-page">
+                <td class="td-sub-title bg-light color-border-lv2">
+                    <!-- SUB-CABEÇALHO -->
+                    <span>&rsaquo;</span> VENCIMENTOS
+                    <!-- /SUB-CABEÇALHO -->
+                </td>
+
+            </tr>
+
+            <tr class="new-page">
+                <td style="padding: 0px 15px;">
+                    <!-- TABLE type 02 DADOS POPULADOS -->
+                    <table class="tb-dados">
+                        <!-- VENCIMENTOS -->
+                        <tr class="no-border" style="display:flex;">
+                            <td width="50%" class="flex-col">
+                                <span class="lb">Data de Vencimento:</span>
+                                <span class="lb-col">{!orderData.paymentDate}</span>
+                            </td>
+                            <!-- <td class="flex-col">
+                                <span class="lb">Condição de Pagamento:</span>
+                                <span class="lb-col">{!orderData.paymentConditionName}</span>
+                            </td> -->
+                            <td width="50%" class="flex-col">
+                                <span class="lb">Forma de Pagamento:</span>
+                                <span class="lb-col">{!orderData.paymentForm}</span>
+                            </td>
+                        </tr>
+                        <!-- / VENCIMENTOS -->
+                    </table>
+                    <!-- /TABLE type 02 DADOS POPULADOS -->
+
+                </td>
+            </tr>
+            <!-- /FINAL D DE SECAO TABLE -->
+
+
+            <!-- INICIO B SECAO DE TABLE -->
+            <tr>
+                <td class="td-sub-title bg-light color-border-lv2">
+                    <!-- SUB-CABEÇALHO -->
+                    <span>&rsaquo;</span> DADOS DE ENTREGA
+                    <!-- /SUB-CABEÇALHO -->
+                </td>
+
+            </tr>
+
+            <tr>
+                <td style="padding: 0px 15px;">
+                    <!-- TABLE type 02 DADOS POPULADOS -->
+                    <table class="tb-dados">
+                        <tr>
+                            <td width="100%">
+                                <span class="lb">Local:</span>
+                                <span class="valor">{!orderData.deliveryAccountName}</span>
+                            </td>
+                        </tr>
+                    </table>
+
+                    <table class="tb-dados">
+                        <tr>
+                            <td width="50%">
+                                <span class="lb">CPF/CNPJ:</span>
+                                <span class="valor">{!orderData.accountRegister}</span>
+                            </td>
+                            <td width="50%">
+                                <span class="lb">Inscrição Estadual:</span>
+                                <span class="valor">{!orderData.accountIE}</span>
+                            </td>
+
+                        </tr>
+                    </table>
+                    <table class="tb-dados">
+                        <tr>
+                            <td width="50%">
+                                <span class="lb">Endereço:</span>
+                                <span class="valor">{!orderData.deliveryAddress}</span>
+                            </td>
+                            <td width="50%">
+                                <span class="lb">Tipo de Frete: </span>
+                                <span class="valor">{!orderData.freightModality}</span>
+                            </td>
+                        </tr>
+                    </table>
+                    <table class="tb-dados">
+                        <tr class="no-border">
+                            <td width="50%">
+                                <span class="lb">Município:</span>
+                                <span class="valor">{!orderData.deliveryCity}</span>
+                            </td>
+                            <td width="50%">
+                                <span class="lb">UF:</span>
+                                <span class="valor">{!orderData.deliveryState}</span>
+                            </td>
+                        </tr>
+                    </table>
+                    <!-- /TABLE type 02 DADOS POPULADOS -->
+                </td>
+            </tr>
+            <!-- /FINAL B DE SECAO TABLE -->
+
+
+
+            <!-- INICIO C SECAO DE TABLE -->
+            <tr class="new-page">
+                <td class="td-sub-title bg-light color-border-lv2">
+                    <!-- SUB-CABEÇALHO -->
+                    <span>&rsaquo;</span> ITENS
+                    <!-- /SUB-CABEÇALHO -->
+                </td>
+
+            </tr>
+
+            <tr>
+                <td>
+                    <!-- TABLE type 02 DADOS POPULADOS -->
+                    <table class="tb-dados">
+
+                        <tr class="tr-lista-header">
+                            <th width="20%">Código</th>
+                            <th width="55%">Descrição do Produto</th>
+                            <th width="25%" class="text-right">Quantidade</th>
+                        </tr>
+                        <apex:repeat value="{!orderData.orderItemDataList}" var="orderItemData">
+                            <!-- LISTANDO PRODUTOS -->
+                            <tr class="tr-lista-valores new-page">
+                                <td width="20%">
+                                    <span class="valor">{!orderItemData.productCode}</span>
+                                </td>
+                                <td width="55%">
+                                    <span class="valor">{!orderItemData.productDescription}</span>
+                                </td>
+                                <td width="25%" class="text-right">
+                                    <span class="valor">{!orderItemData.quantity}</span>
+                                </td>
+                            </tr>
+                            <!-- / LISTANDO PRODUTOS -->
+                        </apex:repeat>
+                    </table>
+                    <!-- /TABLE type 02 DADOS POPULADOS -->
+                </td>
+            </tr>
+            <!-- /FINAL C DE SECAO TABLE -->
+
+
+            <tr class="new-page">
+                <td style="padding: 0;">
+                    <!-- CONDIÇÃO PAGTO E VALOR -->
+                    <table class="tb-dados mb-1">
+                        <tr class="no-border flex-end">
+                            <td width="360" class="text-right">
+                                <div class="box-total">
+                                    <span class="lb">Valor Total do Pedido:</span>
+                                    <span class="valor total">{!orderData.coinUnit} {!orderData.totalValue}</span>
+                                </div>
+                            </td>
+                        </tr>
+                    </table>
+                    <!-- /CONDIÇÃO PAGTO E VALOR -->
+                </td>
+            </tr>
+
+
+            <!-- INICIO CONDICAO - SECAO DE TABLE -->
+            <tr class="new-page">
+                <td class="td-sub-title bg-light color-border-lv2">
+                    <!-- SUB-CABEÇALHO -->
+                    <span>&rsaquo;</span> {!($Label.OrderPDF_ObsTitle)}
+                    <!-- /SUB-CABEÇALHO -->
+                </td>
+            </tr>
+
+            <tr class="new-page">
+                <td style="padding: 0px 15px;">
+                    <!-- TABLE type 02 DADOS POPULADOS -->
+                    <table class="tb-dados">
+                        <!-- LISTANDO PRODUTOS -->
+                        <tr class="no-border">
+                            <td width="100%">
+                                <div class="text-obs">{!($Label.OrderPDF_ObsText)}</div>
+                            </td>
+
+                        </tr>
+                        <!-- / LISTANDO PRODUTOS -->
+                    </table>
+                    <!-- /TABLE type 02 DADOS POPULADOS -->
+                </td>
+            </tr>
+            <!-- /FINAL CONDICAO - SECAO TABLE -->
+
+
+            <tr class="new-page">
+                <td>
+                    <!-- ASSINATURA -->
+                    <table class="tb-dados box-assin" width="100%">
+                        <tr class="no-border">
+                            <td width="60%">
+                                <span class="lb">Assinatura do Parceiro/Cliente</span>
+                                <div class="local-assin">&raquo;</div>
+                            </td>
+                            <td width="40%">
+                                <span class="lb">Vendedor</span>
+                                <p class="valor">{!orderData.rtvName}</p>
+                            </td>
+                        </tr>
+                    </table>
+                </td>
+            </tr>
+
+        </table>
+        <!-- /TABLE WRAP-->
+        </div>
+    </div>
+
+</apex:page>

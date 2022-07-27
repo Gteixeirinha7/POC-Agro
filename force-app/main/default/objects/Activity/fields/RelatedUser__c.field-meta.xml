@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>RelatedUser__c</fullName>
+    <deleteConstraint>SetNull</deleteConstraint>
+    <description>Caso este campo esteja preenchido, será gerado um evento clone do evento atual e será atribuído ao usuário selecionado.</description>
+    <externalId>false</externalId>
+    <inlineHelpText>Caso este campo esteja preenchido, será gerado um evento clone do evento atual e será atribuído ao usuário selecionado.</inlineHelpText>
+    <label>Usuário Adicional</label>
+    <referenceTo>User</referenceTo>
+    <relationshipName>Atividades</relationshipName>
+    <required>false</required>
+    <type>Lookup</type>
+</CustomField>

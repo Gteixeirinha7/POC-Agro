@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>EscolherPublicoAlvo</fullName>
+    <active>true</active>
+    <description>Escolher pelo menos uma das opções de regional, Cliente, Escritório, Equipe, Organização Ou Cluster.</description>
+    <errorConditionFormula>AND(  ISBLANK( Account__c ) , ISBLANK(  SalesOffice__c  ),ISBLANK(  SalesTeam__c  ), ISBLANK(  SalesOrg__c  ), ISBLANK(  Cluster__c  )  )</errorConditionFormula>
+    <errorMessage>Deve ser preenchido pelo menos um campo ( Cliente, Escritório, Equipe, Organização Ou Cluster)</errorMessage>
+</ValidationRule>

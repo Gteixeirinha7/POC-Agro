@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>ParentId__c</fullName>
+    <externalId>false</externalId>
+    <label>Escritório de Vendas</label>
+    <referenceTo>SalesOffice__c</referenceTo>
+    <relationshipLabel>Equipes de Vendas</relationshipLabel>
+    <relationshipName>SalesTeams</relationshipName>
+    <relationshipOrder>0</relationshipOrder>
+    <reparentableMasterDetail>false</reparentableMasterDetail>
+    <trackTrending>false</trackTrending>
+    <type>MasterDetail</type>
+    <writeRequiresMasterRead>false</writeRequiresMasterRead>
+</CustomField>

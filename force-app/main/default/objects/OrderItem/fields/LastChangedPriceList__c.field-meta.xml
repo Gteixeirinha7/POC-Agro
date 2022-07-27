@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>LastChangedPriceList__c</fullName>
+    <description>Toda vez que um produto do pedido for inserido dentro da tela, é colocado a data do dia dentro do campo</description>
+    <externalId>false</externalId>
+    <label>Ultima Data Lista de Preço</label>
+    <required>false</required>
+    <trackHistory>false</trackHistory>
+    <type>Date</type>
+</CustomField>

@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CompactLayout xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>ProductOfferDiscountCompactLayout</fullName>
+    <fields>CreatedById</fields>
+    <fields>OfferDiscount__c</fields>
+    <fields>OwnerId</fields>
+    <fields>LastModifiedById</fields>
+    <label>Layout compacto de Produto do Desconto de Oferta</label>
+</CompactLayout>

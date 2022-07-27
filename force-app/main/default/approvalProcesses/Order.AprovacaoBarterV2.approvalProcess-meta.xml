@@ -1,0 +1,138 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ApprovalProcess xmlns="http://soap.sforce.com/2006/04/metadata">
+    <active>true</active>
+    <allowRecall>false</allowRecall>
+    <allowedSubmitters>
+        <type>allInternalUsers</type>
+    </allowedSubmitters>
+    <allowedSubmitters>
+        <type>owner</type>
+    </allowedSubmitters>
+    <approvalPageFields>
+        <field>OrderNumber</field>
+        <field>StatusSF__c</field>
+        <field>Owner</field>
+        <field>RTV__c</field>
+        <field>ShippingAccount__c</field>
+        <field>BillingAccount__c</field>
+        <field>SalesOrg__c</field>
+        <field>SalesTeam__c</field>
+        <field>EffectiveDate</field>
+        <field>ShippingCrop__c</field>
+        <field>BarterType__c</field>
+        <field>AccountTradeName__c</field>
+        <field>Currency__c</field>
+        <field>Commodity__c</field>
+        <field>DeliveryQuantity__c</field>
+        <field>CommercialMeasureUnit__c</field>
+        <field>GrossUnitPrice__c</field>
+        <field>UnitPrice__c</field>
+        <field>PaymentDate__c</field>
+        <field>CommodityShipping__c</field>
+        <field>ProductionDeliveryLocation__c</field>
+        <field>ProductionPickupLocation__c</field>
+        <field>InitialDeliveryDate__c</field>
+        <field>EndDeliveryDate__c</field>
+    </approvalPageFields>
+    <approvalStep>
+        <allowDelegate>false</allowDelegate>
+        <assignedApprover>
+            <approver>
+                <name>EastClusterGrainsTable</name>
+                <type>queue</type>
+            </approver>
+            <whenMultipleApprovers>FirstResponse</whenMultipleApprovers>
+        </assignedApprover>
+        <description>Verifica se o pedido é do Cluster Leste, envia para a Fila do Leste</description>
+        <entryCriteria>
+            <formula>SalesOffice__r.ParentId__r.Name = &quot;CLUSTER LESTE&quot;</formula>
+        </entryCriteria>
+        <ifCriteriaNotMet>GotoNextStep</ifCriteriaNotMet>
+        <label>Cluster Leste para Fila Leste</label>
+        <name>EastClustertoEastQueue</name>
+    </approvalStep>
+    <approvalStep>
+        <allowDelegate>false</allowDelegate>
+        <assignedApprover>
+            <approver>
+                <name>NorthClusterGrainTable</name>
+                <type>queue</type>
+            </approver>
+            <whenMultipleApprovers>FirstResponse</whenMultipleApprovers>
+        </assignedApprover>
+        <description>Verifica se o pedido é do Cluster Norte, envia para a Fila do Norte</description>
+        <entryCriteria>
+            <formula>SalesOffice__r.ParentId__r.Name = &quot;CLUSTER NORTE&quot;</formula>
+        </entryCriteria>
+        <ifCriteriaNotMet>GotoNextStep</ifCriteriaNotMet>
+        <label>Cluster Norte para Fila Norte</label>
+        <name>NorthClustertoNorthQueue</name>
+        <rejectBehavior>
+            <type>RejectRequest</type>
+        </rejectBehavior>
+    </approvalStep>
+    <approvalStep>
+        <allowDelegate>false</allowDelegate>
+        <assignedApprover>
+            <approver>
+                <name>SouthClusterGrainTable</name>
+                <type>queue</type>
+            </approver>
+            <whenMultipleApprovers>FirstResponse</whenMultipleApprovers>
+        </assignedApprover>
+        <description>Verifica se o pedido é do Cluster Sul, envia para a Fila do Sul</description>
+        <entryCriteria>
+            <formula>SalesOffice__r.ParentId__r.Name = &quot;CLUSTER SUL&quot;</formula>
+        </entryCriteria>
+        <label>Cluster Sul para Fila Sul</label>
+        <name>SouthClustertoSouthQueue</name>
+        <rejectBehavior>
+            <type>RejectRequest</type>
+        </rejectBehavior>
+    </approvalStep>
+    <description>Processo de Aprovação para pedido Barter, todos os pedidos passam pela mesa de grãos para aprovação.</description>
+    <enableMobileDeviceAccess>false</enableMobileDeviceAccess>
+    <entryCriteria>
+        <criteriaItems>
+            <field>Order.RecordType</field>
+            <operation>equals</operation>
+            <value>Negociação Barter</value>
+        </criteriaItems>
+    </entryCriteria>
+    <finalApprovalActions>
+        <action>
+            <name>ChangingStatusInApproval</name>
+            <type>FieldUpdate</type>
+        </action>
+        <action>
+            <name>MarkGrainTableApproval</name>
+            <type>FieldUpdate</type>
+        </action>
+    </finalApprovalActions>
+    <finalApprovalRecordLock>false</finalApprovalRecordLock>
+    <finalRejectionActions>
+        <action>
+            <name>UnmarkGrainTableApproval</name>
+            <type>FieldUpdate</type>
+        </action>
+        <action>
+            <name>UpdateStatustoInTyping</name>
+            <type>FieldUpdate</type>
+        </action>
+    </finalRejectionActions>
+    <finalRejectionRecordLock>false</finalRejectionRecordLock>
+    <initialSubmissionActions>
+        <action>
+            <name>UnmarkGrainTableSubmit</name>
+            <type>FieldUpdate</type>
+        </action>
+        <action>
+            <name>UpdateStatustoInGrainApproval</name>
+            <type>FieldUpdate</type>
+        </action>
+    </initialSubmissionActions>
+    <label>Aprovação Mesa de Grãos V2</label>
+    <processOrder>1</processOrder>
+    <recordEditability>AdminOnly</recordEditability>
+    <showApprovalHistory>true</showApprovalHistory>
+</ApprovalProcess>

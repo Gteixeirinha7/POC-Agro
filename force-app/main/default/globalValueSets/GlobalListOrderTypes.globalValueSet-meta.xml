@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<GlobalValueSet xmlns="http://soap.sforce.com/2006/04/metadata">
+    <customValue>
+        <fullName>AccountOrder</fullName>
+        <default>false</default>
+        <label>Conta e Ordem</label>
+    </customValue>
+    <customValue>
+        <fullName>BarterSale</fullName>
+        <default>false</default>
+        <label>Negociação Barter</label>
+    </customValue>
+    <customValue>
+        <fullName>CurrencySale</fullName>
+        <default>false</default>
+        <label>Venda Moeda</label>
+    </customValue>
+    <customValue>
+        <fullName>ExchangeSale</fullName>
+        <default>false</default>
+        <label>Venda Troca e Permuta</label>
+    </customValue>
+    <customValue>
+        <fullName>FutureSale</fullName>
+        <default>false</default>
+        <label>Venda Futura</label>
+    </customValue>
+    <customValue>
+        <fullName>ZCCO</fullName>
+        <default>false</default>
+        <label>Contrato Conta e Ordem</label>
+    </customValue>
+    <customValue>
+        <fullName>ZCEF</fullName>
+        <default>false</default>
+        <label>Contrato Venda Futura</label>
+    </customValue>
+    <customValue>
+        <fullName>ZCNO</fullName>
+        <default>false</default>
+        <label>Contrato Venda Moeda</label>
+    </customValue>
+    <customValue>
+        <fullName>ZVTR</fullName>
+        <default>false</default>
+        <label>Venda Barter</label>
+    </customValue>
+    <customValue>
+        <fullName>ZVTF</fullName>
+        <default>false</default>
+        <label>Venda Triangulada</label>
+    </customValue>
+    <customValue>
+        <fullName>ZVTS</fullName>
+        <default>false</default>
+        <label>Remessa Venda Triangulação</label>
+    </customValue>
+    <masterLabel>Lista global de tipos de pedidos</masterLabel>
+    <sorted>true</sorted>
+</GlobalValueSet>

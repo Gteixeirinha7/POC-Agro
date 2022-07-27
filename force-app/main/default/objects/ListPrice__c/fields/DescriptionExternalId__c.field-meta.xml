@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>DescriptionExternalId__c</fullName>
+    <externalId>false</externalId>
+    <formula>
+        IF(ISBLANK(SAlesConditionObject__c), '', TEXT(InitialDate__c)+'_')+
+        IF(ISBLANK(SAlesConditionObject__c), '', TEXT(EndDate__c)+'_')+
+        SalesOrg__c+'_'+Crop__c+'_'+
+        IF(ISBLANK(SAlesConditionObject__c), '', SAlesConditionObject__c+'_')+
+        IF(ISBLANK(TEXT(Currency__c)), '', TEXT(Currency__c)+'_')+
+        IF(ISBLANK(SalesTeam__c), '', SalesTeam__c+'_')+
+        IF(ISBLANK(Account__c), '', Account__c+'_')+
+        IF(ISBLANK(SalesOffice__c), '', SalesOffice__c+'_')+
+        IF(ISBLANK(TEXT(CustomerGroup__c)), '', TEXT(CustomerGroup__c)+'_')+
+        IF(ISBLANK(TEXT(ActivitySector__c)), '', TEXT(ActivitySector__c)+'_')+
+        IF(ISBLANK(Product2Id__c), '', Product2Id__c)
+    </formula>
+    <label>DescriptionExternalid</label>
+    <required>false</required>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Text</type>
+    <unique>false</unique>
+</CustomField>
+    

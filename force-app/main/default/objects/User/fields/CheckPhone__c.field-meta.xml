@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>CheckPhone__c</fullName>
+    <defaultValue>false</defaultValue>
+    <description>Campo utilizado para verificar se o Usuario preencheu ou esta de acordo em informar seu telefone.</description>
+    <externalId>false</externalId>
+    <label>Telefone Verificado?</label>
+    <type>Checkbox</type>
+</CustomField>

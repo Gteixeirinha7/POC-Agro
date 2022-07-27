@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>InitialDate__c</fullName>
+    <description>Data da vigência inicial do Catalogo de preço, este campo armazena os valores KONH - DATAB no SAP.</description>
+    <externalId>false</externalId>
+    <inlineHelpText>Data da vigência inicial do Catalogo de preço, este campo armazena os valores KONH - DATAB no SAP.</inlineHelpText>
+    <label>Data Vigência Inicial</label>
+    <required>false</required>
+    <trackHistory>true</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Date</type>
+</CustomField>

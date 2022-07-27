@@ -1,0 +1,190 @@
+<template>
+    <div class="wrap commom" style="padding: 20px;">
+        <div class="container wmax-740">
+            <div class="slds-page-header" style="background-color: white;margin-top: 20px;">
+                <div class="slds-page-header__row">
+                    <div class="slds-page-header__col-title">
+                        <div class="slds-media">
+                            <div class="slds-media__figure">
+                                <span class="slds-icon_container slds-icon-standard-Event" title="Event">
+                                    <lightning-icon icon-name="standard:event" alternative-text="Event" title="Event"></lightning-icon>
+                                    <span class="slds-assistive-text">Visita</span>
+                                </span>
+                            </div>
+                            <div class="slds-media__body">
+                                <div class="slds-page-header__name">
+                                    <div class="slds-page-header__name-title">
+                                        <h1>
+                                            <span class="slds-page-header__title slds-truncate"
+                                                title="Criar Evento">Criar Visita</span>
+                                        </h1>
+                                    </div>
+                                </div>
+                                <p class="slds-page-header__name-meta">Preencher todos os campos marcados como obrigatórios(<span class="field-required">*</span>) para concluir a criação da Visita.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+                <div class="slds-page-header" style="background-color: white;margin-top: 20px;" >
+                    <div class="container wmax-740">
+                        <div class="row">
+                            <div class="col-6">
+                                <div class="unique-data">                                    
+                                    <div class="lb-commom"> Atribuido a <span class="field-required">*</span></div>                                    
+                                    <div class="content cont-label">
+                                        <c-custom-lookup
+                                        object-api-name="User" 
+                                        field-api-name="Name"
+                                        field-api-names="Name "
+                                        object-icon-name="standard:user"
+                                        filter={filterUser}
+                                        custom-lookup-name="OwnerId"
+                                        onselectrecord={handleChangeLookupUser}
+                                        selected-record={UserLookupData}>
+                                        </c-custom-lookup>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-6">
+                                <div class="unique-data">                                    
+                                    <div class="lb-commom"> Tipo de Visita <span class="field-required">*</span></div>                                    
+                                    <div class="content cont-label">
+                                        <c-custom-lookup
+                                        object-api-name="EventTypes__c" 
+                                        field-api-name="Name"
+                                        field-api-names=" Name "
+                                        object-icon-name="custom:custom82"
+                                        filter="  "
+                                        custom-lookup-name="EventType__c"
+                                        onselectrecord={handleChangeLookupEvent}
+                                        selected-record={EventTypeLookupData}>
+                                        </c-custom-lookup>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-6" style="margin-top: 10px;">
+                                <div class="unique-data">                                    
+                                    <div class="lb-commom"> Cliente <span class="field-required">*</span></div>                                    
+                                    <div class="content cont-label">
+                                        <c-custom-lookup
+                                        object-api-name="Account" 
+                                        field-api-name="Name;CNPJ__c"
+                                        field-api-names="Name, CNPJ__c, ExternalId__c "
+                                        object-icon-name="standard:account"
+                                        filter=" AND RecordType.DeveloperName = 'Property' "
+                                        onselectrecord={handleChangeAccount}
+                                        selected-record={AccountLookupData}>
+                                        </c-custom-lookup>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-6" style="margin-top: 10px;">
+                                <div class="unique-data">                                    
+                                    <div class="lb-commom"> Safra <span class="field-required">*</span></div>                                    
+                                    <div class="content cont-label">
+                                        <c-custom-lookup
+                                        object-api-name="Crop__c" 
+                                        field-api-name="Name"
+                                        field-api-names="  Name "
+                                        object-icon-name="custom:custom5"
+                                        filter={filterCrop}
+                                        onselectrecord={handleChangeLookupCrop}
+                                        custom-lookup-name="Crop__c"
+                                        selected-record={CropLookupData}>
+                                        </c-custom-lookup>
+                                    </div>
+                                </div>
+                            </div>
+                             <div class="col-6" style="margin-top: 10px;">
+                                <div class="unique-data">
+                                    <div class="lb-commom"> Assunto <span class="field-required">*</span></div>
+                                    <lightning-input maxlength="255" class="inputStyle" type="text"  onchange={handleChange} name="Subject" value={eventData.Subject} variant="label-hidden" >
+                                    </lightning-input>
+                                </div>
+                            </div>
+                            <div class="col-6" style="margin-top: 10px;">
+                                <div class="unique-data">                                    
+                                    <div class="lb-commom"> Ocorrência</div>                                    
+                                    <div class="content cont-label">
+                                        <c-custom-lookup
+                                        object-api-name="Case" 
+                                        field-api-name="CaseNumber"
+                                        field-api-names="  CaseNumber, Subject, AccountId, Account.Name, Crop__c, Crop__r.Name "
+                                        object-icon-name="standard:case"
+                                        filter={filterCase}
+                                        onselectrecord={handleChangeLookupCase}
+                                        custom-lookup-name="Case__c"
+                                        selected-record={CaseLookupData}>
+                                        </c-custom-lookup>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-6">
+                                <div class="unique-data">                                      
+                                    <lightning-input label="Data " class="inputStyle" type="date" onchange={handleChange} name="StartDateTime" value={eventData.StartDateTime} min={eventData.StartDateTime}></lightning-input>
+                                </div>
+                            </div>
+                            <div class="col-3">
+                                <div class="unique-data">                                    
+                                    <lightning-input max={maxValue} label ="Inicio" class="inputStyle" type="time" onchange={handleChangeTime} name="initTime" value={eventData.initTime}></lightning-input>
+                                </div>
+                            </div>
+                            <div class="col-3">
+                                <div class="unique-data">                                    
+                                    <lightning-input min={minValue} label="Fim" class="inputStyle" type="time" onchange={handleChangeTime} name="endTime" value={eventData.endTime}></lightning-input>
+                                </div>
+                            </div>
+                            <div class="col-12">
+                                <div class="unique-data">
+                                    <div class="lb-commom"> Adicionar Usuario Adicional</div>        
+                                    <c-custom-lookup-for-table-screen
+                                        object-api-name="User" 
+                                        field-api-name="Name"
+                                        field-api-names="Name "
+                                        object-icon-name="standard:user"
+                                        filter=" AND isActive = true "
+                                        onselectrecord={setSelectedRecordCrop}
+                                        custom-lookup-name="customLookupDistributionCenter">
+                                    </c-custom-lookup-for-table-screen>
+                                </div>
+                                <div class="slds-form-element__control slds-input-has-icon slds-input-has-icon slds-input-has-icon_left-right" role="none">
+                                    <template for:each={selectedRecords} for:item="serecord">
+                                        <span key={serecord.Id} class="filter-itens">
+                                            <lightning-pill label={serecord.Name} name={serecord.Id} onremove={removeRecord} class="filter-itens-label"></lightning-pill>
+                                        </span>
+                                    </template>
+                                </div>
+                            </div>
+                             <div class="col-12">
+                                <div class="unique-data">
+                                    <div class="lb-commom"> Descrição</div>        
+                                    <lightning-input class="inputStyle" type="text" onchange={handleChange} name="Description" value={eventData.Description} variant="label-hidden"></lightning-input>
+                                </div>
+                            </div>
+                        </div>                      
+                        <div class="row">
+                            <div class="col-12" style="text-align: right; margin-top: 20px">
+                                <div class="unique-data">
+                                    <lightning-button variant="variant" label="Voltar" title="Voltar" onclick={closeEvent} class="slds-m-left_x-small"></lightning-button>  
+                                    <lightning-button variant="brand" label="Salvar" title="Salvar" onclick={conclude} class="slds-m-left_x-small" disabled={showDisabled}></lightning-button>  
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+        </div>
+    </div>
+    <!-- LOADING SPINNER  -->
+    <template if:true={loading}>
+        <div class="demo-only">
+            <div class="slds-spinner_container" style="position: fixed;">
+                <div role="status" class="slds-spinner slds-spinner_medium slds-spinner_brand">
+                    <div class="slds-spinner__dot-a"></div>
+                    <div class="slds-spinner__dot-b"></div>
+                </div>
+            </div>
+        </div>
+    </template>
+    <!-- LOADING SPINNER  -->
+</template>

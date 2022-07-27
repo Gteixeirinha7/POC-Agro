@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CompactLayout xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>RangeDiscount</fullName>
+    <fields>Name</fields>
+    <fields>ApprovingAuthority__c</fields>
+    <fields>PaymentType__c</fields>
+    <fields>FinalDate__c</fields>
+    <fields>MinimumPercentage__c</fields>
+    <fields>MaximaPercentage__c</fields>
+    <fields>SalesOffice__c</fields>
+    <fields>Status__c</fields>
+    <label>Desconto de Banda</label>
+</CompactLayout>

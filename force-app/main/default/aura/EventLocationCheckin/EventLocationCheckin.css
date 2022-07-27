@@ -1,0 +1,34 @@
+.THIS {
+	padding:10px;
+    width:100%;
+    height:100%;
+}
+.THIS.INFO{
+    text-align:center;
+    font-size: 12px;
+	text-transform: italic;
+	font-weight:bold;
+}
+.THIS.QASPINNER{
+    width:100%;
+    height:100%;
+    display: inline-block;
+}
+
+.THIS.MAP{
+	width:100%;
+	height:438px !important;
+}
+
+.THIS.ERROR{
+	padding:20px;
+	box-sizing:border-box;
+}
+
+.THIS.ACTION_ROW{
+	padding: 0 10px 10px 10px;
+}
+.THIS .LABEL{
+	line-height: 30px;
+    font-size: 10px;
+}

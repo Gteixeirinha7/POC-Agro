@@ -1,0 +1,96 @@
+<template>
+    <template if:true={loading}>
+        <div class="demo-only">
+            <div class="slds-spinner_container">
+                <div role="status" class="slds-spinner slds-spinner_medium slds-spinner_brand">
+                    <div class="slds-spinner__dot-a"></div>
+                    <div class="slds-spinner__dot-b"></div>
+                </div>
+            </div>
+        </div>
+    </template>
+<div>
+    <lightning-accordion class="slds-theme_shade" allow-multiple-sections-open>
+        <template if:true={prodList}>
+                <div>
+                    <lightning-button onclick={addNewItem} class="slds-theme_neutral" icon-position="right"
+                        variant="neutral" type="button" label="Novo" icon-name="utility:add">
+                    </lightning-button>
+                </div>
+                <div style="overflow-y:scroll">
+                <table class="slds-table slds-table_bordered slds-table_striped">
+                    <thead>
+                        <tr class="slds-text-title_caps">
+                            <th><div class="slds-truncate">Nome</div></th>
+                            <th><div class="slds-truncate">Produto</div></th>
+                            <th><div class="slds-truncate">Familia</div></th>
+                            <th><div class="slds-truncate">Fornecedor</div></th>
+                            <th><div class="slds-truncate">Marca</div></th>
+                            <th><div class="slds-truncate">Quantidade Limite</div></th>
+                            <th><div class="slds-truncate">Ativador?</div></th>
+                            <th><div class="slds-truncate">Aplica Desconto?</div></th>
+                            <th><div class="slds-truncate"></div>Excluir?</th>
+                        </tr>
+                    </thead>
+                    <tbody style="min-height: 100px;">
+                        <template if:true={hasProduct}>
+                            <template for:each={prodList} for:item="prod">
+                                <tr key={prod.id} class="slds-hint-parent" >
+                                    <td>
+                                        <a target="_blank" class="slds-text-link" href={prod.url}>{prod.name}</a>
+                                    </td>
+                                    <td>
+                                        <c-custom-lookup style="height: 0px; margin: 0px;position: relative; top: -15px" data-id={prod.id} data-type="product2"
+                                            object-api-name="Product2" field-api-name="Name" field-api-names="Name"
+                                            object-icon-name="custom:custom13" filter=" "
+                                            onselectrecord={handleNewRecordProduct}
+                                            custom-lookup-name="customLookupProduct" selected-record={prod.product2}>
+                                        </c-custom-lookup>
+                                    </td>
+                                    <td>
+                                        <c-custom-lookup style="height: 0px; margin: 0px; position: relative; top: -15px" data-id={prod.id} data-type="family"
+                                            object-api-name="Family__c" field-api-name="Name" field-api-names="Name"
+                                            object-icon-name="custom:custom13" filter=" "
+                                            onselectrecord={handleNewRecordFamily}
+                                            custom-lookup-name="customLookupFamily" selected-record={prod.family}>
+                                        </c-custom-lookup>
+                                    </td>
+                                    <td>
+                                        <lightning-input data-id={prod.id} data-type="manufacturer" type="text"
+                                            variant="label-hidden" value={prod.manufacturer} oncommit={saveOnChange}>
+                                        </lightning-input>
+                                    </td>
+                                    <td>
+                                        <lightning-input data-id={prod.id} data-type="comercialName" type="text"
+                                            variant="label-hidden" value={prod.comercialName} oncommit={saveOnChange}>
+                                        </lightning-input>
+                                    </td>
+                                    <td>
+                                        <lightning-input data-id={prod.id} data-type="max" type="number"
+                                            variant="label-hidden" value={prod.max} oncommit={saveOnChange}>
+                                        </lightning-input>
+                                    </td>
+                                    <td>
+                                        <lightning-input data-id={prod.id} data-type="receive" type="checkbox"
+                                            variant="label-hidden" checked={prod.receive} oncommit={saveOnChangeCheck}>
+                                        </lightning-input>
+                                    </td>
+                                    <td>
+                                        <lightning-input data-id={prod.id} data-type="activates" type="checkbox"
+                                            variant="label-hidden" checked={prod.activates}
+                                            oncommit={saveOnChangeCheck}>
+                                        </lightning-input>
+                                    </td>
+                                    <td>
+                                        <img src={cIRemove} alt="Remover Produto da Campanha" style="width: 12px; cursor: pointer;" onclick={removeProduct} data-product-id={prod.id}>
+                                    </td>
+                                </tr>
+                            </template>
+        </template>
+        </tbody>
+        </table>
+</div>
+</template>
+</lightning-accordion>
+</div>
+</template>

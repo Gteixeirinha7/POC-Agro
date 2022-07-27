@@ -1,0 +1,155 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomLabels xmlns="http://soap.sforce.com/2006/04/metadata">
+    <labels>
+        <fullName>CancelOrderContract</fullName>
+        <language>pt_BR</language>
+        <protected>false</protected>
+        <shortDescription>Frase de cancelamento por saldo do pedido</shortDescription>
+        <value>Pedido cancelado pois o contrato não tem produtos com saldo disponivel!!</value>
+    </labels>
+    <labels>
+        <fullName>ContractBalanceError</fullName>
+        <language>pt_BR</language>
+        <protected>false</protected>
+        <shortDescription>Saldo do contrato inválido</shortDescription>
+        <value>A soma dos produtos vinculados ao contrato não pode ser maior que o saldo do contrato!</value>
+    </labels>
+    <labels>
+        <fullName>DeletedProductAlert</fullName>
+        <language>pt_BR</language>
+        <protected>false</protected>
+        <shortDescription>Texto de alerta para produtos marcados para exclusão</shortDescription>
+        <value>Produto marcado para exclusão</value>
+    </labels>
+    <labels>
+        <fullName>ErrorIntegrationProduct</fullName>
+        <language>pt_BR</language>
+        <protected>false</protected>
+        <shortDescription>Frase que retorna parte da frase de erro de integração de produto</shortDescription>
+        <value>não está permitido (exclusão)</value>
+    </labels>
+    <labels>
+        <fullName>ErrorIntegrationBloqueioSOPProduct</fullName>
+        <language>pt_BR</language>
+        <protected>false</protected>
+        <shortDescription>Frase que retorna parte da frase de erro de integração de produto</shortDescription>
+        <value>Bloqueio SOP indisp</value>
+    </labels>
+    <labels>
+        <fullName>FiscalDomicileAlert</fullName>
+        <language>pt_BR</language>
+        <protected>false</protected>
+        <shortDescription>Alerta de criação de pedidos para clientes sem domicilio fiscal</shortDescription>
+        <value>O cliente selecionado está sem Domicílio Fiscal, Por favor, solicite a correção via chamado: Central de Cadastro &gt; Cadastro de Cliente &gt; Alteração de Cadastro de Cliente.</value>
+    </labels>
+    <labels>
+        <fullName>InactiveIntegration</fullName>
+        <language>pt_BR</language>
+        <protected>false</protected>
+        <shortDescription>Validação de Integração</shortDescription>
+        <value>Integração Desligada, contactar o Administrador do Sistema</value>
+    </labels>
+    <labels>
+        <fullName>IntegrationLimitCreditError</fullName>
+        <language>pt_BR</language>
+        <protected>false</protected>
+        <shortDescription>IntegrationLimitCreditError</shortDescription>
+        <value>Cliente sem limite de crédito cadastrado.</value>
+    </labels>
+    <labels>
+        <fullName>ForcaAgroSiteURL</fullName>
+        <language>pt_BR</language>
+        <protected>false</protected>
+        <shortDescription>Site</shortDescription>
+        <value>www.ForcaAgro.com</value>
+    </labels>
+    <labels>
+        <fullName>OrderPDF_ObsText</fullName>
+        <language>pt_BR</language>
+        <protected>false</protected>
+        <shortDescription>Texto de observação do PDF do Pedido</shortDescription>
+        <value>PEDIDO VÁLIDO SOMENTE APÓS APROVAÇÃO DO DEPARTAMENTO DE CRÉDITO/COMERCIAL.</value>
+    </labels>
+    <labels>
+        <fullName>OrderPDF_ObsTitle</fullName>
+        <language>pt_BR</language>
+        <protected>false</protected>
+        <shortDescription>Titulo de observação do PDF do Pedido</shortDescription>
+        <value>CONDIÇÕES GERAIS DE VENDA</value>
+    </labels>
+    <labels>
+        <fullName>ReturnOrderContract</fullName>
+        <language>pt_BR</language>
+        <protected>false</protected>
+        <shortDescription>Frase de retorna ao RTV por saldo do pedido</shortDescription>
+        <value>Este pedido tem produtos do pedido com quantidade acima do saldo disponivel para o contrato!!</value>
+    </labels>
+    <labels>
+        <fullName>ReturnProductDeletedOrder</fullName>
+        <language>pt_BR</language>
+        <protected>false</protected>
+        <shortDescription>Frase de retorna ao RTV por produto indisponível</shortDescription>
+        <value>Pedido está com erro, devido um dos seus produtos ({prodCode}) estar marcado para exclusão, procure o CS do seu Cluster</value>
+    </labels>
+    <labels>
+        <fullName>ReturnProductSOP</fullName>
+        <language>pt_BR</language>
+        <protected>false</protected>
+        <shortDescription>Frase de retorna ao RTV por produto indisponível</shortDescription>
+        <value>Pedido está com erro, devido um dos seus produtos ({prodCode}) estar com Bloqueio SOP, remova-o do pedido ou contacte o time de SOP para prosseguir</value>
+    </labels>
+    <labels>
+        <fullName>SalesConditionObject</fullName>
+        <language>pt_BR</language>
+        <protected>false</protected>
+        <shortDescription>Frase para notificar o adm de vendas sobre condições vendas novas</shortDescription>
+        <value>Novas condições de vendas foram criadas: ({prodCode}), para ativa-las visitar a guia de &apos;Condições de Vendas&apos;</value>
+    </labels>
+    <labels>
+        <fullName>StockAlert</fullName>
+        <categories>Controle de vendas</categories>
+        <language>pt_BR</language>
+        <protected>false</protected>
+        <shortDescription>Erro de estoque</shortDescription>
+        <value>O produto não tem estoque suficiente para atender este pedido.
+Estoque Disponível = {stock}
+Em caso de dúvida, contatar Customer Service.</value>
+    </labels>
+    <labels>
+        <fullName>StockError</fullName>
+        <categories>Controle de vendas</categories>
+        <language>pt_BR</language>
+        <protected>false</protected>
+        <shortDescription>Erro de estoque</shortDescription>
+        <value>Produto {productName} - Estoque insuficiente para atender o Pedido. Em caso de dúvida, contatar Customer Service.</value>
+    </labels>
+    <labels>
+        <fullName>CampaignError</fullName>
+        <categories>Controle de vendas</categories>
+        <language>pt_BR</language>
+        <protected>false</protected>
+        <shortDescription>Campanha</shortDescription>
+        <value>Produto: {prodCode}, não pode ser vendido devido a quantidade estar acima do disponivel para a Campanha {campName}.</value>
+    </labels>
+    <labels>
+        <fullName>costNull</fullName>
+        <language>pt_BR</language>
+        <protected>false</protected>
+        <shortDescription>cost null message</shortDescription>
+        <value>Esta família contém produtos sem custo cadastrado.</value>
+    </labels>
+    <labels>
+        <fullName>margemNull</fullName>
+        <language>pt_BR</language>
+        <protected>false</protected>
+        <shortDescription>margem null message</shortDescription>
+        <value>Esta família não contém margem projetada cadastrada dentro do sistema.</value>
+    </labels>
+    <labels>
+        <fullName>Parecer_da_visita</fullName>
+        <language>pt_BR</language>
+        <protected>false</protected>
+        <shortDescription>Parecer da visita</shortDescription>
+        <value>Insira a quantidade mínima de imagens que este tipo de evento necessita para prosseguir com o preenchimento do parecer da visita.</value>
+    </labels>
+</CustomLabels>

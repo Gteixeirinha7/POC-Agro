@@ -1,0 +1,285 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Workflow xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fieldUpdates>
+        <fullName>AtualizaTempoAprovacao</fullName>
+        <field>SendToActualApprover__c</field>
+        <formula>NOW()</formula>
+        <name>AtualizaTempoAprovacao</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Formula</operation>
+        <protected>false</protected>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>AtualizarStatusEmAprovacao</fullName>
+        <field>StatusSF__c</field>
+        <literalValue>Em aprovação</literalValue>
+        <name>Atualizar o status para &quot;Em Aprovação&quot;</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Literal</operation>
+        <protected>false</protected>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>ChangingStatusInApproval</fullName>
+        <field>StatusSF__c</field>
+        <literalValue>Em aprovação</literalValue>
+        <name>Alterar status para &quot;Em aprovação&quot;</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Literal</operation>
+        <protected>false</protected>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>CleanApprovalJustificationField</fullName>
+        <field>ApprovalJustification__c</field>
+        <name>Limpar campos - Justificativa Aprovação</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Null</operation>
+        <protected>false</protected>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>CleanApproverDiscountAmount</fullName>
+        <field>DiscountApprover__c</field>
+        <name>Limpar campos - Desconto acima de</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>LookupValue</operation>
+        <protected>false</protected>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>CleanBonificationApprovalNote</fullName>
+        <field>BonificationApprovalNote__c</field>
+        <name>Limpar campos - Aprovação Bonificação</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Null</operation>
+        <protected>false</protected>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>CleanCommercialApprovalField</fullName>
+        <field>CommercialApproval__c</field>
+        <literalValue>0</literalValue>
+        <name>Limpar campos - Aprovação Comercial</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Literal</operation>
+        <protected>false</protected>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>CleanDiscountApprovalNote</fullName>
+        <field>DiscountApprovalNote__c</field>
+        <name>Limpar campos - Aprovação Desconto</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Null</operation>
+        <protected>false</protected>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>CleanDiscountApprover</fullName>
+        <field>DiscountApprover__c</field>
+        <name>Limpar campos - Aprovador de Desconto</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>LookupValue</operation>
+        <protected>false</protected>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>CleanFinancialAdministrativeField</fullName>
+        <field>FinancialAdministrativeManager__c</field>
+        <name>Limpar campos - Gerente Financeiro</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>LookupValue</operation>
+        <protected>false</protected>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>CleanFinancialAdministrativeManager</fullName>
+        <field>FinancialAdministrativeManager__c</field>
+        <name>Limpar campos - Gerente Financeiro Admin</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>LookupValue</operation>
+        <protected>false</protected>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>CleanRegistrationApprovalNote</fullName>
+        <field>RegistrationApprovalNote__c</field>
+        <name>Limpar campos - Aprovação Cadastral</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Null</operation>
+        <protected>false</protected>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>DesmarcarEnviarAprovacaoMesaGraos</fullName>
+        <field>SubmitGrainTableApproval__c</field>
+        <literalValue>0</literalValue>
+        <name>Desmarcar Enviar Aprovação Mesa de Grãos</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Literal</operation>
+        <protected>false</protected>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>EnableRecalcOrder1</fullName>
+        <field>RecalculateApprovals__c</field>
+        <literalValue>1</literalValue>
+        <name>Ativar recalcular pedido</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Literal</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>true</reevaluateOnChange>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>EnableRecalcOrder2</fullName>
+        <field>RecalculateApprovals__c</field>
+        <literalValue>0</literalValue>
+        <name>Remover recalcular pedido</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Literal</operation>
+        <protected>false</protected>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>MarkGrainTableApproval</fullName>
+        <field>GrainTableApproval__c</field>
+        <literalValue>1</literalValue>
+        <name>Marcar o campo Aprovação Mesa de Grãos</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Literal</operation>
+        <protected>false</protected>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>RemoveTempoAprovacao</fullName>
+        <field>SendToActualApprover__c</field>
+        <name>RemoveTempoAprovacao</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Null</operation>
+        <protected>false</protected>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>UnmarkGrainTableApproval</fullName>
+        <description>Marcar o campo GrainTableApproval__c como false.</description>
+        <field>GrainTableApproval__c</field>
+        <literalValue>0</literalValue>
+        <name>Desmarcar Aprovação Mesa de Grãos</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Literal</operation>
+        <protected>false</protected>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>UnmarkGrainTableSubmit</fullName>
+        <description>Marcar o campo SubmitGrainTableApproval__c como false.</description>
+        <field>SubmitGrainTableApproval__c</field>
+        <literalValue>0</literalValue>
+        <name>Desmarcar Submissão a Mesa de Grãos</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Literal</operation>
+        <protected>false</protected>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>RecalculateApprovals</fullName>
+        <description>Ação que altera o campo &quot;Recalular Aprovações&quot; para true, indicando que o processo precisa ser recalculado.</description>
+        <field>RecalculateApprovals__c</field>
+        <literalValue>1</literalValue>
+        <name>Recalcular Aprovação</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Literal</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>true</reevaluateOnChange>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>UpdateApproved1</fullName>
+        <field>Approved1__c</field>
+        <literalValue>1</literalValue>
+        <name>Atualizar Aprovado 1</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Literal</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>false</reevaluateOnChange>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>UpdateApproved2</fullName>
+        <field>Approved2__c</field>
+        <literalValue>1</literalValue>
+        <name>Atualizar Aprovado 2</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Literal</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>false</reevaluateOnChange>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>UpdateApproved3</fullName>
+        <field>Approved3__c</field>
+        <literalValue>1</literalValue>
+        <name>Atualizar Aprovado 3</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Literal</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>false</reevaluateOnChange>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>UpdateApproved4</fullName>
+        <field>Approved4__c</field>
+        <literalValue>1</literalValue>
+        <name>Atualizar Aprovado 4</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Literal</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>false</reevaluateOnChange>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>UpdateRecalcApproval</fullName>
+        <field>RecalculateApprovals__c</field>
+        <literalValue>1</literalValue>
+        <name>Recalcular processo Aprovação</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Literal</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>true</reevaluateOnChange>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>UpdateRecalculateToFalse</fullName>
+        <field>RecalculateApprovals__c</field>
+        <literalValue>0</literalValue>
+        <name>Atualizar Recalculo para &quot;false&quot;</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Literal</operation>
+        <protected>false</protected>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>UpdateStatuSF</fullName>
+        <description>Atualiza o campo de status para aprovado.</description>
+        <field>StatusSF__c</field>
+        <literalValue>Retorna RTV</literalValue>
+        <name>Atualizar StatusSF</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Literal</operation>
+        <protected>false</protected>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>UpdateStatusSF</fullName>
+        <description>Atualiza o campo de status para aprovado</description>
+        <field>StatusSF__c</field>
+        <literalValue>Aprovado</literalValue>
+        <name>Atualizar StatusSF</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Literal</operation>
+        <protected>false</protected>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>UpdateStatusToInApproval</fullName>
+        <field>StatusSF__c</field>
+        <literalValue>Em aprovação</literalValue>
+        <name>Atualizar Status para &quot;Em aprovação&quot;</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Literal</operation>
+        <protected>false</protected>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>UpdateStatustoInGrainApproval</fullName>
+        <field>StatusSF__c</field>
+        <literalValue>Em aprovação grãos</literalValue>
+        <name>Atualizar Status p/ &quot;Em aprovação grãos&quot;</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Literal</operation>
+        <protected>false</protected>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>UpdateStatustoInTyping</fullName>
+        <field>StatusSF__c</field>
+        <literalValue>Em digitação</literalValue>
+        <name>Atualizar o status para &quot;Em Digitação&quot;</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Literal</operation>
+        <protected>false</protected>
+    </fieldUpdates>
+</Workflow>

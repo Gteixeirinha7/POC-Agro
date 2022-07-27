@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>EventRelated__c</fullName>
+    <deleteConstraint>SetNull</deleteConstraint>
+    <description>Este campo vincula o evento atual com o evento relacionado, o motivo deste objeto existir é porque existem objetos que precisam estar relacionados a visita, porém por ser um objeto standard, ele não permite que seja indicado como relacionamento de pesquisa em outros objetos.</description>
+    <externalId>false</externalId>
+    <label>Evento Relacionado</label>
+    <referenceTo>EventRelated__c</referenceTo>
+    <relationshipLabel>Atividades</relationshipLabel>
+    <relationshipName>Atividades</relationshipName>
+    <required>false</required>
+    <type>Lookup</type>
+</CustomField>

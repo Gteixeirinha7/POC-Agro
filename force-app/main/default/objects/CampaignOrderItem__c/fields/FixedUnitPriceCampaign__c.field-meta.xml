@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>FixedUnitPriceCampaign__c</fullName>
+    <defaultValue>false</defaultValue>
+    <description>Campo utilizado para marcar se o produto contem uma campanha de preço fixo.</description>
+    <externalId>false</externalId>
+    <inlineHelpText>Campo utilizado para marcar se o produto contem uma campanha de preço fixo.</inlineHelpText>
+    <label>Campanha de Preço Fixo?</label>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Checkbox</type>
+</CustomField>

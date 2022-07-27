@@ -1,0 +1,5 @@
+<aura:component access="global" implements="force:lightningQuickActionWithoutHeader,force:hasRecordId,lightning:actionOverride,flexipage:availableForAllPageTypes,force:appHostable">
+    <aura:attribute name="recordId" type="String" access="global" />
+    <c:answersAndQuestionsScreen recordId="{!v.recordId}" onclose="{!c.handleClose}" />
+    <aura:handler name="init" value="{!this}" action="{!c.init}" />
+</aura:component>

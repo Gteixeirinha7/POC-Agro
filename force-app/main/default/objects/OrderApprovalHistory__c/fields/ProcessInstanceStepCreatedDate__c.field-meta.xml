@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>ProcessInstanceStepCreatedDate__c</fullName>
+    <description>Campo que armazena a data de criação da etapa do processo de aprovação.</description>
+    <externalId>false</externalId>
+    <inlineHelpText>Campo que armazena a data de criação da etapa do processo de aprovação.</inlineHelpText>
+    <label>Data do passo do processo</label>
+    <required>false</required>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>DateTime</type>
+</CustomField>

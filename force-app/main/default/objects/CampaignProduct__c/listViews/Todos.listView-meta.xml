@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ListView xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Todos</fullName>
+    <columns>NAME</columns>
+    <columns>CREATED_DATE</columns>
+    <columns>MaxQuantity__c</columns>
+    <columns>UsedQuantity__c</columns>
+    <columns>AvailableQuantity__c</columns>
+    <columns>UnitMeasurement__c</columns>
+    <columns>Product2__c</columns>
+    <columns>Manufacturer__c</columns>
+    <columns>Family__c</columns>
+    <columns>CURRENCY_ISO_CODE</columns>
+    <filterScope>Everything</filterScope>
+    <label>Todos</label>
+</ListView>

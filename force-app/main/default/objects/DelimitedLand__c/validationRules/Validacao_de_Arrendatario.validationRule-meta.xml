@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Validacao_de_Arrendatario</fullName>
+    <active>true</active>
+    <description>Esta regra de validação tem como objetivo validar o preenchimento dos campos a partir do valor preenchido em Tenant__c</description>
+    <errorConditionFormula>IF(Tenant__c == true, 
+ 
+IF(OR(ISNULL(AreaTotalHec__c),ISNULL(TenantArea__c),ISNULL(ContractDate__c),ISNULL(TenantCulture__c),ISNULL(TenantTax__c)) ,true, false),
+
+false)</errorConditionFormula>
+    <errorMessage>Os campos obrigatórios Quantidade Hec Proprietario Rural, Quantidade Hec Arrendatario, Data de vencimento do contrato, Cultura de Arrendamento e Valor Taxa de Arrendamento devem ser preenchidos</errorMessage>
+</ValidationRule>

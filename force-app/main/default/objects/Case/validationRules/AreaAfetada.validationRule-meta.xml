@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>AreaAfetada</fullName>
+    <active>true</active>
+    <description>Área Afetada não pode ser maior que área disponível</description>
+    <errorConditionFormula>AND(NOT  ISBLANK( Plot__c ) ,  DamagedArea__c  &gt;  Plot__r.AreaCultivatedLand__c )</errorConditionFormula>
+    <errorMessage>Área Afetada não pode ser maior que Área disponível no Talhão!</errorMessage>
+</ValidationRule>

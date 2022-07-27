@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>CampaignProduct__c</fullName>
+    <deleteConstraint>Restrict</deleteConstraint>
+    <description>Caso este campo esteja preenchido, a regra só vai funcionar para o produto selecionado, um dos cenários para se utilizar este campo é quando existem diversos produtos com preço fixo na campanha.</description>
+    <externalId>false</externalId>
+    <inlineHelpText>Caso este campo esteja preenchido, a regra só vai funcionar para o produto selecionado, um dos cenários para se utilizar este campo é quando existem diversos produtos com preço fixo na campanha.</inlineHelpText>
+    <label>Produto da Campanha</label>
+    <lookupFilter>
+        <active>true</active>
+        <filterItems>
+            <field>CampaignProduct__c.Campaign__c</field>
+            <operation>equals</operation>
+            <valueField>$Source.Campaign__c</valueField>
+        </filterItems>
+        <isOptional>false</isOptional>
+    </lookupFilter>
+    <referenceTo>CampaignProduct__c</referenceTo>
+    <relationshipLabel>Regras de Campanhas</relationshipLabel>
+    <relationshipName>Regras_de_Campanhas</relationshipName>
+    <required>false</required>
+    <trackHistory>true</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Lookup</type>
+</CustomField>

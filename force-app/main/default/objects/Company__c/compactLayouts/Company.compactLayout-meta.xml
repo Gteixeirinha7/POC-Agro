@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CompactLayout xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Company</fullName>
+    <fields>Name</fields>
+    <fields>CompanyName__c</fields>
+    <fields>CNPJ__c</fields>
+    <fields>Email__c</fields>
+    <fields>Phone__c</fields>
+    <fields>DeliveryStreet__c</fields>
+    <fields>DeliveryCity__c</fields>
+    <fields>DeliveryState__c</fields>
+    <label>Empresa</label>
+</CompactLayout>

@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>HasAttachment__c</fullName>
+    <defaultValue>false</defaultValue>
+    <description>Devido a quantidade de dados no payload, é necessário um anexo?</description>
+    <externalId>false</externalId>
+    <inlineHelpText>Devido a quantidade de dados no payload, é necessário um anexo?</inlineHelpText>
+    <label>Possui Anexo</label>
+    <trackTrending>false</trackTrending>
+    <type>Checkbox</type>
+</CustomField>

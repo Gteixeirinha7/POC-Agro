@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Pedido__c</fullName>
+    <description>Campo que armazena o pedido relacionado ao histórico.</description>
+    <externalId>false</externalId>
+    <inlineHelpText>Campo que armazena o pedido relacionado ao histórico.</inlineHelpText>
+    <label>Pedido</label>
+    <referenceTo>Order</referenceTo>
+    <relationshipLabel>Histórico de aprovações de pedidos</relationshipLabel>
+    <relationshipName>Hist_rico_de_aprova_es_de_pedidos</relationshipName>
+    <relationshipOrder>0</relationshipOrder>
+    <reparentableMasterDetail>false</reparentableMasterDetail>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>MasterDetail</type>
+    <writeRequiresMasterRead>false</writeRequiresMasterRead>
+</CustomField>

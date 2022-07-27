@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>PaymentForm__c</fullName>
+    <externalId>false</externalId>
+    <label>Forma de Pagamento</label>
+    <required>false</required>
+    <trackHistory>false</trackHistory>
+    <type>Picklist</type>
+    <valueSet>
+        <restricted>true</restricted>
+        <valueSetDefinition>
+            <sorted>false</sorted>
+            <value>
+                <fullName>#</fullName>
+                <default>false</default>
+                <label>Bonificação</label>
+            </value>
+            <value>
+                <fullName>I</fullName>
+                <default>false</default>
+                <label>Carteira - Clientes (Dinheiro)</label>
+            </value>
+            <value>
+                <fullName>J</fullName>
+                <default>false</default>
+                <label>Cheque - Clientes</label>
+            </value>
+            <value>
+                <fullName>K</fullName>
+                <default>false</default>
+                <label>Boleto - Clientes</label>
+            </value>
+            <value>
+                <fullName>O</fullName>
+                <default>false</default>
+                <label>Cartão de Débito - Clientes</label>
+            </value>
+            <value>
+                <fullName>Q</fullName>
+                <default>false</default>
+                <label>Cartão de Crédito - Clientes</label>
+            </value>
+            <value>
+                <fullName>R</fullName>
+                <default>false</default>
+                <label>Depósito - Clientes</label>
+            </value>
+            <value>
+                <fullName>S</fullName>
+                <default>false</default>
+                <label>Antecipado - Clientes</label>
+            </value>
+            <value>
+                <fullName>U</fullName>
+                <default>false</default>
+                <label>Transfêrencia (livre)</label>
+            </value>
+            <value>
+                <fullName>V</fullName>
+                <default>false</default>
+                <label>Barter Cliente</label>
+            </value>
+            <value>
+                <fullName>Y</fullName>
+                <default>false</default>
+                <label>Cessão de Crédito - Cliente</label>
+            </value>
+            <value>
+                <fullName>Z</fullName>
+                <default>false</default>
+                <label>PIX - Clientes</label>
+            </value>
+            <value>
+                <fullName>D</fullName>
+                <default>false</default>
+                <label>Barter Fornecedor</label>
+            </value>
+            <value>
+                <fullName>A</fullName>
+                <default>false</default>
+                <label>Transferência - Fornecedor</label>
+            </value>
+            <value>
+                <fullName>P</fullName>
+                <default>false</default>
+                <label>Cessão de Crédito - Fornecedor</label>
+            </value>
+        </valueSetDefinition>
+    </valueSet>
+</CustomField>

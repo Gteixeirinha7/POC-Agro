@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>AreaCultivatedLandMeters__c</fullName>
+    <externalId>false</externalId>
+    <formula>CASE(  UnitMeasurement__c ,&quot;Hectare&quot;, 10000,&quot;Are&quot;, 100, &quot;Centiare&quot;, 1,&quot;Alqueire Mineiro&quot;, 48400, &quot;Alqueire Goiano&quot;, 48400, &quot;Alqueire Paulista&quot;, 24200, &quot;Alqueire do norte&quot;, 27225, &quot;Alqueire do RJ&quot; , 27225, &quot;Alqueire Baiano&quot;, 69800, &quot;Litro&quot;, 605, 1 ) *   AreaCultivatedLand__c</formula>
+    <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+    <inlineHelpText>Este Campo é a soma de Área de Plantio mais Área de Pastagem.</inlineHelpText>
+    <label>Total de Áreas Cultivadas (m2)</label>
+    <precision>18</precision>
+    <required>false</required>
+    <scale>2</scale>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Number</type>
+    <unique>false</unique>
+</CustomField>

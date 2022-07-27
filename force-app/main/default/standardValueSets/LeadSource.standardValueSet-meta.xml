@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<StandardValueSet xmlns="http://soap.sforce.com/2006/04/metadata">
+    <sorted>false</sorted>
+    <standardValue>
+        <fullName>Advertisement</fullName>
+        <default>false</default>
+        <label>Anúncio</label>
+    </standardValue>
+    <standardValue>
+        <fullName>Employee Referral</fullName>
+        <default>false</default>
+        <label>Indicação de funcionário</label>
+    </standardValue>
+    <standardValue>
+        <fullName>External Referral</fullName>
+        <default>false</default>
+        <label>Indicação externa</label>
+    </standardValue>
+    <standardValue>
+        <fullName>Partner</fullName>
+        <default>false</default>
+        <label>Parceiro</label>
+    </standardValue>
+    <standardValue>
+        <fullName>Public Relations</fullName>
+        <default>false</default>
+        <label>Relações públicas</label>
+    </standardValue>
+    <standardValue>
+        <fullName>Seminar - Internal</fullName>
+        <default>false</default>
+        <label>Seminário - Interno</label>
+    </standardValue>
+    <standardValue>
+        <fullName>Seminar - Partner</fullName>
+        <default>false</default>
+        <label>Seminário - Parceiro</label>
+    </standardValue>
+    <standardValue>
+        <fullName>Trade Show</fullName>
+        <default>false</default>
+        <label>Feira ou convenção</label>
+    </standardValue>
+    <standardValue>
+        <fullName>Web</fullName>
+        <default>false</default>
+        <label>Web</label>
+    </standardValue>
+    <standardValue>
+        <fullName>Word of mouth</fullName>
+        <default>false</default>
+        <label>Boca a boca</label>
+    </standardValue>
+    <standardValue>
+        <fullName>Other</fullName>
+        <default>false</default>
+        <label>Outros</label>
+    </standardValue>
+    <standardValue>
+        <fullName>0</fullName>
+        <default>false</default>
+        <label>0</label>
+    </standardValue>
+</StandardValueSet>

@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>InterestOrAntecipationDiscount__c</fullName>
+    <deleteConstraint>SetNull</deleteConstraint>
+    <description>Campo que armazena o valor de juros caso a data de pagamento seja posterior a data efetiva ou o desconto de antecipação caso a data de pagamento seja inferior a data efetiva do catálogo de preço.</description>
+    <externalId>false</externalId>
+    <inlineHelpText>Campo que armazena o valor de juros caso a data de pagamento seja posterior a data efetiva ou o desconto de antecipação caso a data de pagamento seja inferior a data efetiva do catálogo de preço.</inlineHelpText>
+    <label>Juros ou Desconto de antecipação</label>
+    <referenceTo>ListPrice__c</referenceTo>
+    <relationshipLabel>Produtos do pedido (Juros ou Desconto de antecipação)</relationshipLabel>
+    <relationshipName>ProductsInterestOrAntecipationDiscount</relationshipName>
+    <required>false</required>
+    <trackHistory>true</trackHistory>
+    <type>Lookup</type>
+</CustomField>

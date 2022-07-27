@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<WaveApplication xmlns="http://soap.sforce.com/2006/04/metadata">
+    <folder>Performance_das_Filiais</folder>
+    <masterLabel>Performance das Filiais</masterLabel>
+    <shares>
+        <accessLevel>Manage</accessLevel>
+        <sharedTo>admin@kaique-agro.demo</sharedTo>
+        <sharedToType>User</sharedToType>
+    </shares>
+</WaveApplication>

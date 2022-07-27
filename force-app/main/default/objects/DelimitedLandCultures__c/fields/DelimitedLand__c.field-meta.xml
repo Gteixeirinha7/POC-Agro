@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>DelimitedLand__c</fullName>
+    <externalId>false</externalId>
+    <label>Talhão</label>
+    <referenceTo>DelimitedLand__c</referenceTo>
+    <relationshipLabel>Culturas dos Talhões</relationshipLabel>
+    <relationshipName>Culturas_dos_Talhoes</relationshipName>
+    <relationshipOrder>0</relationshipOrder>
+    <reparentableMasterDetail>false</reparentableMasterDetail>
+    <trackHistory>true</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>MasterDetail</type>
+    <writeRequiresMasterRead>false</writeRequiresMasterRead>
+</CustomField>

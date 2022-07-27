@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>ZDJ1orZJ01WithoutProduct</fullName>
+    <active>true</active>
+    <description>Regra que valida se um dos dois campos ( produto ou família de produtos ) estão preenchidos.</description>
+    <errorConditionFormula>if(
+				AND(
+					OR(RecordType.Name = &apos;ZDJ1&apos;, RecordType.Name = &apos;ZJ01&apos;),
+					ISBLANK(Product2Id__c),
+					ISBLANK( ProductFamily__c)
+				),
+				True,
+				False
+)</errorConditionFormula>
+    <errorDisplayField>ProductFamily__c</errorDisplayField>
+    <errorMessage>Para os tipos de registros ZDJ1 e ZJ01, o campo de produto ou o campo de família de produto deve estar preenchido.</errorMessage>
+</ValidationRule>

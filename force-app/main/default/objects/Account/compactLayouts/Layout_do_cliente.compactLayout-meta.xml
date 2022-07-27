@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CompactLayout xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Layout_do_cliente</fullName>
+    <fields>Name</fields>
+    <fields>ExternalId__c</fields>
+    <fields>FiscalDomicile__c</fields>
+    <fields>StateRegistration__c</fields>
+    <label>Layout do cliente</label>
+</CompactLayout>

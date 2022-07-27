@@ -1,0 +1,978 @@
+<!-- sldsValidatorIgnore -->
+<!-- sldsValidatorIgnore -->
+<template>
+    <template if:true={showPedidoStep01}>
+        <!-- CORPO DE CONTEÚDO -->
+    <div class="wrap commom">
+        <div class="container wmax-740">
+            <div class="row">
+                <div class="col-md-12 col-xs-12">
+                    <div class="box-steps">
+                        <div class="step active">
+                           <span class='nr'>1</span>
+                           <span class='lb-step'>Pedido</span>
+                        </div>
+                        <div class="step">
+                           <span class='nr'>2</span>
+                           <span class='lb-step'>Itens</span>
+                        </div>
+                        <div class="step">
+                           <span class='nr'>3</span>
+                           <span class='lb-step'>Fechamento</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-6 col-xs-6">
+                    <button class="btn btn-outline-primary btn-nav-steps" onclick={onClickWindowBack}>
+                        <img src={cIBack} class="ic-voltar" alt="Voltar">
+                        <span>Voltar</span>
+                    </button>
+                </div>
+                <div class="col-6 col-xs-6 text-right">
+                    <button class="btn btn-outline-primary btn-nav-steps" onclick={onClickShowPedidoStep2a}>
+                        <span>Continuar</span>
+                        <img src={cIContinueBlue} class="ic-continuar" alt="Continuar">
+                    </button>
+                </div>
+            </div>
+
+            <!-- form pedido -->
+            <div class="box-form-pedido">
+
+                <div class="row">
+                    <div class="col-12">
+                        <div class="unique-data">
+                            <div class="lb-commom">
+                                Nº Pedido
+                            </div>
+                            <div class="content">
+                                {orderObject.OrderNumber}
+                            </div>
+                        </div>
+                    </div>    
+                </div>
+
+                <div class="row">
+                    <div class="col-6">
+                        <div class="unique-data">
+                            <div class="lb-commom">
+                                Situação
+                            </div>
+                            <div class="content">
+                                {orderObject.Status}
+                            </div>
+                        </div>
+                    </div>    
+                    <div class="col-6">
+                        <div class="unique-data">
+                            <div class="lb-commom">
+                                Data de Emissão
+                            </div>
+                            <div class="content">
+                                <img class="mr-2" src={cIEmissionDate} alt="info">{dateToday}
+                            </div>
+                        </div>
+                    </div>    
+                </div>
+
+                <div class="row">
+                    <div class="col-12">
+                        <div class="unique-data">
+                            <div class="lb-commom">
+                                Cliente <span class="field-required">*</span>
+                            </div>
+                            <div class="content cont-label">
+                                <c-custom-lookup
+                                object-api-name="Account" 
+                                field-api-name="Name"
+                                field-api-names="Name, ParentId, NCDDate__c, SalesOrg__c, ActivitySector__c, Blocked__c,  InternShippingCity__c, InternShippingCity__r.Name, InternShippingCity__r.Id, ExternalId__c "
+                                object-icon-name="standard:account"
+                                filter=" AND RecordType.DeveloperName <> 'Property' "
+                                record-id={clienteId}
+                                onselectrecord={handleNewRecordAccount}
+                                custom-lookup-name="customLookupAccount"
+                                selected-record={orderObject.Account}
+                                disabled-custom-lookup={disabledCustomLookup}>
+                                </c-custom-lookup>
+                            </div>
+                        </div>
+                    </div>      
+                </div>
+
+                <template if:true={hiddenProps}>
+                    <div class="row">
+                        <div class="col-12">
+                            <div class="unique-data">
+                                <div class="lb-commom">
+                                    Cliente cobrança <span class="field-required">*</span>
+                                </div>
+                                <div class="content cont-label">
+                                    <c-custom-lookup    
+                                    object-api-name="Account" 
+                                    field-api-name="(Name"
+                                    field-api-names="Name, NCDDate__c, Blocked__c, InternShippingCity__c, InternShippingCity__r.Name, InternShippingCity__r.Id"
+                                    object-icon-name="standard:account"
+                                    filter=" AND (ParentId = 'replace' AND  RecordType.DeveloperName = 'Property' )) OR (Id = 'replace') "
+                                    record-id={clienteId}
+                                    onselectrecord={handleNewRecordBillingAccount}
+                                    custom-lookup-name="customLookupBillingAccount"
+                                    selected-record={orderObject.BillingAccount}
+                                    disabled-custom-lookup={disabledAllFields}>
+                                    </c-custom-lookup>
+                                </div>
+                            </div>
+                        </div>      
+                    </div>
+
+                    <div class="row">
+                        <div class="col-12">
+                            <div class="unique-data">
+                                <div class="lb-commom">
+                                    Cliente entrega <span class="field-required">*</span>
+                                </div>
+                                <div class="content cont-label">
+                                    <c-custom-lookup  
+                                    class="shippingCustomLookup"  
+                                    object-api-name="Account" 
+                                    field-api-name="(Name"
+                                    field-api-names="Name, NCDDate__c, Blocked__c, InternShippingCity__c, InternShippingCity__r.Name, InternShippingCity__r.Id "
+                                    object-icon-name="standard:account"
+                                    filter=" AND (ParentId = 'replace' AND  RecordType.DeveloperName = 'Property' )) OR (Id = 'replace') "
+                                    record-id={clienteId}
+                                    onselectrecord={handleNewRecordShippingAccount}
+                                    custom-lookup-name="customLookupShippingAccount"
+                                    selected-record={orderObject.ShippingAccount}
+                                    disabled-custom-lookup={disabledCustomLookup}>
+                                    </c-custom-lookup>
+                                </div>
+                            </div>
+                        </div>      
+                    </div>
+                </template>
+                <template if:true={hiddenSalesTeam}>
+                <template if:true={hiddenRTV}>
+                    <div class="row">
+                        <div class="col-12">
+                            <div class="unique-data">
+                                <div class="lb-commom">
+                                    RTV <span class="field-required">*</span>
+                                </div>
+                                <div class="content cont-label">
+                                    <c-custom-lookup-rtv
+                                    object-api-name="AccountTeamMember" 
+                                    field-api-name="User.Name"
+                                    field-search-names="User.Name, UserId"
+                                    object-icon-name="standard:people"
+                                    record-id={clienteId}
+                                    filter=" AND User.Id IN (replace) AND Account.Id = 'recordId' "
+                                    onselectrecord={handleNewRecordRTV}
+                                    custom-lookup-name="customLookupRTV"
+                                    ids-rtvs={idsRtvs}
+                                    selected-record={orderObject.Rtv}
+                                    disabled-custom-lookup={disabledCustomLookup}>
+                                    </c-custom-lookup-rtv>
+                                </div>
+                            </div>
+                        </div>      
+                    </div>
+                </template>
+                    <div class="row">
+                        <div class="col-12">
+                            <div class="unique-data">
+                                <div class="lb-commom">
+                                    Equipe de vendas <span class="field-required">*</span>
+                                </div>
+                                <div class="content cont-label">
+                                    <c-custom-lookup-sales-team
+                                    object-api-name="SalesTeam__c" 
+                                    field-api-name="Name "
+                                    field-api-names=", DistributionCenter__r.City__c, SalesOrg__c, SalesOrg__r.Name, SalesOrg__r.Director__r.Name, ParentId__c, Manager__r.Name"
+                                    object-icon-name="custom:custom27"
+                                    record-id={clienteId}
+                                    filter=" AND Id IN (replace)  "
+                                    onselectrecord={handleNewRecordSalesTeam}
+                                    custom-lookup-name="customLookupSalesTeam"
+                                    sales-team-list={salesTeamList}
+                                    selected-record={orderObject.SalesTeam}
+                                    disabled-custom-lookup={disabledCustomLookup}>
+                                    </c-custom-lookup-sales-team>
+                                </div>
+                            </div>
+                        </div>      
+                    </div>
+                </template>
+
+                <div class="row">
+                    <div class="col-12">
+                        <div class="unique-data">
+                            <div class="lb-commom">
+                                Tipo de negociação <span class="field-required">*</span>
+                            </div>
+                            <div class="content">
+                                <div class="box-moeda" style="margin-bottom: 7px;">
+                                    <div class="form-check form-check-inline bg-white p-2 px-3 border rounded">
+                                        <input class="form-check-input" type="radio" checked={checkedSales} name="inlineRadioPedidos" id="inlineRadioPedidosVenda" value="Sales" onclick={handleFilter} disabled={disabledNegotiationType}>
+                                        <label class="form-check-label" for="inlineRadioPedidos" style="font-weight: 400; font-size: 13px;">Ordem de Venda</label>
+                                    </div>
+                                    <div class="form-check form-check-inline bg-white p-2 px-3 border rounded">
+                                        <input class="form-check-input" type="radio" checked={checkedContract} name="inlineRadioPedidos" id="inlineRadioPedidosContrato" value="Contract" onclick={handleFilter} disabled={disabledNegotiationType}>
+                                        <label class="form-check-label" for="inlineRadioPedidos" style="font-weight: 400; font-size: 13px;">Contrato de Venda</label> 
+                                    </div>
+                                </div>
+                                <c-custom-combo-box-get-record-type 
+                                object-name="RecordType"
+                                field-name=" Name, SobjectType, DeveloperName "
+                                filter=" SobjectType = 'Order' AND IsActive = true"
+                                filterpicklist={filtersales}
+                                field-label=""
+                                onshowloading={handleLoading}
+                                onselectrecordtype={handleNewRecordType}
+                                value={orderObject.RecordType}
+                                disabled-custom-lookup={disabledNegotiationType}>
+                                </c-custom-combo-box-get-record-type>
+                            </div>
+                        </div>
+                    </div>      
+                </div>
+                <div class="row" if:true={showOrderContractField}>
+                    <div class="col-12">
+                        <div class="unique-data">
+                            <div class="lb-commom">
+                                 Pedidos do tipo Contrato
+                            </div>
+                            <div class="content cont-label">
+                                <c-custom-lookup-contracts
+                                object-api-name="Order"
+                                field-api-name="Name"
+                                field-api-names="Name"
+                                filter={}
+                                record-id={clienteId}
+                                parent-account-id={parentId}
+                                record-type={orderObject.RecordType}
+                                onselectrecordcontract2={handleOnClickContract}
+                                onselectedcontractquantity1={contractQuantity}
+                                onselectedwithcontract ={handleHavingContract}
+                                object-icon-name="standard:product"
+                                value={orderObject.ContractProduct}
+                                selected-record-contract={orderObject.ContractProduct}
+                                disabled-product2={disabledContract}
+                                activity-sector={orderObject.ActivitySector}>
+                                </c-custom-lookup-contracts>
+                            </div>
+                        </div>
+                    </div>      
+                </div>
+                <!-- ROW -->
+                <div class="row" if:true={showBarterContractField}>
+                    <div class="col-12">
+                        <div class="unique-data">
+                            <div class="lb-commom">
+                                Tipo de Barter <span class="field-required">*</span>
+                            </div>
+                            <div class="content">
+                                <c-show-picklist-value 
+                                object-name="Order" 
+                                field-name="BarterType__c" 
+                                field-label=""
+                                onselectpicklist={handlePicklistBarterType}
+                                picklist-name="barterTypePickList"
+                                value={orderObject.BarterType}
+                                disabled-custom-lookup={disabledBarterFields}> 
+                                </c-show-picklist-value>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-12">
+                        <div class="unique-data">
+                            <div class="lb-commom">
+                                Condição de venda <span class="field-required">*</span>
+                            </div>
+                            <div class="content">
+                                <c-custom-lookup-sales-conditon 
+                                object-name="Order" 
+                                field-name="SalesCondition__c" 
+                                field-label=""
+                                onselectpicklist={handlePicklistSalesCondition}
+                                picklist-name="salesConditionPickList"
+                                value={orderObject.SalesCondition}
+                                disabled-custom-lookup={disabledSalesCondition}> 
+                                </c-custom-lookup-sales-conditon>
+                            </div>
+                        </div>
+                    </div>      
+                </div>
+                <!-- /ROW -->
+                <div class="row">
+                    <div class="col-12">
+                        <div class="unique-data">
+                            <div class="lb-commom">
+                                Setor de atividade <span class="field-required">*</span>
+                            </div>
+                            <div class="content">
+                                <c-show-picklist-value
+                                object-name="Product2"
+                                field-name="ActivitySector__c"
+                                field-label=""
+                                onselectpicklist={handlePicklistActivitySector}
+                                picklist-name="activitySectorPickList"
+                                value={orderObject.ActivitySector}
+                                disabled-custom-lookup={disabledCustomLookup}> 
+                                </c-show-picklist-value>
+                            </div>
+                        </div>
+                    </div>      
+                </div>
+
+                <div class="row">
+                    <div class="col-12">
+                        <div class="unique-data">
+                            <div class="lb-commom">Moeda</div>
+                        </div>
+                        <div class="box-moeda">
+                            <div class="form-check form-check-inline bg-white p-2 px-3 border rounded">
+                                <input class="form-check-input" checked={checkedCurrencyReal} type="radio" name="inlineRadio" id="inlineRadio1" value="BRL" onclick={handleCurrency} disabled={disabledCustomLookup}>
+                                <label class="form-check-label" for="inlineRadio1">Real (R$)</label>
+                            </div>
+                            <div class="form-check form-check-inline bg-white p-2 px-3 border rounded">
+                                <input class="form-check-input" checked={checkedCurrencyDol} type="radio" name="inlineRadio" id="inlineRadio2" value="USD" onclick={handleCurrency} disabled={disabledCustomLookup}>
+                                <label class="form-check-label" for="inlineRadio2">Dolar (US$)</label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-12">
+                        <div class="unique-data">
+                            <div class="lb-commom">
+                                Validade da proposta <span class="field-required">*</span>
+                            </div>
+                            <div class="content cont-label-date">
+                            <lightning-input type="date" name="inputDateValidade" variant="label-hidden" value={valueDataValidade} onchange={handleDataValidade} disabled={disabledCustomLookup}>
+                                
+                            </lightning-input>
+                            </div>
+                        </div>
+                    </div>      
+                </div>
+
+                <div class="row">
+                    <div class="col-12">
+                        <div class="unique-data">
+                            <div class="lb-commom">
+                                Safra <span class="field-required">*</span>
+                            </div>
+                            <div class="content cont-label">
+                                <c-custom-lookup 
+                                object-api-name="Crop__c" 
+                                field-api-name="Name"
+                                field-api-names="Name"
+                                object-icon-name="custom:custom5"
+                                filter=" AND Active__c = true"
+                                onselectrecord={handleNewRecordCrop}
+                                custom-lookup-name="customLookupCrop"
+                                record-id={clienteId}
+                                selected-record={orderObject.Crop}
+                                disabled-custom-lookup={disabledCustomLookup}>
+                                </c-custom-lookup>
+                            </div>
+                        </div>
+                    </div>      
+                </div>
+
+                <div class="row">
+                    <div class="col-12">
+                        <div class="unique-data">
+                            <div class="lb-commom">
+                                Condição de Pagamento <span class="field-required">*</span>
+                            </div>
+                            <div class="content cont-label">
+                                <c-custom-lookup 
+                                object-api-name="PaymentCondition__c" 
+                                field-api-name="Name"
+                                field-api-names="Name"
+                                object-icon-name="custom:custom41"
+                                record-id={clienteId}
+                                filter=" AND Active__c = true "
+                                onselectrecord={handleNewRecordPaymentCondition}
+                                custom-lookup-name="customLookupPaymentCondition"
+                                selected-record={orderObject.PaymentCondition}
+                                disabled-custom-lookup={disabledAllFields}
+                                record-type={orderObject.RecordType}>
+                                </c-custom-lookup>
+                            </div>
+                        </div>
+                    </div>      
+                </div>
+
+                <div class="row">
+                    <div class="col-12">
+                        <div class="unique-data">
+                            <div class="lb-commom">
+                                Forma de pagamento <span class="field-required">*</span>
+                            </div>
+                            <div class="content">
+                                <c-show-picklist-value 
+                                object-name="Order" 
+                                field-name="PaymentForm__c" 
+                                field-label=""
+                                onselectpicklist={handlePicklistPaymentForm}
+                                picklist-name="paymentFormPickList"
+                                value={orderObject.PaymentForm}
+                                disabled-custom-lookup={disabledPaymentForm}> 
+                                </c-show-picklist-value>
+                            </div>
+                        </div>
+                    </div>      
+                </div>
+
+                <div class="row">
+                    <div class="col-12">
+                        <div class="unique-data">
+                            <div class="lb-commom">
+                                Data de Pagamento <span class="field-required">*</span>
+                            </div>
+                            <div class="content cont-label-date">
+                                <lightning-input type="date" name="inputDateVencimento" variant="label-hidden" value={Dates.DueDate} onchange={callHandleDatesEvent} disabled={disabledCustomLookup}>
+                                
+                                </lightning-input>
+                            </div>
+                        </div>
+                    </div>      
+                </div>
+
+                <!-- ROW DATA -->
+                <div class="row" if:true={showDateContractField}>
+                    <div class="col-12">
+                        <div class="unique-data">
+                            <div class="lb-commom">
+                                Janela do Contrato de Insumos <span class="field-required">*</span>
+                            </div>
+                            <div class="content cont-label-date">
+                                <div class="row">
+                                    <div class="col-6">  
+                                        <lightning-input type="date" name="inputInitialContractDate" variant="label-hidden" value={Dates.InitialContractDate} onchange={handleInitialContractDate} disabled={disabledBarterFields}>
+                                
+                                        </lightning-input>
+                                    </div>
+                                            
+                                    <div class="col-6">  
+                                        <lightning-input type="date" name="inputEndContractDate" variant="label-hidden" value={Dates.EndContractDate} onchange={handleEndContractDate} disabled={disabledBarterFields}>
+                                
+                                        </lightning-input>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>      
+                </div>
+                <!-- /ROW -->
+
+                <div class="row">
+                    <div class="col-12">
+                        <div class="unique-data">
+                            <div class="lb-commom">
+                                Observações <small>(Opcional)</small>
+                            </div>
+                            <div class="content">
+                                <textarea class="form-control" name="" id="obs" cols="30" rows="6" onchange={handleTextAreaObservacoes} disabled={disabledAllObservation}></textarea><br>
+                            </div>
+                        </div>
+                    </div>      
+                </div>
+
+            </div>
+            <!-- /form-pedido -->
+
+            <div class="row mb-3">
+                <div class="col-6 col-xs-6">
+                    <button class="btn btn-outline-primary btn-nav-steps p-3 btn-block" onclick={onClickWindowBack}>
+                        <img src={cIBack} class="ic-voltar" alt="Voltar">
+                        <span>Voltar</span>
+                    </button>
+                </div>
+                <div class="col-6 col-xs-6 text-right">
+                    <button class="btn btn-primary btn-nav-steps-blue p-3 btn-block" onclick={onClickShowPedidoStep2a} disabled={disabledBtnContinuar}>
+                        <span>Continuar</span>
+                        <img src={cIContinue} class="ic-continuar" alt="Continuar">
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- /CORPO DE CONTEÚDO -->
+    </template>
+
+    <template if:true={showPedidoStep2a}>
+            <!-- CORPO DE CONTEÚDO -->
+            <div class="wrap commom">
+                <div class="container wmax-740">
+                    <div class="row">
+                        <div class="col-md-12 col-xs-12">
+                            <div class="box-steps">
+                                <div class="step done">
+                                    <img src={cICheck}>
+                                    <span class='nr'>1</span>
+                                    <span class='lb-step' >Pedido</span>
+                                </div>
+                                <div class="step active">
+                                    <img src={cICheck}>
+                                    <span class='nr'>2</span>
+                                    <span class='lb-step' >Itens</span>
+                                </div>
+                                <div class="step">
+                                    <img src={cICheck}>
+                                    <span class='nr'>3</span>
+                                    <span class='lb-step' >Fechamento</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+        
+                    <div class="row">
+                        <div class="col-6 col-xs-6">
+                            <button class="btn btn-outline-primary btn-nav-steps" onclick={onClickShowPedidoStep1}>
+                                <img src={cIBack} class="ic-voltar"  alt="Voltar">
+                                <span>Voltar</span>
+                            </button>
+                        </div>
+                        <div class="col-6 col-xs-6 text-right">
+                            <button class="btn btn-outline-primary btn-nav-steps" onclick={onClickShowPedidoStep2b}>
+                                <span>Continuar</span>
+                                <img src={cIContinueBlue} class="ic-continuar"  alt="Continuar">
+                            </button>
+                        </div>
+                    </div>
+        
+        
+                    <!-- form pedido -->
+                    <c-order-item-screen
+                    product-with-contract={productWithContract}
+                    product-contract={contractProducts}
+                    product-contract-id={contractId}
+                    order-item-object-api={orderItemObject}
+                    order-object={orderObject}
+                    cliente-id={clienteId}
+                    context={itemContext}
+                    contain-inventory-error={containInventoryError}
+                    product-id={productId}
+                    currency-screen={currencyScreen}
+                    currency-screen-format={currencyScreenFormat}
+                    disabled-all-fields={disabledAllFields}
+                    disabled-product2={disabledProduct2}
+                    check-freight-c-i-f={checkedFreightCIF}
+                    check-freight-f-o-b={checkedFreightFOB}
+                    check-freight-f-c-a={checkedFreightFCA}>
+                    </c-order-item-screen>
+                    <!-- /form-pedido -->
+        
+                    <br>
+                    <div class="row mb-3 mt-2">
+                        <div class="col-6 col-xs-6">
+                            <button class="btn btn-outline-primary btn-nav-steps p-3 btn-block" onclick={onClickShowPedidoStep1}>
+                                <img src={cIBack} class="ic-voltar" alt="Voltar">
+                                <span>Voltar</span>
+                            </button>
+                        </div>
+                        <div class="col-6 col-xs-6 text-right">
+                            <button class="btn btn-primary btn-nav-steps-blue p-3 btn-block" onclick={onClickShowPedidoStep2b}>
+                                <span>Continuar</span>
+                                <img src={cIContinue} class="ic-continuar"  alt="Continuar">
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- /CORPO DE CONTEÚDO -->
+    </template>
+
+    <template if:true={showPedidoStep2b}>
+        <!-- CORPO DE CONTEÚDO -->
+    <div class="wrap commom">
+        <div class="container wmax-740">
+            <div class="row">
+                <div class="col-md-12 col-xs-12">
+                    <div class="box-steps">
+                        <div class="step done">
+                            <img src={cICheck}>
+                            <span class='nr'>1</span>
+                            <span class='lb-step' >Pedido</span>
+                        </div>
+                        <div class="step active">
+                            <img src={cICheck}>
+                            <span class='nr'>2</span>
+                            <span class='lb-step' >Itens</span>
+                        </div>
+                        <div class="step">
+                            <img src={cICheck}>
+                            <span class='nr'>3</span>
+                            <span class='lb-step' >Fechamento</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-6 col-xs-6">
+                    <button class="btn btn-outline-primary btn-nav-steps" onclick={onClickShowPedidoStep2aDivisao}>
+                        <img src={cIBack} class="ic-voltar"  alt="Voltar">
+                        <span>Voltar</span>
+                    </button>
+                </div>
+                <div class="col-6 col-xs-6 text-right">
+                    <button class="btn btn-outline-primary btn-nav-steps" onclick={onClickShowPedidoStep3}>
+                        <span>Continuar</span>
+                        <img src={cIContinueBlue} class="ic-continuar"  alt="Continuar">
+                    </button>
+                </div>
+            </div>
+
+            <!-- form pedido -->
+            <div class="box-form-pedido">
+
+                <!-- TITULO -->
+                <div class="row">
+                    <div class="col-md-6 col-sm-6 mb-6">
+                        <h3 class="titulo">Planejamento de <strong>Entrega(s)</strong></h3>
+                    </div>
+                </div>
+                <!-- /TITULO -->
+
+                <div class="row">
+                    <div class="col-12">
+                        <div class="unique-data">
+                            <div class="lb-commom">Tipo de Frete</div>
+                        </div>
+
+                        <div class="box-moeda">
+                            <div class="form-check form-check-inline bg-white p-2 px-3 border rounded" style="width:32%">
+                                <input class="form-check-input" checked={checkedFreightCIF} type="radio" name="inlineRadioOptions" id="inlineRadio3" value="CIF" onclick={handleFreight} disabled={disablefreight}>
+                                <label class="form-check-label" for="inlineRadio3">CIF</label>
+                            </div>
+                            <div class="form-check form-check-inline bg-white p-2 px-3 border rounded" style="width:32%">
+                                <input class="form-check-input" checked={checkedFreightFOB} type="radio" name="inlineRadioOptions" id="inlineRadio4" value="FOB" onclick={handleFreight} disabled={disablefreight}>
+                                <label class="form-check-label" for="inlineRadio4">FOB</label>
+                            </div>
+                            <div class="form-check form-check-inline bg-white p-2 px-3 border rounded" style="width:32%">
+                                <input class="form-check-input" checked={checkedFreightFCA} type="radio" name="inlineRadioOptions" id="inlineRadio5" value="FCA" onclick={handleFreight} disabled={disablefreight}>
+                                <label class="form-check-label" for="inlineRadio5">FCA</label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <template if:true={hiddenCity}>
+                        <div class="col-6">
+                            <div class="unique-data">
+                                <div class="lb-commom">
+                                    Cidade de Destino
+                                </div>
+                                <div class="content cont-label">
+                                    <c-custom-lookup
+                                    object-api-name="Cidade__c" 
+                                    field-api-name="Name"
+                                    field-api-names=""
+                                    filter=""
+                                    record-id={clienteId}
+                                    object-icon-name="standard:custom_notification"
+                                    selected-record={orderItemObject.InternShippingCity}>
+                                    </c-custom-lookup>
+                                </div>
+                            </div>
+                        </div>
+                    </template>
+                    <div class="col-6">
+                        <div class="unique-data">
+                            <div class="lb-commom">
+                                Valor do Frete
+                            </div>
+                            <div class="content">
+                                <lightning-formatted-number value={orderItemObject.Freigth} format-style="currency" currency-code={currencyScreenFormat}></lightning-formatted-number>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <br>
+
+                <div class="row">
+                    <div class="col-12">
+                        <!-- TITULO -->
+                        <div class="row">
+                            <div class="col-md-4 col-sm-12 mb-2">
+                                <h3 class="titulo">Divisão de Remessas</h3>
+                            </div>
+                        </div>
+                        <!-- /TITULO -->
+                    </div>
+                </div>
+
+                <template if:true={orderItemObject.ShippingDivision}>
+                    <template for:each={orderItemObject.ShippingDivision} for:item="record">
+                        <div class="row mb-3" key={record.Iterator}>
+                            <div class="col-12">
+                                <div class="shipping-box">
+                                    <div class="unique-data">
+                                        <div class="lb-commom" style="padding: 0;">
+                                            Data
+                                        </div>
+                                        <div class="content">{record.SD.DueDateShowBrl}</div>
+                                        </div>
+                                    <div class="unique-data">
+                                        <div class="lb-commom" style="padding: 0;">
+                                            Quantidade
+                                        </div>
+                                        <div class="content">{record.SD.Quantity}</div>
+                                    </div>
+                                    <button type="button" class="close btn-modal" data-dismiss="modal" aria-label="Close" style="font-size: 35px;border: 0 !important;" onclick={handleClickButtonShippingDivision} data-index={record.Iterator} disabled={disablefreight}>
+                                        <span aria-hidden="true">×</span>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </template>
+                </template>
+                <br>
+                <template if:true={hiddenShippingDivision}>
+                <div class="box-divisao-remessas">
+
+                    <div class="row">
+                        <div class="col-12">
+                            <div class="unique-data">
+                                <div class="lb-commom">
+                                    Quantidade disponível para planejamento
+                                </div>
+                                <div class="customlookup">
+                                    <lightning-input type="number" name="inputShippingQuantity" maxlength="15" step="0.001" value={shippingDivision.Quantity} variant="label-hidden" onfocusout={handleChangeQuantityShippingDivisionOnFocusOut}></lightning-input>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-12">
+                            <div class="unique-data">
+                                <div class="lb-commom">
+                                    Data de Entrega
+                                </div>
+                                <div class="customlookup">
+                                    <lightning-input type="date" name="inputDueDate" value={shippingDivision.DueDate} variant="label-hidden" onchange={handleChangeDueDateShippingDivision}></lightning-input>
+                                </div>
+                            </div>
+                        </div>      
+                    </div>
+                    <br>
+                    <div class="row">
+                        <div class="col-12">
+                            <button class="btn btn-outline-primary btn-nav-steps p-3 btn-block btn-right-icon" onclick={handleAddShippingDivision}>
+                                <span>Adicionar Divisão de Remessas</span>
+                                <div class="ic-right-button"><img src={cISumWhite} class="ic-continuar"  alt="Voltar"></div>
+                            </button>
+                        </div>      
+                    </div>
+
+                </div>
+            </template>
+            </div>
+            <!-- /form-pedido -->
+
+
+            <div class="row mb-3 mt-2">
+                <div class="col-6 col-xs-6">
+                    <button class="btn btn-outline-primary btn-nav-steps p-3 btn-block" onclick={onClickShowPedidoStep2aDivisao}>
+                        <img src={cIBack} class="ic-voltar" alt="Voltar">
+                        <span>Voltar</span>
+                    </button>
+                </div>
+                <div class="col-6 col-xs-6 text-right">
+                    <button class="btn btn-primary btn-nav-steps-blue p-3 btn-block" onclick={onClickShowPedidoStep3}>
+                        <span>Continuar</span>
+                        <img src={cIContinue} class="ic-continuar"  alt="Continuar">
+                    </button>
+                </div>
+            </div>
+
+        </div>
+    </div>
+    <!-- /CORPO DE CONTEÚDO -->
+
+    </template>
+
+        <template if:true={showBarterStepB}>
+        <c-order-screen-checkout-barter
+        authority-array={authArray}
+        fin-authority={finAuthArray}
+        mkt-authority={mktAuthArray}
+        order-type={orderTypeMP}
+        image-check={cICheck}
+        image-back={cIBack}
+        onclickshowbarterstepa={onClickShowBarterStepA}
+        onshowscreen={showScreen}
+        image-check-square={cICheckSquare}
+        credit-limit-bloqued={creditLimitBloqued}
+        order-object={orderObject}
+        has-attachment={hasAttachment}
+        accepted-formats={acceptedFormats}
+        onuploadfinished={uploadFinished}
+        file-name={FileName}
+        view-product={viewProduct}
+        ondeleteproductconcludebarter={deleteProductConcludeBarter}
+        disable-last-page-products={disableLastPageProducts}
+        disable-conclude={disableConclude}
+        image-delete={cIDel}
+        image-edit={cIEdit}
+        image-view={cIView}
+        onclickshowpedidostep2abycarscreenedit={onClickShowPedidoStep2aByCarScreenEdit}
+        onclickshowpedidostep2abycarscreenview={onClickShowPedidoStep2aByCarScreenView}
+        onclickshowpedidostep2abycarscreen={onClickShowPedidoStep2aByCarScreen}
+        image-plus-circle={cIPlusCircle}
+        image-camera={cICamera}
+        image-paper={cIPaper}
+        disabled-all-fields={disableConclude}
+        onchangestatusconcludeorder={changeStatusConcludeOrder}
+        onuploudbartersetvalues={uploudBarterSetValues}
+        onconcludeorder={concludeOrder}
+        onnavigatetoview={navigateToView}
+        str-products-name={strProductsName}
+        is-refuse-reason={isRefuseReason}
+        onremovecampaign={removeCampaign}
+        onremovecampaignfromitem={removeCampaignFromOrderItens}
+        onsetcampaignvalue={setTotalValueFromCampaign}
+        refuse-reason-margin={RefuseReasonMargin}>
+
+        </c-order-screen-checkout-barter>
+    </template>
+
+    <template if:true={showPedidoStep03}>
+        <c-order-screen-checkout
+        order-type={orderTypeMP}
+        order-object={orderObject}
+        image-back={cIBack}
+        image-check={cICheck}
+        image-delete={cIDel}
+        image-edit={cIEdit}
+        image-view={cIView}
+        image-continue-blue={cIContinueBlue}
+        onclickshowpedidostepbypricecar={clickShowStepByPriceCar}
+        ongetpaymentformpicklistvalues={handleGetPaymentFormPicklistValues}
+        ongetpaymentform={handleGetPaymentForm}
+        onshowscreen={showScreen}
+        disabled-return-sap={disabledReturnSap}
+        disable-last-page-products={disableLastPageProducts}
+        disable-route-field={disabledAllObservation}
+        view-product={viewProduct}
+        ondeleteproduct={deleteProduct}
+        onclickshowpedidostep2abycarscreenedit={onClickShowPedidoStep2aByCarScreenEdit}
+        onclickshowpedidostep2abycarscreenview={onClickShowPedidoStep2aByCarScreenView}
+        image-plus-circle={cIPlusCircle}
+        authority-array={authArray}
+        fin-authority={finAuth}
+        mkt-authority={mktAuth}
+        show-total-quantity={showTotalQuantity}
+        currency-screen-format={currencyScreenFormat}
+        hide-conclude={hideConclude}
+        hide-save={hideSave}
+        disable-conclude={disableConclude}
+        image-paper={cIPaper}
+        document-id={documentId}
+        onsetcampaignvalue={setTotalValueFromCampaign}
+        onconcludeorder={concludeOrder}
+        onremovecampaignfromitem={removeCampaignFromOrderItens}
+        onnavigatetoview={navigateToView}
+        str-products-name={strProductsName}
+        onchangestatusconcludeorder={changeStatusConcludeOrder}
+        onuploudbartersetvalues={uploudBarterSetValues}
+        show-barter-contract-field={showBarterContractField}
+        image-money-check={cIMoneyCheck}
+        onremovecampaign={removeCampaign}
+        onclickshowbarterstepa={onClickShowBarterStepA}
+        onclickshowpedidostep2abycarscreen={onClickShowPedidoStep2aByCarScreen}
+        onchangestatus={changeStatusOrderToWriting}
+        is-refuse-reason={isRefuseReason}
+        refuse-reason-margin={RefuseReasonMargin}>
+        </c-order-screen-checkout>
+
+    </template>
+    <template if:true={showBarterStepA}>
+        <!-- CORPO DE CONTEÚDO -->
+        <div class="wrap commom">
+            <div class="container" style="max-width: 850px;">
+
+                <div class="row">
+                    <div class="col-md-12 col-xs-12">
+                        <div class="box-steps">
+                            <div class="step done">
+                                <img src={cICheck}>
+                                <span class='nr'>1</span>
+                                <span class='lb-step'>Pedido</span>
+                            </div>
+                            <div class="step done">
+                                <img src={cICheck}>
+                                <span class='nr'>2</span>
+                                <span class='lb-step'>Itens</span>
+                            </div>
+                            <div class="step active">
+                                <img src={cICheck}>
+                                <span class='nr'>3</span>
+                                <span class='lb-step'>Fechamento</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- NAV BACK/NEXT -->
+                <div class="row">
+                    <div class="col-6 col-xs-6">
+                        <button class="btn btn-outline-primary btn-nav-steps" onclick={onClickShowPedidoStep2a}>
+                            <img src={cIBack} class="ic-voltar" alt="Voltar">
+                            <span>Voltar</span>
+                        </button>
+                    </div>
+                    <!--
+                    <div class="col-6 col-xs-6 text-right">
+                        <button class="btn btn-outline-primary btn-nav-steps">
+                            <span>Continuar</span>
+                            <img src={cIContinueBlue} class="ic-continuar" alt="Continuar">
+                        </button>
+                    </div>
+                    -->
+                </div>
+                <!-- /NAV BACK/NEXT -->
+
+                <c-order-barter-contract-screen
+                order-object={orderObject}
+                cliente-id={clienteId}
+                currency-screen={currencyScreen}
+                disabled-barter-fields={disabledBarterFields}
+                checked-currency-real={checkedCurrencyReal}
+                checked-currency-dol={checkedCurrencyDol}
+                onclickshowbarterstepb={onClickShowBarterStepB}
+                onreceivebarterobject={onReceiveBarterObject}>
+                </c-order-barter-contract-screen>
+
+            </div>
+            <!--- /BOX LISTA OS PRODUTOS -->
+            </div>
+
+        </div>
+        <!-- /CORPO DE CONTEÚDO -->
+    </template>
+
+    <!-- LOADING SPINNER  -->
+    <template if:true={loading}>
+        <div class="demo-only">
+            <div class="slds-spinner_container" style="position: fixed;">
+                <div role="status" class="slds-spinner slds-spinner_medium slds-spinner_brand">
+                    <div class="slds-spinner__dot-a"></div>
+                    <div class="slds-spinner__dot-b"></div>
+                </div>
+            </div>
+        </div>
+    </template>
+<!-- LOADING SPINNER  -->
+</template>

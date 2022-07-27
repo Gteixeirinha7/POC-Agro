@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>CampaignTargetRule__c</fullName>
+    <deleteConstraint>SetNull</deleteConstraint>
+    <externalId>false</externalId>
+    <label>Público Alvo</label>
+    <lookupFilter>
+        <active>true</active>
+        <filterItems>
+            <field>CampaignTargetAudience__c.Campaign__c</field>
+            <operation>equals</operation>
+            <valueField>$Source.Campaign__c</valueField>
+        </filterItems>
+        <isOptional>false</isOptional>
+    </lookupFilter>
+    <referenceTo>CampaignTargetAudience__c</referenceTo>
+    <relationshipLabel>Regras de Campanhas</relationshipLabel>
+    <relationshipName>Regras_de_Campanhas</relationshipName>
+    <required>false</required>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Lookup</type>
+</CustomField>

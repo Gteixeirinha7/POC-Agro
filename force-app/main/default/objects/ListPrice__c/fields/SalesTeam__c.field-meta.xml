@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>SalesTeam__c</fullName>
+    <deleteConstraint>Restrict</deleteConstraint>
+    <description>Campo que armazena a Equipe de vendas, referente ao campo  VBAK - VKGRP no SAP.</description>
+    <externalId>false</externalId>
+    <inlineHelpText>Campo que armazena a Equipe de vendas, referente ao campo  VBAK - VKGRP no SAP.</inlineHelpText>
+    <label>Equipe de Vendas</label>
+    <referenceTo>SalesTeam__c</referenceTo>
+    <relationshipLabel>Catalogos de preço</relationshipLabel>
+    <relationshipName>ListPrices</relationshipName>
+    <required>false</required>
+    <trackHistory>true</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Lookup</type>
+</CustomField>

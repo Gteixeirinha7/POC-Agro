@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>AvailableInventory__c</fullName>
+    <description>Campo de totalização que soma o estoque físico com as compras e subtrai as vendas.</description>
+    <externalId>false</externalId>
+    <formula>Inventory__c +  FutureInventory__c -  SalesInventory__c + Tolerance__c</formula>
+    <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+    <inlineHelpText>Campo de totalização que soma o estoque físico com as compras e subtrai as vendas.</inlineHelpText>
+    <label>Estoque Disponível</label>
+    <precision>18</precision>
+    <required>false</required>
+    <scale>4</scale>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Number</type>
+    <unique>false</unique>
+</CustomField>

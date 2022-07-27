@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<GlobalValueSet xmlns="http://soap.sforce.com/2006/04/metadata">
+    <customValue>
+        <fullName>Trigo em Grãos</fullName>
+        <default>false</default>
+        <label>Trigo em Grãos</label>
+    </customValue>
+    <customValue>
+        <fullName>Sorgo em Grãos</fullName>
+        <default>false</default>
+        <label>Sorgo em Grãos</label>
+    </customValue>
+    <customValue>
+        <fullName>Milho em Grãos Convencional</fullName>
+        <default>false</default>
+        <label>Milho em Grãos Convencional</label>
+    </customValue>
+    <customValue>
+        <fullName>Milho em Grãos Transgênico</fullName>
+        <default>false</default>
+        <label>Milho em Grãos Transgênico</label>
+    </customValue>
+    <customValue>
+        <fullName>Milho em Grãos Transgênico VTPR04</fullName>
+        <default>false</default>
+        <label>Milho em Grãos Transgênico VTPR04</label>
+    </customValue>
+    <customValue>
+        <fullName>Soja em Grãos Convencional</fullName>
+        <default>false</default>
+        <label>Soja em Grãos Convencional</label>
+    </customValue>
+    <customValue>
+        <fullName>Soja em Grãos Transgênica</fullName>
+        <default>false</default>
+        <label>Soja em Grãos Transgênica</label>
+    </customValue>
+    <customValue>
+        <fullName>Algodão em Pluma 31-4-35</fullName>
+        <default>false</default>
+        <label>Algodão em Pluma 31-4-35</label>
+    </customValue>
+    <customValue>
+        <fullName>Algodão em Pluma 31-4-36</fullName>
+        <default>false</default>
+        <label>Algodão em Pluma 31-4-36</label>
+    </customValue>
+    <customValue>
+        <fullName>Algodão em Pluma 41-4</fullName>
+        <default>false</default>
+        <label>Algodão em Pluma 41-4</label>
+    </customValue>
+    <masterLabel>Commodity</masterLabel>
+    <sorted>true</sorted>
+</GlobalValueSet>

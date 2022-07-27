@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<WaveApplication xmlns="http://soap.sforce.com/2006/04/metadata">
+    <assetIcon>/analytics/wave/web/proto/images/app/icons/12.png</assetIcon>
+    <folder>Hist_rico_de_Aprova_o_Pedidos</folder>
+    <masterLabel>Histórico de Aprovação Pedidos</masterLabel>
+    <shares>
+        <accessLevel>Manage</accessLevel>
+        <sharedTo>admin@kaique-agro.demo</sharedTo>
+        <sharedToType>User</sharedToType>
+    </shares>
+    <templateOrigin>sfdc_internal__ApprovalAnalytics</templateOrigin>
+    <templateVersion>1.0</templateVersion>
+</WaveApplication>

@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>FixedPriceAppliedToAllProducts</fullName>
+    <active>true</active>
+    <description>Preço Fixo aplicado em todos os produtos</description>
+    <errorConditionFormula>AND(
+NOT ISBLANK(FixedUnitPrice__c),
+OrderDiscount__c = True
+)</errorConditionFormula>
+    <errorMessage>Não é possível aplicar um preço fixo para o pedido todo</errorMessage>
+</ValidationRule>

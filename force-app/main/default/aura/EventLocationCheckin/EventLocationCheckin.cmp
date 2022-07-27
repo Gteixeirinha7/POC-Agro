@@ -1,0 +1,60 @@
+<aura:component controller="EventLocationCheckinController" access="global" implements="force:lightningQuickActionWithoutHeader,force:hasRecordId,lightning:actionOverride,flexipage:availableForAllPageTypes,force:appHostable">
+	
+	<aura:attribute name="isLoading" type="Boolean" default="true" />
+	<aura:attribute name="hasError" type="Boolean" default="false" />
+	<aura:attribute name="coords" type="Object" />
+	<aura:attribute name="accuracy" type="Decimal" />
+	<aura:attribute name="longitude" type="Decimal" default="null" />
+	<aura:attribute name="markers" type="Object[]"/>
+	<aura:attribute name="zoomLevel" type="Integer" default="16" />
+
+	<aura:handler name="change" value="{!v.coords}" action="{!c.receivedCoords}"/>
+	<aura:handler name="init" value="{!this}" action="{!c.doInit}"/>
+
+	<aura:if isTrue="{! v.hasError }">
+		<div class="ERROR">
+			<div class="slds-text-heading_large">Localização Indisponível</div>
+			<div class="slds-text-body_regular">Verifique seu sinal GPS.</div>
+		</div>
+		<aura:set attribute="else">
+			<aura:if isTrue="{! v.isLoading }">
+				<lightning:spinner aura:id="loadSpinner" alternativeText="Loading" size="medium" class="QASPINNER"/>
+				<aura:set attribute="else">
+					<lightning:map mapMarkers="{!v.markers}" zoomLevel="{!v.zoomLevel}" class="MAP" />
+					<lightning:layout class="ACTION_ROW">
+						<lightning:layoutItem >
+							<div class="LABEL">Precisão: <b>{!v.accuracy} Metros</b></div>
+						</lightning:layoutItem>
+						<lightning:layoutItem alignmentBump="left">
+							<lightning:button label="Atualizar" onclick="{! c.refreshButtonClick }" />
+						</lightning:layoutItem>
+						<lightning:layoutItem >&nbsp;</lightning:layoutItem>
+						<lightning:layoutItem>
+							<lightning:button label="Cancelar" onclick="{! c.cancelButtonClick }" />
+						</lightning:layoutItem>
+						<lightning:layoutItem >&nbsp;</lightning:layoutItem>
+						<lightning:layoutItem>
+							<lightning:button label="Salvar" variant="brand" onclick="{! c.saveButtonClick }" />
+						</lightning:layoutItem>
+					</lightning:layout>
+				</aura:set>
+			</aura:if>
+		</aura:set>
+	</aura:if>
+
+	<aura:html tag="style">
+        .cuf-content {
+            padding: 0 !important;
+        }
+        .slds-p-around--medium {
+            padding: 0rem !important;
+        }       
+        .slds-modal__content{
+			overflow-y:hidden !important;
+			position:relative;
+            /*height:unset !important;
+            max-height:unset !important;*/
+        }
+	</aura:html>
+	
+</aura:component>

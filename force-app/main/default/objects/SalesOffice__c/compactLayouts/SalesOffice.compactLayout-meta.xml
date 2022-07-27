@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CompactLayout xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>SalesOffice</fullName>
+    <fields>Name</fields>
+    <fields>ExternalId__c</fields>
+    <fields>ParentId__c</fields>
+    <fields>GGN__c</fields>
+    <label>Escritório de Vendas</label>
+</CompactLayout>

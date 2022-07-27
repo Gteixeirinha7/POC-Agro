@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>SalesTeam__c</fullName>
+    <deleteConstraint>SetNull</deleteConstraint>
+    <externalId>false</externalId>
+    <label>Equipe de Vendas</label>
+    <lookupFilter>
+        <active>true</active>
+        <booleanFilter>(1 OR 2) AND (3 OR 4)</booleanFilter>
+        <filterItems>
+            <field>SalesTeam__c.ParentId__c</field>
+            <operation>equals</operation>
+            <valueField>$Source.SalesOffice__c</valueField>
+        </filterItems>
+        <filterItems>
+            <field>$Source.SalesOffice__c</field>
+            <operation>equals</operation>
+            <value/>
+        </filterItems>
+        <filterItems>
+            <field>SalesTeam__c.SalesOrg__c</field>
+            <operation>equals</operation>
+            <valueField>$Source.SalesOrg__c</valueField>
+        </filterItems>
+        <filterItems>
+            <field>$Source.SalesOrg__c</field>
+            <operation>equals</operation>
+            <value/>
+        </filterItems>
+        <isOptional>false</isOptional>
+    </lookupFilter>
+    <referenceTo>SalesTeam__c</referenceTo>
+    <relationshipLabel>Público-alvo das Campanhas</relationshipLabel>
+    <relationshipName>Publico_Alvo_das_Campanhas</relationshipName>
+    <required>false</required>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Lookup</type>
+</CustomField>

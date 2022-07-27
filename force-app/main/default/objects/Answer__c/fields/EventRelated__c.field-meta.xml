@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>EventRelated__c</fullName>
+    <deleteConstraint>Restrict</deleteConstraint>
+    <description>A resposta se relaciona ao Evento relacionado, que por sua vez se relaciona ao Evento (Visitas e atividades)</description>
+    <externalId>false</externalId>
+    <label>Evento Relacionado</label>
+    <referenceTo>EventRelated__c</referenceTo>
+    <relationshipLabel>Respostas</relationshipLabel>
+    <relationshipName>Respostas</relationshipName>
+    <required>true</required>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Lookup</type>
+</CustomField>

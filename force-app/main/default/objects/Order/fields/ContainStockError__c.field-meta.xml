@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>ContainStockError__c</fullName>
+    <defaultValue>false</defaultValue>
+    <description>Campo que informa se algum produto do pedido esta com erro de estoque insuficiente na hora da venda, o estoque é controlado a partir do objeto &quot;Controle de Estoque&quot;.</description>
+    <externalId>false</externalId>
+    <inlineHelpText>Campo que informa se algum produto do pedido esta com erro de estoque insuficiente na hora da venda, o estoque é controlado a partir do objeto &quot;Controle de Estoque&quot;.</inlineHelpText>
+    <label>Contem Erro Estoque?</label>
+    <trackHistory>false</trackHistory>
+    <type>Checkbox</type>
+</CustomField>

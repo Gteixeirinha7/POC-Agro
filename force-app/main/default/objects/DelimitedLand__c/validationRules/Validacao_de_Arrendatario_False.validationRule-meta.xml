@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Validacao_de_Arrendatario_False</fullName>
+    <active>true</active>
+    <description>Esta regra de validação tem como objetivo validar o preenchimento dos campos a partir do valor preenchido em Tenant__c</description>
+    <errorConditionFormula>IF(Tenant__c == false, 
+ 
+IF(OR(ISNULL(TenantArea__c),ISNULL(ContractDate__c)) ,false, true),
+
+false)</errorConditionFormula>
+    <errorMessage>Os campos Quantidade Hec Arrendatario e Data de vencimento do contrato devem estar vazios</errorMessage>
+</ValidationRule>

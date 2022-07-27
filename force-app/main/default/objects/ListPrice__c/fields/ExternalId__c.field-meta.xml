@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>ExternalId__c</fullName>
+    <caseSensitive>false</caseSensitive>
+    <description>Campo que identifica o catalogo de preço no SAP.</description>
+    <externalId>true</externalId>
+    <inlineHelpText>Campo que identifica o catalogo de preço no SAP.</inlineHelpText>
+    <label>Código SAP</label>
+    <length>100</length>
+    <required>true</required>
+    <trackHistory>true</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Text</type>
+    <unique>true</unique>
+</CustomField>

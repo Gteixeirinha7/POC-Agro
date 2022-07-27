@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>RecalculateApprovals__c</fullName>
+    <defaultValue>false</defaultValue>
+    <description>Campo que indica se o processo de aprovação precisa de um recalculo, quando o setor comercial cadastra um desconto de banda por exemplo, o processo precisa sofrer um recalculo para determinar se ainda precisa de aprovação comercial e para recalcular as aprovações de desconto de banda. Se o campo for marcado como True, o processo de aprovação será interrompido e recalculado do 0.</description>
+    <externalId>false</externalId>
+    <inlineHelpText>Campo que indica se o processo de aprovação precisa de um recalculo, quando o setor comercial cadastra um desconto de banda por exemplo, o processo precisa sofrer um recalculo para determinar se ainda precisa de aprovação comercial e para recalcular as aprovações de desconto de banda. Se o campo for marcado como True, o processo de aprovação será interrompido e recalculado do 0.</inlineHelpText>
+    <label>Recalcular aprovações</label>
+    <trackHistory>false</trackHistory>
+    <type>Checkbox</type>
+</CustomField>

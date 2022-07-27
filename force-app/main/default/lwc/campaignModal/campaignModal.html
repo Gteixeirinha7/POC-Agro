@@ -1,0 +1,89 @@
+<template>
+    <!-- lightning button for open modal window -->
+
+    <!--<lightning-button variant="brand"
+       label="What is Modal/PopUp in LWC?"
+       title="What is Modal/PopUp in LWC?"
+       onclick={openModal}
+       class="slds-m-left_x-small">
+    </lightning-button> -->
+
+    <!--Use template if:true to display/hide popup based on isModalOpen value--> 
+    <template if:true={isModalOpen}>
+        <!-- Modal/Popup Box LWC starts here -->
+        <section role="dialog" tabindex="-1" aria-labelledby="modal-heading-01" aria-modal="true" aria-describedby="modal-content-id-1" class="slds-modal slds-fade-in-open">
+            <div class="slds-modal__container">
+                <!-- Modal/Popup Box LWC header here -->
+                <header class="slds-modal__header">
+                    <button class="slds-button slds-button_icon slds-modal__close slds-button_icon-inverse" title="Close" onclick={closeModal}>
+                        <lightning-icon icon-name="utility:close"
+                            alternative-text="close"
+                            variant="inverse"
+                            size="small" ></lightning-icon>
+                        <span class="slds-assistive-text">Close</span>
+                    </button>
+                    <h3 id="modal-heading-01" class="slds-text-heading_medium slds-hyphenate" style="font-weight: 100; font-size: 20px; margin-bottom: 0;">Campanhas Disponíveis</h3>
+                </header>
+                <!-- Modal/Popup Box LWC body starts here -->
+                <div class="slds-modal__content slds-p-around_medium" id="modal-content-id-1">
+                    <div class="row" style="padding-bottom: 5px;">
+                        <div class="mx-auto col-md-12 col-sm-12 col-xs-12 mb-1 mb-md-4 " style="padding: 0;">
+                            <template for:each={campaign} for:item="record">
+                                <div if:true={record.show}  key={record.CampaignId}>
+                                    <div class={record.styleCard} >
+                                        <div class="card-body pt-2">
+                                            <div class="row">
+                                                <div class="col-12">
+                                                    <div class="unique-data" style="width:100%;"> 
+                                                        <div class={record.styleTitle} onclick={selectCampaign} data-campaign-id={record.CampaignId} style="min-height: 35px;display: flex;align-items: center;">
+                                                            {record.Name}
+                                                        </div>
+                                                        <div>
+                                                            <details class="accordion col-12">
+                                                                <summary class="accordion col-12">
+                                                                    <span class="accordion_title">
+                                                                        <span class={record.labelBackground}>DESCRIÇÃO</span>
+                                                                    </span><img src={cIArrowDown} alt="Arrow" style="max-width: 13px;margin-top: 3px;">
+                                                                </summary>
+                                                                <p onclick={selectCampaign} data-campaign-id={record.CampaignId}>{record.Description}</p>
+                                                            </details>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </template>
+                            <!--<div class="card card-lista-pedido border-secondary card-margin-for-modal" style="background-color: silver;">
+                                <div class="card-body pt-2">
+                                    <div class="row">
+                                        <div class="col-12">
+                                            <div class="unique-data" style="width:100%;">
+                                                <div class="content" style="color: dimgray;word-break: break-word; font-weight: bolder;">
+                                                    Mix Defensivos
+                                                </div>
+                                                <div>
+                                                    <details class="accordion col-12">
+                                                        <summary class="accordion col-12">
+                                                            <span class="accordion_title">
+                                                                <span style="background: silver;padding-right: 10px;">DESCRIÇÃO</span>
+                                                            </span><img src={cIArrowDown} alt="Arrow" style="max-width: 13px;margin-top: 3px;">
+                                                        </summary>
+                                                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed doeiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam</p>
+                                                    </details>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>-->
+                        </div>
+                    </div>
+                </div>
+                <!-- Modal/Popup Box LWC footer starts here -->
+            </div>
+        </section>
+        <div class="slds-backdrop slds-backdrop_open"></div>
+    </template>
+ </template>

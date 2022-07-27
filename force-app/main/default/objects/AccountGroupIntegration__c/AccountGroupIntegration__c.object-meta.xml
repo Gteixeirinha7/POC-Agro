@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObject xmlns="http://soap.sforce.com/2006/04/metadata">
+    <customSettingsType>List</customSettingsType>
+    <description>BRLH
+CLGP
+CLIN
+CNAC
+CNAV
+CNCA
+CNLV
+CNPC
+CSPT</description>
+    <enableFeeds>false</enableFeeds>
+    <label>Organização para Grupo de Cliente</label>
+    <visibility>Public</visibility>
+</CustomObject>

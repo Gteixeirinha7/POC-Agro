@@ -1,0 +1,23 @@
+/* @media (min-width: 769px) and (max-width: 1024px) and (orientation: portraid) { */
+
+@media (min-width: 768px) and (max-width: 1024px) {
+  
+  .footer{
+      max-width: 50%;
+      margin-left: 40px;
+  } 
+
+  .footer .nav-footer ul li a{
+      flex-direction: column;
+      min-width: 70px;
+      padding: 0 10px;
+  }
+  .footer .nav-footer ul li a img{
+      margin-right: 0;
+  } 
+
+  .container{
+      max-width:100%;
+  }
+    
+}

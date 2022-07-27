@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>InterestPriority__c</fullName>
+    <description>Um catálogo de preços que possua o campo &quot;produto&quot; preenchido será mais especifico do que os catálogos de preços que tenham apenas a &quot;Família de produtos&quot; preenchida.</description>
+    <externalId>false</externalId>
+    <formula>IF(NOT(IsBlank(SalesOffice__c)), 1000,  0) 
+        + IF(NOT(IsBlank(TEXT(Currency__c))), 100, 0) 
+        + IF(NOT(IsBlank(Product2Id__c)), 10, 0)</formula>
+    <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+    <label>Prioridade Juros</label>
+    <precision>18</precision>
+    <required>false</required>
+    <scale>0</scale>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Number</type>
+    <unique>false</unique>
+</CustomField>

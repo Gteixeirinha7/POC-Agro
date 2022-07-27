@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<RecordType xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>PaymentDate</fullName>
+    <active>true</active>
+    <description>Vincula a liberação de desconto no pedido ou produto conforme a Data de Pagamento estipulada na campanha. Pedido com data de pagamento ATÉ data XX/XX/XXX</description>
+    <label>Data de pagamento</label>
+</RecordType>

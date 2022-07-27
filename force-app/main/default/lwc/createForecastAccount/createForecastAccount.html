@@ -1,0 +1,882 @@
+<template>
+	<div class="slds-grid slds-gutters" style="max-height: 100%;">
+		<div class='slds-col slds-size_3-of-3' data-name="left_div">
+			<div class="main-header" style="margin-bottom: 8px;">
+				<lightning-card>
+					<div class="slds-card__body" style="padding: 0px 10px 0px 10px;">
+						<div style="border: 1px dashed #ddd;border-radius: 5px;"
+							class="slds-m-around_xx-small slds-m-bottom_small slds-border_top slds-border_bottom slds-border_left slds-border_right slds-page-header">
+							<div class="slds-media slds-media_center slds-media_small">
+								<lightning-layout multiple-rows style="width: 100%; align-items: center;">
+									<lightning-layout-item size="9" small-device-size="9" medium-device-size="9" large-device-size="9">
+										<div class="slds-media__body">
+											<lightning-layout multiple-rows style="width: 100%;">
+												<lightning-layout-item size="12" small-device-size="12" medium-device-size="12" large-device-size="12">
+													<div class="slds-page-header__title slds-text-heading_small" style="width: 100%; font-size: 20px;">PREVISÃO DE VENDAS</div>
+													<div class="slds-text-heading_small" style="width: 100%; font-size: 14px;">Dentro desta tela será possível informar e realizar a manutenção da previsão de vendas de seus clientes.</div>
+												</lightning-layout-item>
+											</lightning-layout>
+										</div>
+									</lightning-layout-item>
+									<lightning-layout-item size="3" small-device-size="3" medium-device-size="3" large-device-size="3">
+										<div class="slds-media__body">
+											<lightning-layout multiple-rows style="width: 100%;">
+												<lightning-layout-item size="12" small-device-size="12" medium-device-size="12" large-device-size="12">
+													<lightning-button  class="slds-button_full-width  flex-end" icon-name="utility:einstein" variant="brand" onclick={showCheckout} label="Calcular Previsão Agrupada">
+													</lightning-button>	
+												</lightning-layout-item>
+											</lightning-layout>
+										</div>
+									</lightning-layout-item>
+								</lightning-layout>
+							</div>
+						</div>
+					</div>
+				</lightning-card>
+			</div>
+			<div class={headerClass} style={headerStyle}>
+				<lightning-card>
+					<div class="slds-card__body" style=" margin: 0;">
+						<div class="slds-section slds-is-open" >
+  						<div aria-hidden="false" class="slds-section__content" style="padding-left: 15px;">
+						<div class="slds-section slds-is-open slds-card "
+							style="padding:15px; border-radius: 5px 5px 0px 0px;margin-bottom: 30px;box-shadow: 0 0 3px rgb(0 0 0 / 10%);border-bottom: 3px solid #A32871; border-top: 1px solid #ddd; border-right: 1px solid #ddd; border-left: 1px solid #ddd;">
+							<div style="margin:auto;display:flex;justify-content:space-between; width: 100%;">
+								<lightning-layout multiple-rows horizontal-align="spread" style="width: 100%;">
+									<lightning-layout-item size="1">
+										<div style="font-size:1rem;padding: 0 0 10px 0;">
+											<strong>0000212304</strong>
+										</div>
+										<div>
+											<div style="max-width: 80px; ">
+												<div style="display: flex;border: 1px dashed #ddd;border-radius: 5px;min-width: 30px;justify-content: center;height: 30px;align-items: center;"
+													title="B">
+													UF: MT
+												</div>
+											</div>
+										</div>
+									</lightning-layout-item>
+									<lightning-layout-item size="4">
+										<div class="slds-media__body slds-col">
+											<lightning-layout multiple-rows>
+												<lightning-layout-item size="12" class="slds-m-bottom_xx-small"
+													style="font-size: 15px;color:#0070d2">
+													<p><strong>ALCIDES CARVALHO BELLAFRONTE E OUTROS FAZENDA PONTAL - Propriedade</strong></p>
+												</lightning-layout-item>
+												<lightning-layout-item size="12" class="slds-m-bottom_xx-small"
+													style="font-size: 13px;color:#999">
+													<p>Grupo de Clientes: C2</p>
+												</lightning-layout-item>
+												<lightning-layout-item size="12" class="slds-m-bottom_xx-small"
+													style="font-size: 13px;color:#999">
+													<p>Data da última compra: 25/05/2022</p>
+												</lightning-layout-item>
+												<lightning-layout-item size="12" class="slds-m-bottom_xx-small"
+													style="font-size: 13px;color:#999">
+													<p>Valor da última compra: R$ 10.000</p>
+												</lightning-layout-item>
+											</lightning-layout>
+										</div>
+									</lightning-layout-item>
+									<lightning-layout-item size="3">
+										<div style="display: flex; flex-direction: column; align-items: center;">
+											<lightning-layout-item>
+												<div class="slds-m-left_xx-small"
+													style="font-weight: 400; color: #666; margin-bottom: 8px; display: inline-block;">
+													<strong>Previsão de Vendas (Safras Vigentes)</strong>
+												</div>
+											</lightning-layout-item>
+											<div class="slds-m-right_xx-small" style="font-size:1rem;font-weight:bold">
+												R$ 25.000
+											</div>
+										</div>
+									</lightning-layout-item>
+									<lightning-layout-item size="2">
+										<div style="display: flex; flex-direction: column; align-items: center;">
+											<lightning-layout-item>
+												<div class="slds-m-bottom_x-small"
+													style="font-weight: 400; color: #666; text-align-last: center;">
+													<strong>Potencial de Compra</strong>
+												</div>
+											</lightning-layout-item>
+												<div class="slds-m-bottom_x-small"
+													style="font-size:1rem;font-weight:bold; text-align-last: center;">
+													R$ 1.000.000,00
+												</div>
+										</div>
+									</lightning-layout-item>
+									<lightning-layout-item size="2">
+										<div style="display: flex; flex-direction: column; align-items: center;">
+											<lightning-layout-item>
+												<div class="slds-m-left_xx-small"
+													style="font-weight: 400; color: #666; margin-bottom: 8px; display: inline-block;">
+													<strong>Total de Áreas Cultivadas</strong>
+												</div>
+											</lightning-layout-item>
+											<div class="slds-m-right_xx-small" style="font-size:1rem;font-weight:bold">
+												531.447.000 m2
+											</div>
+										</div>
+									</lightning-layout-item>
+
+								</lightning-layout>
+							</div>
+							<!-- Card info do produto -->
+
+
+							<!-- Accordion do CD -->
+							<div class="distributionCardDiv">
+								<lightning-accordion  allow-multiple-sections-open>
+									<lightning-accordion-section name="cdaccordion" data-name="accordion" 
+										label="Safra 21/22 - Previsão: R$ 40.750 - Potencial: R$ 6.000.000" class="divAccordionSectionInactive"
+										style="display:block; ">
+										<div style="display:flex;">
+											<div class="slds-grid slds-wrap" style="flex: auto; place-content: center;">
+												<!-- CARD CD -->
+												<div class="slds-col slds-size_1-of-1 slds-medium-size_1-of-2 slds-large-size_1-of-3"
+													style="width:auto; min-width: 300px;">
+													<!-- LOOP -->
+													<div style="min-height: 330px" class="card-custom">
+														<!-- CARD-HEADER -->
+														<div class="card-header">
+															<div class="title">
+																<span>MILHETO</span>
+																<div class="box-icons">
+																	<div class="icon">
+																		<lightning-button-icon style="margin:auto;"
+																			tooltip="Informações da cultura do Cliente"
+																			icon-name="utility:fulfillment_order"
+																			size="medium" variant="bare">
+																		</lightning-button-icon>
+																	</div>
+																</div>
+															</div>
+														</div>
+														<!-- /CARD-HEADER -->
+														<!--CARD BODY -->
+														<div class="card-body">
+															<!-- INFO -->
+															<div class="info">
+																<div class="qtde">
+																	<span >R$ 20.000,00</span>
+																</div>
+															</div>
+															<!-- /INFO -->
+															<div class="info2">
+																<div style="width: 100%">
+																	<span class="lb-sec dark">Potencial &rArr;  R$ 2.000.000,00
+																	</span>
+																	<span class="lb-sec">Área Total&rarr;  2.000 m²
+																	</span>
+																</div>
+																<!-- UNIDADE -->
+															</div>
+															
+															<div class="box-form">
+																<div class="row-form" style="padding-bottom: 0px">
+																	<div class="col-form">
+																		<div class="lb-form" style="color: black">
+																			DEFENSIVOS
+																		</div>
+																	</div>
+																</div>
+																<div class="row-form" style="padding-top: 0px">
+																	<div class="col-form">
+																		<div class="lb-input">
+																			<lightning-input type="number" disabled="true" value="10000"
+																				name="qtde_cx_input" label=""
+																				variant="label-hidden">
+																			</lightning-input>
+																		</div>
+																	</div>
+																	<div>
+																		<p class="lb-sec" style="color: #999">Potencial
+																		</p>
+																		<p class="lb-sec" style="color: #999">R$ 500.000,00
+																		</p>
+																	</div>
+																</div>
+																
+																<div class="row-form" style="padding-bottom: 0px">
+																	<div class="col-form">
+																		<div class="lb-form" style="color: black">
+																			FUGINCIDAS
+																		</div>
+																	</div>
+																</div>
+																<div class="row-form" style="padding-top: 0px">
+																	<div class="col-form">
+																		<div class="lb-input">
+																			<lightning-input type="number" disabled="true" value="10000"
+																				name="qtde_cx_input" label=""
+																				variant="label-hidden">
+																			</lightning-input>
+																		</div>
+																	</div>
+																	<div>
+																		<p class="lb-sec" style="color: #999">Potencial
+																		</p>
+																		<p class="lb-sec" style="color: #999">R$ 1.500.000,00
+																		</p>
+																	</div>
+																</div>
+															</div>
+														</div>
+													</div>
+												</div>
+												<!-- /CARD CD -->
+												
+												<!-- CARD CD -->
+												<div class="slds-col slds-size_1-of-1 slds-medium-size_1-of-2 slds-large-size_1-of-3"
+													style="width:auto; min-width: 300px;">
+													<!-- LOOP -->
+													<div style="min-height: 330px" class="card-custom">
+														<!-- CARD-HEADER -->
+														<div class="card-header">
+															<div class="title">
+																<span>SOJA</span>
+																<div class="box-icons">
+																	<div class="icon">
+																		<lightning-button-icon style="margin:auto;"
+																			tooltip="Informações da cultura do Cliente"
+																			icon-name="utility:fulfillment_order"
+																			size="medium" variant="bare">
+																		</lightning-button-icon>
+																	</div>
+																</div>
+															</div>
+														</div>
+														<!-- /CARD-HEADER -->
+														<!--CARD BODY -->
+														<div class="card-body">
+															<!-- INFO -->
+															<div class="info">
+																<div class="qtde">
+																	<span >R$ 750,00</span>
+																</div>
+															</div>
+															<!-- /INFO -->
+															<div class="info2">
+																<div style="width: 100%">
+																	<span class="lb-sec dark">Potencial &rArr;  R$ 2.000.000,00
+																	</span>
+																	<span class="lb-sec">Área Total&rarr;  2.000 m²
+																	</span>
+																</div>
+																<!-- UNIDADE -->
+															</div>
+															
+															<div class="box-form">
+																<div class="row-form" style="padding-bottom: 0px">
+																	<div class="col-form">
+																		<div class="lb-form" style="color: black">
+																			DEFENSIVOS
+																		</div>
+																	</div>
+																</div>
+																<div class="row-form" style="padding-top: 0px">
+																	<div class="col-form">
+																		<div class="lb-input">
+																			<lightning-input type="number" disabled="true" value="250"
+																				name="qtde_cx_input" label=""
+																				variant="label-hidden">
+																			</lightning-input>
+																		</div>
+																	</div>
+																	<div>
+																		<p class="lb-sec" style="color: #999">Potencial
+																		</p>
+																		<p class="lb-sec" style="color: #999">R$ 500.000,00
+																		</p>
+																	</div>
+																</div>
+																
+																<div class="row-form" style="padding-bottom: 0px">
+																	<div class="col-form">
+																		<div class="lb-form" style="color: black">
+																			FUGINCIDAS
+																		</div>
+																	</div>
+																</div>
+																<div class="row-form" style="padding-top: 0px">
+																	<div class="col-form">
+																		<div class="lb-input">
+																			<lightning-input type="number" disabled="true" value="500"
+																				name="qtde_cx_input" label=""
+																				variant="label-hidden">
+																			</lightning-input>
+																		</div>
+																	</div>
+																	<div>
+																		<p class="lb-sec" style="color: #999">Potencial
+																		</p>
+																		<p class="lb-sec" style="color: #999">R$ 1.500.000,00
+																		</p>
+																	</div>
+																</div>
+															</div>
+														</div>
+													</div>
+												</div>
+												<!-- /CARD CD -->
+												
+												<!-- CARD CD -->
+												<div class="slds-col slds-size_1-of-1 slds-medium-size_1-of-2 slds-large-size_1-of-3"
+													style="width:auto; min-width: 300px;">
+													<!-- LOOP -->
+													<div style="min-height: 330px" class="card-custom">
+														<!-- CARD-HEADER -->
+														<div class="card-header">
+															<div class="title">
+																<span>ALGODÃO</span>
+																<div class="box-icons">
+																	<div class="icon">
+																		<lightning-button-icon style="margin:auto;"
+																			tooltip="Informações da cultura do Cliente"
+																			icon-name="utility:fulfillment_order"
+																			size="medium" variant="bare">
+																		</lightning-button-icon>
+																	</div>
+																</div>
+															</div>
+														</div>
+														<!-- /CARD-HEADER -->
+														<!--CARD BODY -->
+														<div class="card-body">
+															<!-- INFO -->
+															<div class="info">
+																<div class="qtde">
+																	<span >R$ 20.000,00</span>
+																</div>
+															</div>
+															<!-- /INFO -->
+															<div class="info2">
+																<div style="width: 100%">
+																	<span class="lb-sec dark">Potencial &rArr;  R$ 2.000.000,00
+																	</span>
+																	<span class="lb-sec">Área Total&rarr;  2.000 m²
+																	</span>
+																</div>
+																<!-- UNIDADE -->
+															</div>
+															<div class="box-form">
+																<div class="row-form" style="padding-bottom: 0px">
+																	<div class="col-form">
+																		<div class="lb-form" style="color: black">
+																			DEFENSIVOS
+																		</div>
+																	</div>
+																</div>
+																<div class="row-form" style="padding-top: 0px">
+																	<div class="col-form">
+																		<div class="lb-input">
+																			<lightning-input type="number" disabled="true" value="12500"
+																				name="qtde_cx_input" label=""
+																				variant="label-hidden">
+																			</lightning-input>
+																		</div>
+																	</div>
+																	<div>
+																		<p class="lb-sec" style="color: #999">Potencial
+																		</p>
+																		<p class="lb-sec" style="color: #999">R$ 500.000,00
+																		</p>
+																	</div>
+																</div>
+																
+																<div class="row-form" style="padding-bottom: 0px">
+																	<div class="col-form">
+																		<div class="lb-form" style="color: black">
+																			FUGINCIDAS
+																		</div>
+																	</div>
+																</div>
+																<div class="row-form" style="padding-top: 0px">
+																	<div class="col-form">
+																		<div class="lb-input">
+																			<lightning-input type="number" disabled="true" value="7500"
+																				name="qtde_cx_input" label=""
+																				variant="label-hidden">
+																			</lightning-input>
+																		</div>
+																	</div>
+																	<div>
+																		<p class="lb-sec" style="color: #999">Potencial
+																		</p>
+																		<p class="lb-sec" style="color: #999">R$ 1.500.000,00
+																		</p>
+																	</div>
+																</div>
+															</div>
+														</div>
+													</div>
+												</div>
+												<!-- /CARD CD -->
+											</div>
+										</div>
+									</lightning-accordion-section>
+									
+									<lightning-accordion-section name="cdaccordion" data-name="accordion" 
+										label="Safra 22/22 - Previsão: R$ 0 - Potencial: R$ 1.000.000" class="divAccordionSectionActive"
+										style="display:block; ">
+										<div style="display:flex;">
+											<div class="slds-grid slds-wrap" style="flex: auto; place-content: center;">
+												<!-- CARD CD -->
+												<div class="slds-col slds-size_1-of-1 slds-medium-size_1-of-2 slds-large-size_1-of-3"
+													style="width:auto; min-width: 300px;">
+													<!-- LOOP -->
+													<div style="min-height: 330px" class="card-custom">
+														<!-- CARD-HEADER -->
+														<div class="card-header">
+															<div class="title">
+																<span>MILHETO</span>
+																<div class="box-icons">
+																	<div class="icon">
+																		<lightning-button-icon style="margin:auto;"
+																			tooltip="Informações da cultura do Cliente"
+																			icon-name="utility:fulfillment_order"
+																			size="medium" variant="bare">
+																		</lightning-button-icon>
+																	</div>
+																</div>
+															</div>
+														</div>
+														<!-- /CARD-HEADER -->
+														<!--CARD BODY -->
+														<div class="card-body">
+															<!-- INFO -->
+															<div class="info">
+																<div class="qtde">
+																	<span >R$ 25.000,00</span>
+																</div>
+															</div>
+															<!-- /INFO -->
+															<div class="info2">
+																<div style="width: 100%">
+																	<span class="lb-sec dark">Potencial &rArr;  R$ 2.000.000,00
+																	</span>
+																	<span class="lb-sec">Área Total&rarr;  2.000 m²
+																	</span>
+																</div>
+																<!-- UNIDADE -->
+															</div>
+															
+															<div class="box-form">
+																<div class="row-form" style="padding-bottom: 0px">
+																	<div class="col-form">
+																		<div class="lb-form" style="color: black">
+																			DEFENSIVOS
+																		</div>
+																	</div>
+																</div>
+																<div class="row-form" style="padding-top: 0px">
+																	<div class="col-form">
+																		<div class="lb-input">
+																			<lightning-input type="number" value="25000"
+																				name="qtde_cx_input" label=""
+																				variant="label-hidden">
+																			</lightning-input>
+																		</div>
+																	</div>
+																	<div>
+																		<p class="lb-sec" style="color: #999">Potencial
+																		</p>
+																		<p class="lb-sec" style="color: #999">R$ 500.000,00
+																		</p>
+																	</div>
+																</div>
+																
+																<div class="row-form" style="padding-bottom: 0px">
+																	<div class="col-form">
+																		<div class="lb-form" style="color: black">
+																			FUGINCIDAS
+																		</div>
+																	</div>
+																</div>
+																<div class="row-form" style="padding-top: 0px">
+																	<div class="col-form">
+																		<div class="lb-input">
+																			<lightning-input type="number"
+																				name="qtde_cx_input" label=""
+																				variant="label-hidden">
+																			</lightning-input>
+																		</div>
+																	</div>
+																	<div>
+																		<p class="lb-sec" style="color: #999">Potencial
+																		</p>
+																		<p class="lb-sec" style="color: #999">R$ 1.500.000,00
+																		</p>
+																	</div>
+																</div>
+																
+															</div>
+														</div>
+													</div>
+												</div>
+												<!-- /CARD CD -->
+												
+												<!-- CARD CD -->
+												<div class="slds-col slds-size_1-of-1 slds-medium-size_1-of-2 slds-large-size_1-of-3"
+													style="width:auto; min-width: 300px;">
+													<!-- LOOP -->
+													<div style="min-height: 330px" class="card-custom">
+														<!-- CARD-HEADER -->
+														<div class="card-header">
+															<div class="title">
+																<span>SOJA</span>
+																<div class="box-icons">
+																	<div class="icon">
+																		<lightning-button-icon style="margin:auto;"
+																			tooltip="Informações da cultura do Cliente"
+																			icon-name="utility:fulfillment_order"
+																			size="medium" variant="bare">
+																		</lightning-button-icon>
+																	</div>
+																</div>
+															</div>
+														</div>
+														<!-- /CARD-HEADER -->
+														<!--CARD BODY -->
+														<div class="card-body">
+															<!-- INFO -->
+															<div class="info">
+																<div class="qtde">
+																	<span >R$ 0,00</span>
+																</div>
+															</div>
+															<!-- /INFO -->
+															<div class="info2">
+																<div style="width: 100%">
+																	<span class="lb-sec dark">Potencial &rArr;  R$ 2.000.000,00
+																	</span>
+																	<span class="lb-sec">Área Total&rarr;  2.000 m²
+																	</span>
+																</div>
+																<!-- UNIDADE -->
+															</div>
+															<div class="box-form">
+																<div class="row-form" style="padding-bottom: 0px">
+																	<div class="col-form">
+																		<div class="lb-form" style="color: black">
+																			DEFENSIVOS
+																		</div>
+																	</div>
+																</div>
+																<div class="row-form" style="padding-top: 0px">
+																	<div class="col-form">
+																		<div class="lb-input">
+																			<lightning-input type="number"
+																				name="qtde_cx_input" label=""
+																				variant="label-hidden">
+																			</lightning-input>
+																		</div>
+																	</div>
+																	<div>
+																		<p class="lb-sec" style="color: #999">Potencial
+																		</p>
+																		<p class="lb-sec" style="color: #999">R$ 500.000,00
+																		</p>
+																	</div>
+																</div>
+																
+																<div class="row-form" style="padding-bottom: 0px">
+																	<div class="col-form">
+																		<div class="lb-form" style="color: black">
+																			FUGINCIDAS
+																		</div>
+																	</div>
+																</div>
+																<div class="row-form" style="padding-top: 0px">
+																	<div class="col-form">
+																		<div class="lb-input">
+																			<lightning-input type="number"
+																				name="qtde_cx_input" label=""
+																				variant="label-hidden">
+																			</lightning-input>
+																		</div>
+																	</div>
+																	<div>
+																		<p class="lb-sec" style="color: #999">Potencial
+																		</p>
+																		<p class="lb-sec" style="color: #999">R$ 1.500.000,00
+																		</p>
+																	</div>
+																</div>
+																
+																<div class="row-form flex-end">
+																	<lightning-button 
+																		class="slds-button_full-width  flex-end"
+																		icon-name="utility:save" variant="brand"
+																		onclick={checkNote}
+																		label="Salvar">
+																	</lightning-button>
+																</div>
+															</div>
+														</div>
+													</div>
+												</div>
+												<!-- /CARD CD -->
+												
+												<!-- CARD CD -->
+												<div class="slds-col slds-size_1-of-1 slds-medium-size_1-of-2 slds-large-size_1-of-3"
+													style="width:auto; min-width: 300px;">
+													<!-- LOOP -->
+													<div style="min-height: 330px" class="card-custom">
+														<!-- CARD-HEADER -->
+														<div class="card-header">
+															<div class="title">
+																<span>ALGODÃO</span>
+																<div class="box-icons">
+																	<div class="icon">
+																		<lightning-button-icon style="margin:auto;"
+																			tooltip="Informações da cultura do Cliente"
+																			icon-name="utility:fulfillment_order"
+																			size="medium" variant="bare">
+																		</lightning-button-icon>
+																	</div>
+																</div>
+															</div>
+														</div>
+														<!-- /CARD-HEADER -->
+														<!--CARD BODY -->
+														<div class="card-body">
+															<!-- INFO -->
+															<div class="info">
+																<div class="qtde">
+																	<span >R$ 0,00</span>
+																</div>
+															</div>
+															<!-- /INFO -->
+															<div class="info2">
+																<div style="width: 100%">
+																	<span class="lb-sec dark">Potencial &rArr;  R$ 2.000.000,00
+																	</span>
+																	<span class="lb-sec">Área Total&rarr;  2.000 m²
+																	</span>
+																</div>
+																<!-- UNIDADE -->
+															</div>
+															<div class="box-form">
+																<div class="row-form" style="padding-bottom: 0px">
+																	<div class="col-form">
+																		<div class="lb-form" style="color: black">
+																			DEFENSIVOS
+																		</div>
+																	</div>
+																</div>
+																<div class="row-form" style="padding-top: 0px">
+																	<div class="col-form">
+																		<div class="lb-input">
+																			<lightning-input type="number"
+																				name="qtde_cx_input" label=""
+																				variant="label-hidden">
+																			</lightning-input>
+																		</div>
+																	</div>
+																	<div>
+																		<p class="lb-sec" style="color: #999">Potencial
+																		</p>
+																		<p class="lb-sec" style="color: #999">R$ 500.000,00
+																		</p>
+																	</div>
+																</div>
+																
+																<div class="row-form" style="padding-bottom: 0px">
+																	<div class="col-form">
+																		<div class="lb-form" style="color: black">
+																			FUGINCIDAS
+																		</div>
+																	</div>
+																</div>
+																<div class="row-form" style="padding-top: 0px">
+																	<div class="col-form">
+																		<div class="lb-input">
+																			<lightning-input type="number"
+																				name="qtde_cx_input" label=""
+																				variant="label-hidden">
+																			</lightning-input>
+																		</div>
+																	</div>
+																	<div>
+																		<p class="lb-sec" style="color: #999">Potencial
+																		</p>
+																		<p class="lb-sec" style="color: #999">R$ 1.500.000,00
+																		</p>
+																	</div>
+																</div>
+																
+																<div class="row-form flex-end">
+																	<lightning-button 
+																		class="slds-button_full-width  flex-end"
+																		icon-name="utility:save" variant="brand"
+																		onclick={checkNote}
+																		label="Salvar">
+																	</lightning-button>
+																</div>
+															</div>
+														</div>
+													</div>
+												</div>
+												<!-- /CARD CD -->
+											</div>
+										</div>
+									</lightning-accordion-section>
+								</lightning-accordion>
+							</div>
+						</div>
+						</div>
+						</div>	
+						<!-- Iteração info do produto / Card CD  -->
+					</div>
+				</lightning-card>
+			</div>
+		</div>
+		
+			<!-- Checkout rápido-->
+			<template if:true={showCheckoutModal}>
+				<div class="slds-col slds-size_1-of-3" style="right:0;position:fixed;height:100vh;">
+					<lightning-card title="Previsão de Venda da Carteira" icon-name="standard:payment_gateway" variant="base"
+						style="bottom:0px;right:0px;margin:0px;height:100%;">
+						<div slot="actions" style="display: flex;">
+							<lightning-button-icon alternative-text="" icon-class="" variant="border-filled"
+								type="button" icon-name="utility:close" size="medium" onclick={closeCheckoutModal}>
+							</lightning-button-icon>
+						</div>
+						<div class="slds-card__body_inner">
+							<div
+								style="padding:0 8px; height:52vh; overflow:auto;border-width: 0px 0px 3px;border-style: solid;border-color: rgb(221, 221, 221) rgb(221, 221, 221) rgb(199 199 199);">
+
+								<div class="slds-section slds-is-open slds-card "
+									style="padding:10px; border-radius: 5px 5px 0px 0px;margin-bottom: 30px;box-shadow: 0 0 3px rgb(0 0 0 / 10%);border-bottom: 3px solid #A32871; border-top: 1px solid #A32871; border-right: 1px solid #ddd; border-left: 1px solid #ddd;">
+									<div style="margin:auto;display:flex;">
+										<div class="slds-col slds-size_4-of-12">
+											<div>
+												<lightning-layout class="slds-m-bottom_xx-small">
+													<lightning-layout-item>
+														<div style="font-size: 14px;color:#5FBE3F;">
+															<p><strong>SAFRA 2022/2022</strong></p>
+															<p></p>
+                                        				</div>
+													</lightning-layout-item>
+												</lightning-layout>
+												<lightning-layout class="slds-m-bottom_xx-small">
+													<lightning-layout-item>
+														<div style="font-size: 12px;">
+															<p>Inicio: 01/07/2021</p>
+														</div>
+													</lightning-layout-item>
+												</lightning-layout>
+												<lightning-layout class="slds-m-bottom_xx-small">
+													<lightning-layout-item>
+														<div class="lb-sec" style="font-size: 12px;">
+															<p>Fim: 30/06/2022</p>
+														</div>
+													</lightning-layout-item>
+												</lightning-layout>
+											</div>
+										</div>
+										<div class="slds-col slds-size_4-of-12" style="text-align: center;">
+											<lightning-layout
+												class="slds-m-bottom_xx-small slds-grid slds-gutters slds-align_absolute-center">
+												<div style="display:inline-block;">
+													<lightning-layout-item>
+														<div class="slds-m-left_xx-small"
+															style="font-weight: 400; color: #666; margin-bottom: 8px; display: inline-block;">
+															<strong>Previsão X Potencial</strong>
+														</div>
+													</lightning-layout-item>
+													<div class="slds-m-right_xx-small">25.000 X 6.000.000</div>
+												</div>
+											</lightning-layout>
+										</div>
+										<div class="slds-col slds-size_4-of-12" style="text-align: center;">
+											<lightning-layout
+												class="slds-m-bottom_xx-small slds-grid slds-gutters slds-align_absolute-center">
+												<div style="display:inline-block;">
+													<lightning-layout-item>
+														<div class="slds-m-left_xx-small"
+															style="font-weight: 400; color: #666; margin-bottom: 8px; display: inline-block;">
+															<strong>% de produtos ForcaAgro</strong>
+														</div>
+													</lightning-layout-item>
+													<div class="slds-m-right_xx-small">0,41%</div>
+												</div>
+											</lightning-layout>
+										</div>
+									</div>
+								</div>
+								
+								<div class="slds-section slds-is-open slds-card "
+									style="padding:10px; border-radius: 5px 5px 0px 0px;margin-bottom: 30px;box-shadow: 0 0 3px rgb(0 0 0 / 10%);border-bottom: 3px solid #A32871; border-top: 1px solid #A32871; border-right: 1px solid #ddd; border-left: 1px solid #ddd;">
+									<div style="margin:auto;display:flex;">
+										<div class="slds-col slds-size_4-of-12">
+											<div>
+												<lightning-layout class="slds-m-bottom_xx-small">
+													<lightning-layout-item>
+														<div style="font-size: 14px;color:#5FBE3F;">
+															<p><strong>SAFRA 2022/2023</strong></p>
+															<p></p>
+                                        				</div>
+													</lightning-layout-item>
+												</lightning-layout>
+												<lightning-layout class="slds-m-bottom_xx-small">
+													<lightning-layout-item>
+														<div style="font-size: 12px;">
+															<p>Inicio: 01/07/2022</p>
+														</div>
+													</lightning-layout-item>
+												</lightning-layout>
+												<lightning-layout class="slds-m-bottom_xx-small">
+													<lightning-layout-item>
+														<div class="lb-sec" style="font-size: 12px;">
+															<p>Fim: 30/06/2023</p>
+														</div>
+													</lightning-layout-item>
+												</lightning-layout>
+											</div>
+										</div>
+										<div class="slds-col slds-size_4-of-12" style="text-align: center;">
+											<lightning-layout
+												class="slds-m-bottom_xx-small slds-grid slds-gutters slds-align_absolute-center">
+												<div style="display:inline-block;">
+													<lightning-layout-item>
+														<div class="slds-m-left_xx-small"
+															style="font-weight: 400; color: #666; margin-bottom: 8px; display: inline-block;">
+															<strong>Previsão X Potencial</strong>
+														</div>
+													</lightning-layout-item>
+													<div class="slds-m-right_xx-small">0 X 6.000.000</div>
+												</div>
+											</lightning-layout>
+										</div>
+										<div class="slds-col slds-size_4-of-12" style="text-align: center;">
+											<lightning-layout
+												class="slds-m-bottom_xx-small slds-grid slds-gutters slds-align_absolute-center">
+												<div style="display:inline-block;">
+													<lightning-layout-item>
+														<div class="slds-m-left_xx-small"
+															style="font-weight: 400; color: #666; margin-bottom: 8px; display: inline-block;">
+															<strong>% de produtos ForcaAgro</strong>
+														</div>
+													</lightning-layout-item>
+													<div class="slds-m-right_xx-small">0%</div>
+												</div>
+											</lightning-layout>
+										</div>
+									</div>
+								</div>
+							</div>
+							<div style="padding-left:10px;padding-top:10px;font-size:18px;">
+								<strong style="display: inline-block;">
+									<h1>Previsão de Vendas: R$ 40.750</h1>
+									<h1>Potencial Utilizado: 0,41%</h1>
+								</strong>
+							</div>
+						</div>
+					</lightning-card>
+				</div>
+			</template>
+			<!-- /Checkout rápido-->
+	</div>
+</template>

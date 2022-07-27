@@ -1,0 +1,4 @@
+<aura:component  access="global" controller="OrderScreenController" implements="force:lightningQuickActionWithoutHeader,force:hasRecordId,lightning:actionOverride,flexipage:availableForAllPageTypes,force:appHostable,lightning:availableForFlowActions">	
+   <aura:attribute name="recordId" type="String" />
+	<aura:handler name="init" value="{!this}" action="{!c.doInit}"/>
+</aura:component>

@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CompactLayout xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>LayoutTalhao</fullName>
+    <fields>Name</fields>
+    <fields>Account__c</fields>
+    <fields>AreaCultivated__c</fields>
+    <fields>AreaPasture__c</fields>
+    <fields>AreaPreservation__c</fields>
+    <fields>AreaNotAllocated__c</fields>
+    <fields>AreaTotal__c</fields>
+    <fields>Description__c</fields>
+    <label>Layout Compacto de Talhão</label>
+</CompactLayout>

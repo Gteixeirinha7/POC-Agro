@@ -1,0 +1,445 @@
+<template>
+    <!-- BATER TELA 01 -->
+    <div class="box-form-pedido">
+
+        <!-- TITULO -->
+        <div class="row">
+            <div class="col-md-12 col-sm-12 mt-3">
+                <h3 class="titulo-carrinho">Dados - Barter</h3>
+            </div>
+        </div>
+        <!-- /TITULO -->
+
+        <!-- FORMS -->
+        
+        <!-- ROW -->
+        <div class="row">
+            <div class="col-12">
+                <div class="unique-data">
+                    <div class="lb-commom">
+                        Tipo de Barter <span class="field-required">*</span>
+                    </div>
+                    <div class="content">
+                        <c-show-picklist-value 
+                        object-name="Order" 
+                        field-name="BarterType__c" 
+                        field-label=""
+                        onselectpicklist={handlePicklistBarterType}
+                        picklist-name="barterTypePickList"
+                        value={orderObjectBarter.BarterType}
+                        disabled-custom-lookup={disabledBarterFields}> 
+                        </c-show-picklist-value>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- /ROW -->
+
+        <!-- ROW -->
+        <div class="row">
+            <div class="col-12">
+                <div class="unique-data">
+                    <div class="lb-commom">
+                        Forma de pagamento <span class="field-required">*</span>
+                    </div>
+                    <div class="content">
+                        <c-show-picklist-value 
+                        object-name="Order" 
+                        field-name="PaymentForm__c" 
+                        field-label=""
+                        onselectpicklist={handlePicklistPaymentForm}
+                        picklist-name="paymentFormPickList"
+                        value={orderObjectBarter.PaymentForm}
+                        disabled-custom-lookup={disabledBarterFields}> 
+                        </c-show-picklist-value>
+                    </div>
+                </div>
+            </div>      
+        </div>
+        <!-- /ROW -->
+
+        <!-- ROW -->
+        <div class="row">
+            <div class="col-12" if:true={showTriangulationFields}>
+                <div class="unique-data">
+                    <div class="lb-commom">
+                        Trading <span class="field-required">*</span>
+                    </div>
+                    <div class="content">
+                        
+                        <lightning-input style="font-weight: 400" onchange={handleChangeTrade} type="text" name="inputtrade" value={orderObjectBarter.Trade} placeholder="Nome da trade..."  variant="label-hidden">
+                        </lightning-input>
+                        <!--input type="text" class="form-control"-->
+                        <!-- <c-custom-lookup    
+                        object-api-name="Account" 
+                        field-api-name="Name"
+                        field-api-names="Name, SalesOrg__c, InternShippingCity__c, InternShippingCity__r.Name, InternShippingCity__r.Id "
+                        object-icon-name="standard:account"
+                        filter=" AND NCDDate__c > TODAY"
+                        record-id={clienteId}
+                        onselectrecord={handleChangeTrade}
+                        custom-lookup-name="customLookupAccount"
+                        input-label=""
+                        selected-record={orderObjectBarter.Trade}
+                        disabled-custom-lookup={disabledBarterFields}>
+                        </c-custom-lookup> -->
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- /ROW -->
+
+        <!-- ROW -->
+        <div class="row">
+            <div class="col-12" if:true={showFinancialFields}>
+                <div class="unique-data">
+                    <div class="lb-commom">
+                        Preço Strike <small class="text-muted">({currencyScreen})</small> <span class="field-required">*</span>
+                    </div>
+                    <div class="content">
+                        <!--input type="text" class="form-control"-->
+                        <lightning-input 
+                            type="number" 
+                            value={orderObjectBarter.StrikePrice} 
+                            variant="label-hidden" 
+                            onchange={handleChangeStrikePrice}
+                            onfocusout={handleChangeStrikePriceOnFocusOut}
+                            step=".01"
+                            formatter="number"
+                            disabled={disabledBarterFields}>
+                        </lightning-input>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- /ROW -->
+
+        <!-- ROW -->
+        <div class="row">
+            <div class="col-12">
+                <div class="unique-data">
+                    <div class="lb-commom">
+                        Cliente
+                    </div>
+                    <div class="content cont-label">
+                        <c-custom-lookup    
+                        object-api-name="Account" 
+                        field-api-name="Name"
+                        field-api-names="Name, SalesOrg__c, InternShippingCity__c, InternShippingCity__r.Name, InternShippingCity__r.Id "
+                        object-icon-name="standard:account"
+                        filter=" AND NCDDate__c > TODAY AND RecordType.DeveloperName <> 'Property' "
+                        record-id={clienteId}
+                        custom-lookup-name="customLookupAccount"
+                        input-label=""
+                        selected-record={orderObject.Account}
+                        disabled-custom-lookup="true">
+                        </c-custom-lookup>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- /ROW -->
+    
+        <!-- ROW MOEDA -->
+        <div class="row">
+            <div class="col-12">
+                <div class="unique-data">
+                    <div class="lb-commom">Moeda</div>
+                </div>
+                <div class="box-moeda">
+                    <div class="form-check form-check-inline bg-white p-2 px-3 border rounded">
+                        <input class="form-check-input" checked={checkedCurrencyReal} type="radio" name="inlineRadio" id="inlineRadio5" value={checkedCurrencyReal} disabled>
+                        <label class="form-check-label" for="inlineRadio5">Real (R$)</label>
+                    </div>
+                    <div class="form-check form-check-inline bg-white p-2 px-3 border rounded">
+                        <input class="form-check-input" checked={checkedCurrencyDol} type="radio" name="inlineRadio" id="inlineRadio6" value={checkedCurrencyDol} disabled>
+                        <label class="form-check-label" for="inlineRadio6">Dolar (US$)</label>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- /ROW -->
+
+        <!-- ROW -->
+        <div class="row">
+            <div class="col-12">
+                <div class="unique-data">
+                    <div class="lb-commom">
+                        Commodity <span class="field-required">*</span>
+                    </div>
+                    <div class="content">
+                        <c-show-picklist-value 
+                        object-name="Order" 
+                        field-name="Commodity__c" 
+                        field-label=""
+                        onselectpicklist={handlePicklistCommodity}
+                        picklist-name="commodityPickList"
+                        value={orderObjectBarter.Commodity}
+                        disabled-custom-lookup={disabledBarterFields}> 
+                        </c-show-picklist-value>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- /ROW -->
+
+        <!-- ROW -->
+        <div class="row">
+            <div class="col-xs-12 col-sm-12 col-md-6 col-xl-6">
+                <div class="unique-data">
+                    <div class="lb-commom">
+                        Safra de Entrega do Grão <span class="field-required">*</span>
+                    </div>
+                    <div class="content cont-label">
+                        <c-custom-lookup 
+                        object-api-name="Crop__c" 
+                        field-api-name="Name"
+                        object-icon-name="custom:custom5"
+                        filter=" AND Active__c = true "
+                        onselectrecord={handleNewRecordShippingCrop}
+                        custom-lookup-name="customLookupCrop"
+                        field-api-names="Name"
+                        record-id={clienteId}
+                        selected-record={orderObjectBarter.ShippingCrop}
+                        disabled-custom-lookup={disabledBarterFields}>
+                        </c-custom-lookup>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-xs-12 col-sm-12 col-md-6 col-xl-6">
+                <div class="unique-data">
+                    <div class="lb-commom">
+                        Safra de Faturamento do Insumo <span class="field-required">*</span>
+                    </div>
+                    <div class="content cont-label">
+                        <c-custom-lookup 
+                        object-api-name="Crop__c" 
+                        field-api-name="Name"
+                        object-icon-name="custom:custom5"
+                        filter=" AND Active__c = true "
+                        onselectrecord={handleNewRecordBillingCrop}
+                        custom-lookup-name="customLookupCrop"
+                        field-api-names="Name"
+                        record-id={clienteId}
+                        selected-record={orderObject.Crop}
+                        disabled-custom-lookup="true"
+                        >
+                        </c-custom-lookup>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- /ROW -->
+
+        <!-- ROW -->
+        <div class="row">
+            <div class="col-12" if:true={showFinancialFields}>
+                <div class="unique-data">
+                    <div class="lb-commom">
+                        Vencimento Financeiro <span class="field-required">*</span>
+                    </div>
+                    <div class="content">
+                        <!--input type="text" class="form-control"-->
+                        <lightning-input type="date" name="inputFinancialDueDate" variant="label-hidden" value={orderObjectBarter.FinancialDueDate} disabled>
+                        
+                        </lightning-input>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- /ROW -->
+
+        <!-- ROW -->
+        <div class="row" if:false={showFinancialFields}>
+            <div class="col-xs-12 col-sm-12 col-md-6 col-xl-6">
+                <div class="unique-data">
+                    <div class="lb-commom">
+                    Preço Comm. Bruto <small class="text-muted">({currencyScreen})</small> <span class="field-required">*</span>
+                    </div>
+                    <div class="content">
+                        <!--input type="text" class="form-control"-->
+                        <lightning-input 
+                            type="number" 
+                            value={orderObjectBarter.GrossUnitPrice} 
+                            variant="label-hidden" 
+                            onchange={handleChangeGrossUnitPrice}
+                            onfocusout={handleChangeGrossUnitPriceOnFocusOut}
+                            step=".01"
+                            formatter="number"
+                            disabled={disabledBarterFields}>
+                        </lightning-input>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-xs-12 col-sm-12 col-md-6 col-xl-6">
+                <div class="unique-data">
+                    <div class="lb-commom">
+                    Preço Comm. Líquido <small class="text-muted">({currencyScreen})</small> <span class="field-required">*</span>
+                    </div>
+                    <div class="content">
+                        <!--input type="text" class="form-control"-->
+                        <lightning-input 
+                            type="number" 
+                            value={orderObjectBarter.CommUnitPrice} 
+                            variant="label-hidden" 
+                            onchange={handleChangeCommUnitPrice}
+                            onfocusout={handleChangeCommUnitPriceOnFocusOut}
+                            step=".01"
+                            formatter="number"
+                            disabled={disabledBarterFields}>
+                        </lightning-input>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- /ROW -->
+
+        <!-- ROW DATA -->
+        <div class="row mt-2">
+            <div class="col-12">
+                <div class="unique-data">
+                    <div class="lb-commom">
+                        Data de Pagamento
+                    </div>
+                    <div class="content cont-label-date">
+                        <lightning-input type="date" name="inputPaymentDate" variant="label-hidden" value={orderObject.DueDate} disabled>
+                        
+                        </lightning-input>
+                        <!--input type="text" class="form-control bg-ic-calendar"-->
+                    </div>
+                </div>
+            </div>      
+        </div>
+        <!-- /ROW -->
+
+        <!-- ROW  -->
+        <div class="row">
+            <div class="col-12">
+                <div class="unique-data">
+                    <div class="lb-commom">
+                    Quantidade Total de Entrega <small class="text-muted" if:true={commUnitScreen}>({orderObjectBarter.CommercialMeasureUnit})</small>
+                    </div>
+
+                    <div class="content">
+                        <!--input type="text" class="form-control"-->
+                        <lightning-input type="number" name="inputTextTotalDeliveryQuantity"
+                            value={orderObjectBarter.TotalDeliveryQuantity} variant="label-hidden" disabled></lightning-input>
+                    </div>
+                </div>
+            </div>      
+        </div>
+        <!-- /ROW -->
+
+        <template if:false={showFinancialFields}>
+        <!-- ROW CIF, FOB -->
+            <div class="row">
+                <div class="col-12">
+                    <div class="unique-data">
+                        <div class="lb-commom">Tipo de Frete Commodities <span class="field-required">*</span></div>
+                    </div>
+
+                    <div class="box-moeda">
+                        <div class="form-check form-check-inline bg-white p-2 px-3 border rounded">
+                            <input class="form-check-input" checked={checkedFreightCommCIF} type="radio" name="inlineRadioOptions" id="inlineRadio7" value="CIF" onclick={handleFreightBarter} disabled={disabledBarterFields}>
+                            <label class="form-check-label" for="inlineRadio7">CIF</label>
+                        </div>
+                        <div class="form-check form-check-inline bg-white p-2 px-3 border rounded">
+                            <input class="form-check-input" checked={checkedFreightCommFOB} type="radio" name="inlineRadioOptions" id="inlineRadio8" value="FOB" onclick={handleFreightBarter} disabled={disabledBarterFields}>
+                            <label class="form-check-label" for="inlineRadio8">FOB</label>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- /ROW -->
+
+            <!-- ROW  -->
+            <div class="row" if:true={showDelivery}>
+                <div class="col-12">
+                    <div class="unique-data">
+                        <div class="lb-commom">
+                        Local de Entrega <span class="field-required">*</span>
+                        </div>
+
+                        <div class="content">
+                            <textarea name="" id="delivery" cols="30" rows="5" class="form-control" onchange={handleTextAreaDelivery} disabled={disabledBarterFields}>{orderObjectBarter.ProductionDeliveryLocation}</textarea>
+                        </div>
+                    </div>
+                </div>      
+            </div>
+            <!-- /ROW -->
+
+            <!-- ROW  -->
+            <div class="row" if:true={showPickup}>
+                <div class="col-12">
+                    <div class="unique-data">
+                        <div class="lb-commom">
+                        Local de Retirada <span class="field-required">*</span>
+                        </div>
+
+                        <div class="content">
+                            <textarea name="" id="pickup" cols="30" rows="5" class="form-control" onchange={handleTextAreaPickup} disabled={disabledBarterFields}>{orderObjectBarter.ProductionPickupLocation}</textarea>
+                        </div>
+                    </div>
+                </div>      
+            </div>
+            <!-- /ROW -->
+
+            <!-- ROW DATA -->
+            <div class="row">
+                <div class="col-12">
+                    <div class="unique-data">
+                        <div class="lb-commom">
+                            Janela de Entrega <span class="field-required">*</span>
+                        </div>
+                        <div class="content cont-label-date">
+                            <div class="row">
+                                <div class="col-6">  
+                                <lightning-input type="date" name="inputInitialDate" variant="label-hidden" value={orderObjectBarter.InitialDeliveryDate} onchange={handleInitialDeliveryDate} disabled={disabledBarterFields}>
+                                
+                                </lightning-input>
+                                </div>
+                                        
+                                <div class="col-6">  
+                                <lightning-input type="date" name="inputEndDate" variant="label-hidden" value={orderObjectBarter.EndDeliveryDate} onchange={handleEndDeliveryDate} disabled={disabledBarterFields}>
+                                
+                                </lightning-input>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>      
+            </div>
+            <!-- /ROW -->
+        </template>
+        <!-- /ROW -->
+
+
+        <!-- ACTION MAIN -->
+        <div class="row box-action-add mt-4"> <!--if:false={disabledBarterFields}>-->
+            <div class="col-12">
+                <button class="btn btn-cta-consultar shadow mb-2" onclick={onClickShowBarterStepB}>
+                    <span>Consultar Crédito</span>
+                    <img src={cIMoneyCheck} alt="Consultar Crédito">
+                </button>
+            </div>
+        </div>
+        <!-- /ACTION MAIN -->
+    
+    
+    </div>
+    <!-- /BATER TELA 01 -->
+    <!-- LOADING SPINNER  -->
+    <template if:true={loading}>
+        <div class="demo-only">
+            <div class="slds-spinner_container" style="position: fixed;">
+                <div role="status" class="slds-spinner slds-spinner_medium slds-spinner_brand">
+                    <div class="slds-spinner__dot-a"></div>
+                    <div class="slds-spinner__dot-b"></div>
+                </div>
+            </div>
+        </div>
+    </template>
+    <!-- LOADING SPINNER  -->
+</template>

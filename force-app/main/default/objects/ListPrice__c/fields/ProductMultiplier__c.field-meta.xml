@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>ProductMultiplier__c</fullName>
+    <externalId>false</externalId>
+    <formula>IF(Product2Id__r.Multiplicity__c = 0, 1, Product2Id__r.Multiplicity__c)</formula>
+    <label>Multiplicidade do Produto</label>
+    <precision>18</precision>
+    <required>false</required>
+    <scale>14</scale>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Number</type>
+    <unique>false</unique>
+</CustomField>

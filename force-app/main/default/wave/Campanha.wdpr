@@ -1,0 +1,254 @@
+{
+  "version" : "54.0",
+  "nodes" : {
+    "LOAD_DATASET0" : {
+      "action" : "load",
+      "sources" : [ ],
+      "parameters" : {
+        "fields" : [ "Id", "Name", "Campaign__c", "AvailableQuantity__c", "CanActivateRules__c", "CanReceiveDiscount__c", "Family__c", "Manufacturer__c", "MaxQuantity__c", "Product2__c", "UnitMeasurement__c", "UsedQuantity__c", "ExternalIdIndex__c", "ComercialName__c" ],
+        "dataset" : {
+          "type" : "connectedDataset",
+          "label" : "CampaignProduct__c",
+          "connectionName" : "SFDC_LOCAL",
+          "sourceObjectName" : "CampaignProduct__c"
+        }
+      }
+    },
+    "JOIN0" : {
+      "action" : "join",
+      "sources" : [ "LOAD_DATASET0", "LOAD_DATASET2" ],
+      "schema" : {
+        "fields" : [ ],
+        "slice" : {
+          "mode" : "DROP",
+          "ignoreMissingFields" : true,
+          "fields" : [ ]
+        }
+      },
+      "parameters" : {
+        "joinType" : "INNER",
+        "leftKeys" : [ "Campaign__c" ],
+        "rightQualifier" : "Campaign",
+        "rightKeys" : [ "Id" ]
+      }
+    },
+    "LOAD_DATASET2" : {
+      "action" : "load",
+      "sources" : [ ],
+      "parameters" : {
+        "fields" : [ "Id", "Name", "Type", "RecordTypeId", "Status", "StartDate", "EndDate", "ExpectedRevenue", "BudgetedCost", "ActualCost", "ExpectedResponse", "NumberSent", "IsActive", "Description", "CampaignMemberRecordTypeId", "Accumulative__c", "ActivitySector__c", "Condition__c", "Crop__c", "DiscountOrder__c", "OrderRecordType__c", "Priority__c", "CampaignNumber__c", "Currency__c" ],
+        "dataset" : {
+          "type" : "connectedDataset",
+          "label" : "Campaign",
+          "connectionName" : "SFDC_LOCAL",
+          "sourceObjectName" : "Campaign"
+        }
+      }
+    },
+    "OUTPUT0" : {
+      "action" : "save",
+      "sources" : [ "JOIN0" ],
+      "parameters" : {
+        "fields" : [ ],
+        "dataset" : {
+          "type" : "analyticsDataset",
+          "label" : "Produtos da Campanhas",
+          "name" : "CampaignProductDataSet",
+          "folderName" : "Performance_das_Filiais"
+        }
+      }
+    },
+    "LOAD_DATASET3" : {
+      "action" : "load",
+      "sources" : [ ],
+      "parameters" : {
+        "fields" : [ "Id", "Name", "RecordTypeId", "Campaign__c", "CampaignProduct__c", "Discount__c", "FixedUnitPrice__c", "MaximumOrderValue__c", "MaximumQuantity__c", "MinimumOrderValue__c", "MinimumQuantity__c", "OrderDiscount__c", "PaymentCondition__c", "PaymentDate__c", "ProductPercent__c", "UnitMeasurement__c", "CampaignTargetRule__c" ],
+        "dataset" : {
+          "type" : "connectedDataset",
+          "label" : "CampaignRule__c",
+          "connectionName" : "SFDC_LOCAL",
+          "sourceObjectName" : "CampaignRule__c"
+        }
+      }
+    },
+    "LOAD_DATASET4" : {
+      "action" : "load",
+      "sources" : [ ],
+      "parameters" : {
+        "fields" : [ "Id", "Name", "CreatedDate", "Campaign__c", "Account__c", "Cluster__c", "CustomerGroup__c", "Rating__c", "SalesOffice__c", "SalesOrg__c", "SalesTeam__c", "CampaignIsActive__c", "Crop__c" ],
+        "dataset" : {
+          "type" : "connectedDataset",
+          "label" : "CampaignTargetAudience__c",
+          "connectionName" : "SFDC_LOCAL",
+          "sourceObjectName" : "CampaignTargetAudience__c"
+        }
+      }
+    },
+    "JOIN1" : {
+      "action" : "join",
+      "sources" : [ "LOAD_DATASET3", "LOAD_DATASET2" ],
+      "schema" : {
+        "fields" : [ ],
+        "slice" : {
+          "mode" : "DROP",
+          "ignoreMissingFields" : true,
+          "fields" : [ ]
+        }
+      },
+      "parameters" : {
+        "joinType" : "INNER",
+        "leftKeys" : [ "Campaign__c" ],
+        "rightQualifier" : "Campaign",
+        "rightKeys" : [ "Id" ]
+      }
+    },
+    "OUTPUT1" : {
+      "action" : "save",
+      "sources" : [ "JOIN1" ],
+      "parameters" : {
+        "fields" : [ ],
+        "dataset" : {
+          "type" : "analyticsDataset",
+          "label" : "Campanhas com Regras",
+          "name" : "CampaignRuleDataset"
+        }
+      }
+    },
+    "JOIN2" : {
+      "action" : "join",
+      "sources" : [ "LOAD_DATASET4", "LOAD_DATASET2" ],
+      "schema" : {
+        "fields" : [ ],
+        "slice" : {
+          "mode" : "DROP",
+          "ignoreMissingFields" : true,
+          "fields" : [ ]
+        }
+      },
+      "parameters" : {
+        "joinType" : "INNER",
+        "leftKeys" : [ "Campaign__c" ],
+        "rightQualifier" : "Campaign",
+        "rightKeys" : [ "Id" ]
+      }
+    },
+    "OUTPUT2" : {
+      "action" : "save",
+      "sources" : [ "JOIN2" ],
+      "parameters" : {
+        "fields" : [ ],
+        "dataset" : {
+          "type" : "analyticsDataset",
+          "label" : "Publico Alvo da Campaign",
+          "name" : "CampaignTargetDataSet",
+          "folderName" : "Performance_das_Filiais"
+        }
+      }
+    }
+  },
+  "ui" : {
+    "nodes" : {
+      "LOAD_DATASET0" : {
+        "label" : "CampaignProduct__c",
+        "type" : "LOAD_DATASET",
+        "top" : 251.5,
+        "left" : 250.7,
+        "parameters" : {
+          "sampleSize" : 2000
+        }
+      },
+      "JOIN0" : {
+        "label" : "Participar 0",
+        "type" : "JOIN",
+        "top" : 251.5,
+        "left" : 390.7
+      },
+      "LOAD_DATASET2" : {
+        "label" : "Campaign",
+        "type" : "LOAD_DATASET",
+        "top" : 391.5,
+        "left" : 670.7,
+        "parameters" : {
+          "sampleSize" : 2000
+        }
+      },
+      "OUTPUT0" : {
+        "label" : "Saída 0",
+        "type" : "OUTPUT",
+        "top" : 251.5,
+        "left" : 530.7
+      },
+      "LOAD_DATASET3" : {
+        "label" : "CampaignRule__c",
+        "type" : "LOAD_DATASET",
+        "top" : 531.5,
+        "left" : 250.7,
+        "parameters" : {
+          "sampleSize" : 2000
+        }
+      },
+      "LOAD_DATASET4" : {
+        "label" : "CampaignTargetAudience__c",
+        "type" : "LOAD_DATASET",
+        "top" : 251.5,
+        "left" : 1090.7,
+        "parameters" : {
+          "sampleSize" : 2000
+        }
+      },
+      "JOIN1" : {
+        "label" : "Participar 1",
+        "type" : "JOIN",
+        "top" : 531.5,
+        "left" : 390.7
+      },
+      "OUTPUT1" : {
+        "label" : "Saída 1",
+        "type" : "OUTPUT",
+        "top" : 531.5,
+        "left" : 530.7
+      },
+      "JOIN2" : {
+        "label" : "Participar 2",
+        "type" : "JOIN",
+        "top" : 251.5,
+        "left" : 950.7
+      },
+      "OUTPUT2" : {
+        "label" : "Saída 2",
+        "type" : "OUTPUT",
+        "top" : 251.5,
+        "left" : 810.7
+      }
+    },
+    "connectors" : [ {
+      "source" : "LOAD_DATASET0",
+      "target" : "JOIN0"
+    }, {
+      "source" : "LOAD_DATASET2",
+      "target" : "JOIN0"
+    }, {
+      "source" : "JOIN0",
+      "target" : "OUTPUT0"
+    }, {
+      "source" : "LOAD_DATASET3",
+      "target" : "JOIN1"
+    }, {
+      "source" : "LOAD_DATASET2",
+      "target" : "JOIN1"
+    }, {
+      "source" : "JOIN1",
+      "target" : "OUTPUT1"
+    }, {
+      "source" : "LOAD_DATASET4",
+      "target" : "JOIN2"
+    }, {
+      "source" : "LOAD_DATASET2",
+      "target" : "JOIN2"
+    }, {
+      "source" : "JOIN2",
+      "target" : "OUTPUT2"
+    } ],
+    "hiddenColumns" : [ ]
+  }
+}

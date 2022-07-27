@@ -1,0 +1,246 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Flow xmlns="http://soap.sforce.com/2006/04/metadata">
+    <apiVersion>53.0</apiVersion>
+    <decisions>
+        <name>ComercialName_Check</name>
+        <label>Nome Comercial Preenchido</label>
+        <locationX>772</locationX>
+        <locationY>973</locationY>
+        <defaultConnectorLabel>Resultado padrão</defaultConnectorLabel>
+        <rules>
+            <name>Filled_ComercialName</name>
+            <conditionLogic>and</conditionLogic>
+            <conditions>
+                <leftValueReference>$Record.ComercialName__c</leftValueReference>
+                <operator>IsNull</operator>
+                <rightValue>
+                    <booleanValue>false</booleanValue>
+                </rightValue>
+            </conditions>
+            <connector>
+                <targetReference>UPDATE_NAME_COMERCIALNAME</targetReference>
+            </connector>
+            <label>Nome Comercial Preenchido</label>
+        </rules>
+    </decisions>
+    <decisions>
+        <name>Family_Check</name>
+        <label>Verificar Família</label>
+        <locationX>768</locationX>
+        <locationY>570</locationY>
+        <defaultConnectorLabel>Resultado padrão</defaultConnectorLabel>
+        <rules>
+            <name>Filled_Family</name>
+            <conditionLogic>and</conditionLogic>
+            <conditions>
+                <leftValueReference>$Record.Family__c</leftValueReference>
+                <operator>IsNull</operator>
+                <rightValue>
+                    <booleanValue>false</booleanValue>
+                </rightValue>
+            </conditions>
+            <connector>
+                <targetReference>UPDATE_NAME_FAMILY</targetReference>
+            </connector>
+            <label>Família Preenchida</label>
+        </rules>
+        <rules>
+            <name>Family_Null</name>
+            <conditionLogic>and</conditionLogic>
+            <conditions>
+                <leftValueReference>$Record.Family__c</leftValueReference>
+                <operator>IsNull</operator>
+                <rightValue>
+                    <booleanValue>true</booleanValue>
+                </rightValue>
+            </conditions>
+            <connector>
+                <targetReference>Manufacturer_Check</targetReference>
+            </connector>
+            <label>Família não preenchida</label>
+        </rules>
+    </decisions>
+    <decisions>
+        <name>Manufacturer_Check</name>
+        <label>Verificar Fornecedor</label>
+        <locationX>767</locationX>
+        <locationY>764</locationY>
+        <defaultConnectorLabel>Resultado padrão</defaultConnectorLabel>
+        <rules>
+            <name>Filled_Manufacturer</name>
+            <conditionLogic>and</conditionLogic>
+            <conditions>
+                <leftValueReference>$Record.Manufacturer__c</leftValueReference>
+                <operator>IsNull</operator>
+                <rightValue>
+                    <booleanValue>false</booleanValue>
+                </rightValue>
+            </conditions>
+            <connector>
+                <targetReference>UPDATE_NAME_MANUFACTURER</targetReference>
+            </connector>
+            <label>Fornecedor Preenchido</label>
+        </rules>
+        <rules>
+            <name>Manufacturer_Null</name>
+            <conditionLogic>and</conditionLogic>
+            <conditions>
+                <leftValueReference>$Record.Manufacturer__c</leftValueReference>
+                <operator>IsNull</operator>
+                <rightValue>
+                    <booleanValue>true</booleanValue>
+                </rightValue>
+            </conditions>
+            <connector>
+                <targetReference>ComercialName_Check</targetReference>
+            </connector>
+            <label>Fornecedor Não Preenchido</label>
+        </rules>
+    </decisions>
+    <decisions>
+        <name>Product_Check</name>
+        <label>Verificar Produto</label>
+        <locationX>768</locationX>
+        <locationY>350</locationY>
+        <defaultConnectorLabel>Resultado padrão</defaultConnectorLabel>
+        <rules>
+            <name>Filled_Produto</name>
+            <conditionLogic>and</conditionLogic>
+            <conditions>
+                <leftValueReference>$Record.Product2__c</leftValueReference>
+                <operator>IsNull</operator>
+                <rightValue>
+                    <booleanValue>false</booleanValue>
+                </rightValue>
+            </conditions>
+            <connector>
+                <targetReference>Update_Name</targetReference>
+            </connector>
+            <label>Produto Preenchido</label>
+        </rules>
+        <rules>
+            <name>Product_Null</name>
+            <conditionLogic>and</conditionLogic>
+            <conditions>
+                <leftValueReference>$Record.Product2__c</leftValueReference>
+                <operator>IsNull</operator>
+                <rightValue>
+                    <booleanValue>true</booleanValue>
+                </rightValue>
+            </conditions>
+            <connector>
+                <targetReference>Family_Check</targetReference>
+            </connector>
+            <label>Produto não preenchido</label>
+        </rules>
+    </decisions>
+    <interviewLabel>CampaignProduct {!$Flow.CurrentDateTime}</interviewLabel>
+    <label>CampaignProduct.UpdateNameWithProductName</label>
+    <processMetadataValues>
+        <name>BuilderType</name>
+        <value>
+            <stringValue>LightningFlowBuilder</stringValue>
+        </value>
+    </processMetadataValues>
+    <processMetadataValues>
+        <name>CanvasMode</name>
+        <value>
+            <stringValue>FREE_FORM_CANVAS</stringValue>
+        </value>
+    </processMetadataValues>
+    <processMetadataValues>
+        <name>OriginBuilderType</name>
+        <value>
+            <stringValue>LightningFlowBuilder</stringValue>
+        </value>
+    </processMetadataValues>
+    <processType>AutoLaunchedFlow</processType>
+    <recordUpdates>
+        <description>Atualiza o nome do registro com o nome do produto</description>
+        <name>Update_Name</name>
+        <label>Update Name</label>
+        <locationX>1029</locationX>
+        <locationY>349</locationY>
+        <inputAssignments>
+            <field>ExternalIdIndex__c</field>
+            <value>
+                <stringValue>{!$Record.Product2__r.Name} - {!$Record.Campaign__r.Name}</stringValue>
+            </value>
+        </inputAssignments>
+        <inputAssignments>
+            <field>Name</field>
+            <value>
+                <stringValue>{!$Record.Product2__r.Name} - {!$Record.Campaign__r.Name}</stringValue>
+            </value>
+        </inputAssignments>
+        <inputReference>$Record</inputReference>
+    </recordUpdates>
+    <recordUpdates>
+        <name>UPDATE_NAME_COMERCIALNAME</name>
+        <label>Atualizar nome com nome comercial</label>
+        <locationX>1018</locationX>
+        <locationY>967</locationY>
+        <inputAssignments>
+            <field>ExternalIdIndex__c</field>
+            <value>
+                <stringValue>{!$Record.ComercialName__c} - {!$Record.Campaign__r.Name}</stringValue>
+            </value>
+        </inputAssignments>
+        <inputAssignments>
+            <field>Name</field>
+            <value>
+                <stringValue>{!$Record.ComercialName__c} - {!$Record.Campaign__r.Name}</stringValue>
+            </value>
+        </inputAssignments>
+        <inputReference>$Record</inputReference>
+    </recordUpdates>
+    <recordUpdates>
+        <name>UPDATE_NAME_FAMILY</name>
+        <label>Atualizar nome com Familia</label>
+        <locationX>1030</locationX>
+        <locationY>569</locationY>
+        <inputAssignments>
+            <field>ExternalIdIndex__c</field>
+            <value>
+                <stringValue>{!$Record.Family__r.Name} - {!$Record.Campaign__r.Name}</stringValue>
+            </value>
+        </inputAssignments>
+        <inputAssignments>
+            <field>Name</field>
+            <value>
+                <stringValue>{!$Record.Family__r.Name} - {!$Record.Campaign__r.Name}</stringValue>
+            </value>
+        </inputAssignments>
+        <inputReference>$Record</inputReference>
+    </recordUpdates>
+    <recordUpdates>
+        <name>UPDATE_NAME_MANUFACTURER</name>
+        <label>Atualizar nome com fornecedor</label>
+        <locationX>1024</locationX>
+        <locationY>761</locationY>
+        <inputAssignments>
+            <field>ExternalIdIndex__c</field>
+            <value>
+                <stringValue>{!$Record.Manufacturer__c} - {!$Record.Campaign__r.Name}</stringValue>
+            </value>
+        </inputAssignments>
+        <inputAssignments>
+            <field>Name</field>
+            <value>
+                <stringValue>{!$Record.Manufacturer__c} - {!$Record.Campaign__r.Name}</stringValue>
+            </value>
+        </inputAssignments>
+        <inputReference>$Record</inputReference>
+    </recordUpdates>
+    <start>
+        <locationX>650</locationX>
+        <locationY>48</locationY>
+        <connector>
+            <targetReference>Product_Check</targetReference>
+        </connector>
+        <object>CampaignProduct__c</object>
+        <recordTriggerType>CreateAndUpdate</recordTriggerType>
+        <triggerType>RecordBeforeSave</triggerType>
+    </start>
+    <status>Active</status>
+</Flow>

@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>DescontoOuPrecoFixo</fullName>
+    <active>true</active>
+    <description>Escolher Desconto ou preço fixo, não podendo ser os dois juntos, e não podendo deixar os dois em branco,</description>
+    <errorConditionFormula>OR (AND(
+NOT ISBLANK( FixedUnitPrice__c ),
+NOT ISBLANK( Discount__c )
+),
+AND (
+ISBLANK(FixedUnitPrice__c),
+ISBLANK(Discount__c )
+))</errorConditionFormula>
+    <errorMessage>Deve ser preenchido Preço Fixo ou Desconto, não podendo deixar os dois em branco.</errorMessage>
+</ValidationRule>

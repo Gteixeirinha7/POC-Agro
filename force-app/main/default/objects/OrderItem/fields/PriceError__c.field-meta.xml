@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>PriceError__c</fullName>
+    <externalId>false</externalId>
+    <formula>AND(NOT(ISBLANK(ListPrice__c)), OR(CheckPriceError__c &gt;= ListPriceWithoutInterest__c + 1, CheckPriceError__c &lt;= ListPriceWithoutInterest__c - 1))</formula>
+    <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+    <label>Erro de Preço</label>
+    <trackHistory>false</trackHistory>
+    <type>Checkbox</type>
+</CustomField>

@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>ContractNumber__c</fullName>
+    <description>Este campo apenas reflete o número do pedido, ele foi criado apenas para renomear a label de Número do pedido para número do contrato.</description>
+    <externalId>false</externalId>
+    <formula>OrderNumber</formula>
+    <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+    <inlineHelpText>Número do contrato</inlineHelpText>
+    <label>Número do Contrato</label>
+    <required>false</required>
+    <trackHistory>false</trackHistory>
+    <type>Text</type>
+    <unique>false</unique>
+</CustomField>

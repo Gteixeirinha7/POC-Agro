@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Condition__c</fullName>
+    <defaultValue>false</defaultValue>
+    <description>Se caso este campo for marcado, o desconto da campanha só será concedido se todos os produtos da campanha forem vendidos no mesmo pedido, ou seja, o usuário precisa lançar o pacote completo para habilitar o desconto.</description>
+    <externalId>false</externalId>
+    <inlineHelpText>Se caso este campo for marcado, o desconto da campanha só será concedido se todos os produtos da campanha forem vendidos no mesmo pedido, ou seja, o usuário precisa lançar o pacote completo para habilitar o desconto.</inlineHelpText>
+    <label>Vender todos os produtos?</label>
+    <trackHistory>true</trackHistory>
+    <type>Checkbox</type>
+</CustomField>

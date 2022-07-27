@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Flow xmlns="http://soap.sforce.com/2006/04/metadata">
+    <apiVersion>53.0</apiVersion>
+    <description>Este flow tem por objetivo selecionar todos os catálogos de preço 18 alterados nas ultimas 24 horas criados ou atualizados nas ultimas 24 horas e disparar a atualização dos mesmos, para rodar a trigger fora de horário comercial, a trigger de catálogo de preço realiza diversos processos no marketplace e se essa trigger roda em horário comercial, ocorrem conflitos de uso quando os usuários tentam lançar pedidos.</description>
+    <formulas>
+        <name>GetLastModifiedDateMinus23Hours</name>
+        <dataType>DateTime</dataType>
+        <expression>now() - (23/24)</expression>
+    </formulas>
+    <interviewLabel>ListPrice.RefreshLastModifiedListPrice18 {!$Flow.CurrentDateTime}</interviewLabel>
+    <label>ListPrice.RefreshLastModifiedListPrice18</label>
+    <loops>
+        <name>Iterate</name>
+        <label>Iterate ListPrices</label>
+        <locationX>489</locationX>
+        <locationY>473</locationY>
+        <collectionReference>Get_last_modified_ListPrices_18</collectionReference>
+        <iterationOrder>Asc</iterationOrder>
+        <nextValueConnector>
+            <targetReference>Update_ListPrice</targetReference>
+        </nextValueConnector>
+    </loops>
+    <processMetadataValues>
+        <name>BuilderType</name>
+        <value>
+            <stringValue>LightningFlowBuilder</stringValue>
+        </value>
+    </processMetadataValues>
+    <processMetadataValues>
+        <name>CanvasMode</name>
+        <value>
+            <stringValue>FREE_FORM_CANVAS</stringValue>
+        </value>
+    </processMetadataValues>
+    <processMetadataValues>
+        <name>OriginBuilderType</name>
+        <value>
+            <stringValue>LightningFlowBuilder</stringValue>
+        </value>
+    </processMetadataValues>
+    <processType>AutoLaunchedFlow</processType>
+    <recordLookups>
+        <name>Get_last_modified_ListPrices_18</name>
+        <label>Get last modified ListPrices 18</label>
+        <locationX>489</locationX>
+        <locationY>276</locationY>
+        <assignNullValuesIfNoRecordsFound>false</assignNullValuesIfNoRecordsFound>
+        <connector>
+            <targetReference>Iterate</targetReference>
+        </connector>
+        <filterLogic>and</filterLogic>
+        <filters>
+            <field>SalesCondition__c</field>
+            <operator>EqualTo</operator>
+            <value>
+                <stringValue>18</stringValue>
+            </value>
+        </filters>
+        <filters>
+            <field>LastModifiedDate</field>
+            <operator>GreaterThanOrEqualTo</operator>
+            <value>
+                <elementReference>GetLastModifiedDateMinus23Hours</elementReference>
+            </value>
+        </filters>
+        <getFirstRecordOnly>false</getFirstRecordOnly>
+        <object>ListPrice__c</object>
+        <storeOutputAutomatically>true</storeOutputAutomatically>
+    </recordLookups>
+    <recordUpdates>
+        <name>Update_ListPrice</name>
+        <label>Update ListPrice</label>
+        <locationX>677</locationX>
+        <locationY>473</locationY>
+        <connector>
+            <targetReference>Iterate</targetReference>
+        </connector>
+        <inputReference>Iterate</inputReference>
+    </recordUpdates>
+    <start>
+        <locationX>363</locationX>
+        <locationY>31</locationY>
+        <connector>
+            <targetReference>Get_last_modified_ListPrices_18</targetReference>
+        </connector>
+        <schedule>
+            <frequency>Daily</frequency>
+            <startDate>2021-11-22</startDate>
+            <startTime>00:00:00.000Z</startTime>
+        </schedule>
+        <triggerType>Scheduled</triggerType>
+    </start>
+    <status>Active</status>
+</Flow>

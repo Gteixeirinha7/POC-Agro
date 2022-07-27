@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<RecordType xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>VariableConstraints</fullName>
+    <active>true</active>
+    <description>Campanha pode ser por: a) Preço Fixo de produto; b) % de desconto por valor do pedido, e ; c) – % de Valor de produto Ativador</description>
+    <label>Condicionantes Váriaveis</label>
+</RecordType>

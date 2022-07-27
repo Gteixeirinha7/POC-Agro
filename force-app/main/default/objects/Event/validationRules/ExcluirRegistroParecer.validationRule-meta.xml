@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>ExcluirRegistroParecer</fullName>
+    <active>true</active>
+    <description>Regra para que não seja possível excluir um registro parecer da visita estiver realizado</description>
+    <errorConditionFormula>Validavisita__c  = TRUE</errorConditionFormula>
+    <errorMessage>Não é possível excluir ou alterar uma Visita que foi preenchido Parecer da Visita!</errorMessage>
+</ValidationRule>

@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>StatusPathLabel__c</fullName>
+    <externalId>false</externalId>
+    <formula>IF(ISPICKVAL(StatusPath__c, '1'), 'Em análise de Crédito', (
+                IF(ISPICKVAL(StatusPath__c, '2'), 'Crédito Bloqueado', (
+                    IF(ISPICKVAL(StatusPath__c, '3'), 'Crédito Liberado', (
+                        IF(ISPICKVAL(StatusPath__c, '4'), 'Faturado Parcial', (
+                            IF(ISPICKVAL(StatusPath__c, '5'), 'Concluído', (
+                                IF(ISPICKVAL(StatusPath__c, 'X'), 'Cancelado', TEXT(StatusPath__c))
+                            ))
+                        ))
+                    ))
+                ))
+              ))    </formula>
+    <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+    <label>Status Path Label</label>
+    <required>false</required>
+    <trackHistory>false</trackHistory>
+    <type>Text</type>
+    <unique>false</unique>
+</CustomField>

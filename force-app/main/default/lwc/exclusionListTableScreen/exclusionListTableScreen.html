@@ -1,0 +1,458 @@
+<template>
+    <div class="container">
+        <div style="padding-bottom: 10px;">
+            <h3 slot="title">
+                <div style="padding-left: 2px">Listas de Exclusão</div>
+            </h3>
+            <div slot="footer">
+            </div>
+        </div>
+        <details closed class="details" style="background-color: white;">
+            <summary class="summary-filter">Filtros</summary> 
+            <div class="filtros-main">
+                <!-- Safra -->
+                <div class="filtros">
+                    <div class="slds-form-element">
+                        <div class="slds-form-element__control" style="margin-top: -15px;">
+                            <div class="slds-combobox_container">
+                                <div data-id="resultBox" aria-expanded="false" aria-haspopup="listbox" role="combobox">
+                                    <div class="slds-form-element__control slds-input-has-icon slds-input-has-icon slds-input-has-icon_left-right" role="none">
+                                        <div class="row">
+                                            <div class="col-12">
+                                                <div class="unique-data">
+                                                    <div class="lb-commom">  Safra  </div>
+                                                    <div class="content cont-label">
+                                                        <c-custom-lookup 
+                                                            object-api-name="Crop__c" 
+                                                            field-api-name="Name"
+                                                            field-api-names="Name"
+                                                            object-icon-name="custom:custom5"
+                                                            filter=" AND Active__c = true "
+                                                            onselectrecord={handleNewRecordCrop}
+                                                            custom-lookup-name="customLookupCrop"
+                                                            selected-record={filterObject.crop}>
+                                                        </c-custom-lookup>
+                                                    </div>
+                                                </div>
+                                            </div>      
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- Equipe de Vendas -->
+                <div class="filtros">
+                    <div class="slds-form-element">
+                        <div class="slds-form-element__control" style="margin-top: -15px;">
+                            <div class="slds-combobox_container">
+                                <div data-id="resultBox" aria-expanded="false" aria-haspopup="listbox" role="combobox">
+                                    <div class="slds-form-element__control slds-input-has-icon slds-input-has-icon slds-input-has-icon_left-right" role="none">
+                                        <div class="row">
+                                            <div class="col-12">
+                                                <div class="unique-data">
+                                                    <div class="lb-commom">Equipe de Vendas 
+                                                    </div>
+                                                    <div class="content cont-label">
+                                                        <c-custom-lookup 
+                                                            object-api-name="SalesTeam__c" 
+                                                            field-api-name="Name;ExternalId__c"
+                                                            field-api-names="Name"
+                                                            object-icon-name="custom:custom27"
+                                                            filter=" AND SalesOrg__c != null "
+                                                            onselectrecord={handleNewRecordSalesTeam}
+                                                            custom-lookup-name="customLookupSalesTeam"
+                                                            selected-record={filterObject.salesTeam}>
+                                                        </c-custom-lookup>
+                                                    </div>
+                                                </div>
+                                            </div>      
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- Listas Ativas? -->
+                <div class="filtros">
+                    <div class="slds-form-element">
+                        <div class="slds-form-element__control" style="margin-top: -15px;">
+                            <div class="slds-combobox_container">
+                                <div data-id="resultBox" aria-expanded="false" aria-haspopup="listbox" role="combobox">
+                                    <div class="slds-form-element__control slds-input-has-icon slds-input-has-icon slds-input-has-icon_left-right" role="none">
+                                       <div class="row">
+                                            <div class="col-12">
+                                                <div class="unique-data">
+                                                    <div class="lb-commom">Listas Ativas?</div>
+                                                </div>
+                                                <div class="box-moeda" style="display: flex; justify-content: space-between;">
+                                                    <div class="form-check form-check-inline bg-white p-2 px-3 border rounded">
+                                                        <input class="form-check-input" checked={currencyActive} type="radio" name="inlineRadio" id="inlineRadio1" value="true" onclick={handleCurrency} disabled={disabledCustomLookup}>
+                                                        <label class="form-check-label" for="inlineRadio1">Ativas</label>
+                                                    </div>
+                                                    <div class="form-check form-check-inline bg-white p-2 px-3 border rounded">
+                                                        <input class="form-check-input" checked={currencyInactive} type="radio" name="inlineRadio" id="inlineRadio2" value="false" onclick={handleCurrency} disabled={disabledCustomLookup}>
+                                                        <label class="form-check-label" for="inlineRadio2">Inativas</label>
+                                                    </div>
+                                                    <div class="form-check form-check-inline bg-white p-2 px-3 border rounded">
+                                                        <input class="form-check-input" type="radio" name="inlineRadio" id="inlineRadio3" value="false" onclick={handleCurrencyAll} disabled={disabledCustomLookup}>
+                                                        <label class="form-check-label" for="inlineRadio2">Todas</label>
+                                                    </div>
+                                                </div>
+                                            </div>      
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- Produtos -->
+                <div class="filtros">
+                    <div class="slds-form-element">
+                        <div class="slds-form-element__control" style="margin-top: -15px;">
+                            <div class="slds-combobox_container">
+                                <div data-id="resultBox" aria-expanded="false" aria-haspopup="listbox" role="combobox">
+                                    <div class="slds-form-element__control slds-input-has-icon slds-input-has-icon slds-input-has-icon_left-right" role="none">
+                                        <div class="row">
+                                            <div class="col-12">
+                                                <div class="unique-data">
+                                                    <div class="lb-commom">
+                                                        Produto 
+                                                    </div>
+                                                    <div class="content cont-label">
+                                                        <c-custom-lookup-for-table-screen
+                                                            object-api-name="Product2" 
+                                                            field-api-name="Name;ExternalId__c"
+                                                            field-api-names="Name"
+                                                            object-icon-name="custom:custom13"
+                                                            onselectrecord={handleNewRecordProduct}
+                                                            filter=" "
+                                                            active-principle={activePrincible}
+                                                            product-family={productFamily}
+                                                            record-id={clienteId}
+                                                            custom-lookup-name="customLookupActivePrincible">
+                                                        </c-custom-lookup-for-table-screen>
+                                                    </div>
+                                                </div>
+                                            </div>      
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- Familia de Produto -->
+                <div class="filtros">
+                    <div class="slds-form-element">
+                        <div class="slds-form-element__control" style="margin-top: -15px;">
+                            <div class="slds-combobox_container">
+                                <div data-id="resultBox" aria-expanded="false" aria-haspopup="listbox" role="combobox">
+                                    <div class="slds-form-element__control slds-input-has-icon slds-input-has-icon slds-input-has-icon_left-right" role="none">
+                                        <div class="row">
+                                            <div class="col-12">
+                                                <div class="unique-data">
+                                                    <div class="lb-commom">Família de Produto </div>
+                                                    <div class="content cont-label">
+                                                        <c-custom-lookup 
+                                                            object-api-name="Family__c"
+                                                            field-api-name="Name"
+                                                            field-api-names="Name"
+                                                            object-icon-name="custom:custom13"
+                                                            filter=" AND Active__c = true "
+                                                            onselectrecord={handleNewRecordFamily}
+                                                            custom-lookup-name="customLookupFamily"
+                                                            selected-record={filterObject.family}>
+                                                        </c-custom-lookup>
+                                                    </div>
+                                                </div>
+                                            </div>      
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- Principio Ativo -->
+                <div class="filtros">
+                    <div class="slds-form-element">
+                        <div class="slds-form-element__control" style="margin-top: -15px;">
+                            <div class="slds-combobox_container">
+                                <div class={txtclassnameCrop} data-id="resultBox" aria-expanded="false" aria-haspopup="listbox" role="combobox">
+                                    <div class="slds-form-element__control slds-input-has-icon slds-input-has-icon slds-input-has-icon_left-right" role="none">
+                                       <div class="row">
+                                            <div class="col-12">
+                                                <div class="unique-data">
+                                                    <div class="lb-commom">Princípio Ativo </div>
+                                                    <div class="content cont-label">
+                                                        <c-custom-lookup-active-principle
+                                                            object-api-name="Product2" 
+                                                            field-api-name="ActivePrinciple__c"
+                                                            field-api-names="ActivePrinciple__c"
+                                                            object-icon-name="custom:custom13"
+                                                            onselectrecord={handleActivePrincible}
+                                                            filter="ActivePrinciple__c != null"
+                                                            selected-record={filterObject.activePrincible}
+                                                            custom-lookup-name="customLookupActivePrincible">
+                                                        </c-custom-lookup-active-principle>
+                                                    </div>
+                                                </div>
+                                            </div>      
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="slds-form-element__control slds-input-has-icon slds-input-has-icon slds-input-has-icon_left-right" role="none">
+                <template for:each={selectedRecords} for:item="serecord">
+                    <span key={serecord.recId} class="filter-itens">
+                    <lightning-pill label={serecord.recName} name={serecord.recId} onremove={removeRecord} class="filter-itens-label">
+                            <lightning-icon icon-name={iconName} size="xx-small" variant="circle" alternative-text={serecord.recName} class="slds-icon_small"></lightning-icon>
+                        </lightning-pill>
+                    </span>
+                </template>
+            </div>
+            <div class="col-6 col-xs-6 text-right produtos filtros-main produtos row mx-auto col-md-12 col-sm-12 mb-3" style="display: flex;">
+                <button class="btn btn-outline-primary btn-nav-steps" onclick={search}>
+                    <span>Filtrar</span>
+                </button>
+            </div>
+        </details>
+        <details closed class="details" style="background-color: white;">
+            <summary class="summary-filter">Criar nova Lista</summary> 
+            <div class="filtros-main">
+                <!-- Safra -->
+                <div class="filtros">
+                    <div class="slds-form-element">
+                        <div class="slds-form-element__control" style="margin-top: -15px;">
+                            <div class="slds-combobox_container">
+                                <div data-id="resultBox" aria-expanded="false" aria-haspopup="listbox" role="combobox">
+                                    <div class="slds-form-element__control slds-input-has-icon slds-input-has-icon slds-input-has-icon_left-right" role="none">
+                                        <div class="row">
+                                            <div class="col-12">
+                                                <div class="unique-data">
+                                                    <div class="lb-commom">  Safra  </div>
+                                                    <div class="content cont-label">
+                                                        <c-custom-lookup 
+                                                            object-api-name="Crop__c" 
+                                                            field-api-name="Name"
+                                                            field-api-names="Name"
+                                                            object-icon-name="custom:custom5"
+                                                            filter=" AND Active__c = true "
+                                                            onselectrecord={handleNewRecordCropPrice}
+                                                            custom-lookup-name="customLookupCrop"
+                                                            selected-record={listObject.crop}>
+                                                        </c-custom-lookup>
+                                                    </div>
+                                                </div>
+                                            </div>      
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- Equipe de Vendas -->
+                <div class="filtros">
+                    <div class="slds-form-element">
+                        <div class="slds-form-element__control" style="margin-top: -15px;">
+                            <div class="slds-combobox_container">
+                                <div data-id="resultBox" aria-expanded="false" aria-haspopup="listbox" role="combobox">
+                                    <div class="slds-form-element__control slds-input-has-icon slds-input-has-icon slds-input-has-icon_left-right" role="none">
+                                        <div class="row">
+                                            <div class="col-12">
+                                                <div class="unique-data">
+                                                    <div class="lb-commom">Equipe de Vendas 
+                                                    </div>
+                                                    <div class="content cont-label">
+                                                        <c-custom-lookup 
+                                                            object-api-name="SalesTeam__c" 
+                                                            field-api-name="Name;ExternalId__c"
+                                                            field-api-names="Name"
+                                                            object-icon-name="custom:custom27"
+                                                            filter=" AND SalesOrg__c != null "
+                                                            onselectrecord={handleNewRecordSalesPrice}
+                                                            custom-lookup-name="customLookupSalesTeam"
+                                                            selected-record={listObject.salesTeam}>
+                                                        </c-custom-lookup>
+                                                    </div>
+                                                </div>
+                                            </div>      
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- Produtos -->
+                <div class="filtros">
+                    <div class="slds-form-element">
+                        <div class="slds-form-element__control" style="margin-top: -15px;">
+                            <div class="slds-combobox_container">
+                                <div data-id="resultBox" aria-expanded="false" aria-haspopup="listbox" role="combobox">
+                                    <div class="slds-form-element__control slds-input-has-icon slds-input-has-icon slds-input-has-icon_left-right" role="none">
+                                        <div class="row">
+                                            <div class="col-12">
+                                                <div class="unique-data">
+                                                    <div class="lb-commom">Produto
+                                                    </div>
+                                                    <div class="content cont-label">
+                                                        <c-custom-lookup 
+                                                            object-api-name="Product2" 
+                                                            field-api-name="Name;ExternalId__c"
+                                                            field-api-names="Name"
+                                                            object-icon-name="custom:custom13"
+                                                            filter=" AND isActive = true "
+                                                            onselectrecord={handleNewRecordProductPrice}
+                                                            custom-lookup-name="customLookupProduct"
+                                                            selected-record={listObject.product}>
+                                                        </c-custom-lookup>
+                                                    </div>
+                                                </div>
+                                            </div>      
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- Listas Ativas? -->
+                <div class="filtros">
+                    <div class="slds-form-element">
+                        <div class="slds-form-element__control" style="margin-top: -15px;">
+                            <div class="slds-combobox_container">
+                                <div data-id="resultBox" aria-expanded="false" aria-haspopup="listbox" role="combobox">
+                                    <div class="slds-form-element__control slds-input-has-icon slds-input-has-icon slds-input-has-icon_left-right" role="none">
+                                       <div class="row">
+                                            <div class="col-12">
+                                                <div class="unique-data">
+                                                    <div class="lb-commom">Lista Ativa?</div>
+                                                </div>
+                                                <div class="box-moeda" style="display: flex; justify-content: space-between;">
+                                                    <div class="form-check form-check-inline bg-white p-2 px-3 border rounded">
+                                                        <input class="form-check-input" checked={currencyPriceActive} type="radio" name="inlineRadioPrice" id="inlineRadioPrice1" value="true" onclick={handlePriceCurrency}>
+                                                        <label class="form-check-label" for="inlineRadio1">Ativa</label>
+                                                    </div>
+                                                    <div class="form-check form-check-inline bg-white p-2 px-3 border rounded">
+                                                        <input class="form-check-input" checked={currencyPriceInactive} type="radio" name="inlineRadioPrice" id="inlineRadioPrice2" value="false" onclick={handlePriceCurrency}>
+                                                        <label class="form-check-label" for="inlineRadio2">Inativa</label>
+                                                    </div>
+                                                </div>
+                                            </div>      
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-6 col-xs-6 text-right produtos filtros-main produtos row mx-auto col-md-12 col-sm-12 mb-3" style="display: flex;">
+                <button class="btn btn-outline-primary btn-nav-steps" onclick={createPrice}>
+                    <span>Salvar</span>
+                </button>
+            </div>
+        </details>
+        <div class="slds-grid slds-gutters" style="margin-left: auto; margin-right: auto;">
+            <div class="slds-col">
+                <button class="btn btn-outline-primary btn-nav-steps" onclick={activeList}>
+                    <span>Ativar</span>
+                </button>
+            </div>
+            <div class="slds-col">
+                <button class="btn btn-outline-primary btn-nav-steps" onclick={inactiveList}>
+                    <span>Inativar</span>
+                </button>
+            </div>           
+        </div>
+        <div>
+            <div if:true={LoadingTextForCards} class='filtros-main'>
+                Nenhuma lista de preço a ser exibida, utilize os filtros para conseguir visualizar as listas de preço da sua região.
+            </div>
+            <div class="filtros-main">
+                <template if:true={loading}>
+                    <div class="demo-only">
+                        <div class="slds-spinner_container" style="position: fixed;">
+                            <div role="status" class="slds-spinner slds-spinner_medium slds-spinner_brand">
+                                <div class="slds-spinner__dot-a"></div>
+                                <div class="slds-spinner__dot-b"></div>
+                            </div>
+                        </div>
+                    </div>
+                </template>
+                <template for:each={selectedRecordsListPrice} for:item="record">
+                    <div class="produtos" key={record.recordId}>
+                        <div class="box-lista-produtos">
+                            <div class="row">
+                                <div class="mx-auto col-md-12 col-sm-12 mb-3">
+                                    <div class="card card-lista-pedido border-primary" style="min-height: 280px;">
+                                        <div class="card-body" style="padding:15px">  
+                                            <div class="row" >
+                                                <div class="col-12">
+                                                    <div class="unique-data">
+                                                        <div class="lb-commom">
+                                                            Lista Ativa?
+                                                        </div>
+                                                        <div class="content" style="color: green;">
+                                                            <lightning-input type="checkbox-button" label="Lista ativa?" checked={record.isActive} onchange={savePrice} data-records-id={record.recordId}></lightning-input>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>    
+                                            <div class="row" >
+                                                <div class="col-12">
+                                                    <div class="unique-data">
+                                                        <div class="lb-commom">
+                                                            Produto
+                                                        </div>
+                                                        <div class="content" style="color: green;">
+                                                            {record.productName}
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>    
+                                            <div class="row" >
+                                                <div class="col-12">
+                                                    <div class="unique-data">
+                                                        <div class="lb-commom">
+                                                            Safra
+                                                        </div>
+                                                        <div class="content" style="color: green;">
+                                                            {record.cropName}
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>        
+                                            <div class="row" >
+                                                <div class="col-12">
+                                                    <div class="unique-data">
+                                                        <div class="lb-commom">
+                                                            Equipe de Vendas
+                                                        </div>
+                                                        <div class="content" style="color: green;">
+                                                            {record.salesTeamName}
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>                      
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </template>
+            </div>
+        </div>
+    </div>
+</template>

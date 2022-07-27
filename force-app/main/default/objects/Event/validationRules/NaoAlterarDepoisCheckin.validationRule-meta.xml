@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>NaoAlterarDepoisCheckin</fullName>
+    <active>false</active>
+    <description>Não é permitido alteração depois de realizar o checkin!</description>
+    <errorConditionFormula>AND( CheckInDone__c = TRUE, 
+OR( ISCHANGED( Subject ) , ISCHANGED( Account__c ), ISCHANGED( EventType__c ) , ISCHANGED( Case__c ), ISCHANGED( ActivityDate ),ISCHANGED(  Subject  )   )  )</errorConditionFormula>
+    <errorMessage>Não é permitido alteração do campo depois de realizar o checkin!</errorMessage>
+</ValidationRule>

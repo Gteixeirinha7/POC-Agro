@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>AreaAfetadaTalhaoSelecionado</fullName>
+    <active>true</active>
+    <description>Regra para obrigar o preenchimento de área afetada caso houver talhão na ocorrência</description>
+    <errorConditionFormula>AND (NOT ISBLANK( Plot__c ), ISBLANK ( DamagedArea__c ))</errorConditionFormula>
+    <errorMessage>Área afetada deve ser preenchida com talhão selecionado na ocorrência.</errorMessage>
+</ValidationRule>

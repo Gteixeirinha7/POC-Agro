@@ -1,0 +1,87 @@
+<template>
+  <ul class="slds-timeline">
+  <template for:each={componentList} for:item='record'>
+  <li key={record.key}>
+    <div class={record.color}>
+      <div class="slds-media">
+        <div class="slds-media__figure">
+          <lightning-button-icon style="margin:auto;"
+						icon-name={record.iconSwitchTitle}
+            data-key={record.key}
+            onclick={changeValue}
+						size="small" variant="bare">
+					</lightning-button-icon> 
+          
+          <template if:true={record.noImage}>
+            <div class="slds-icon_container slds-icon-standard-task slds-timeline__icon" style="border-radius: 20px !important;background: none;">
+              <div class="slds-avatar slds-avatar_profile-image-large">
+              </div>
+            </div>
+          </template>
+          <template if:true={record.showIconImage}>
+            <div class="slds-icon_container slds-icon-standard-task slds-timeline__icon">
+               <lightning-icon size="small" icon-name={record.iconTitle}> </lightning-icon>
+            </div>
+          </template>
+          <template if:true={record.showImage}>
+            <div class="slds-icon_container slds-icon-standard-task slds-timeline__icon" style="border-radius: 20px !important;background: none;">
+              <div class="slds-avatar">
+                <img src={record.img}>
+              </div>
+            </div>
+          </template>
+        </div>
+        <div class="slds-media__body">
+          <div class="slds-grid slds-grid_align-spread slds-timeline__trigger">
+            <div class="slds-grid slds-grid_vertical-align-center slds-truncate_container_75 slds-no-space">
+              <h3 class="slds-truncate" style="padding-right: 5px; font-size: 16px;">
+                <a>
+                  <strong>{record.textTitle}</strong>
+                </a>
+              </h3>
+              <div class="slds-no-flex">
+                <span class="slds-icon_container slds-icon-utility-rotate" title="Recurring Task">
+                  <lightning-icon size="xx-small" icon-name={record.iconSideTitle}> </lightning-icon>
+                </span>
+              </div>
+            </div>
+            <div class="slds-timeline__actions slds-timeline__actions_inline">
+              <p class="slds-timeline__date">{record.leftTextTitle}</p>
+            </div>
+          </div>
+          <p class="slds-m-horizontal_xx-small">
+            {record.textSubTitle}
+          </p>
+          <template if:true={record.showError}>
+            <div class="slds-grid slds-text-color_error slds-m-top_x-small slds-m-horizontal_xx-small">
+              <span class="slds-icon_container slds-icon-utility-rotate" title="Recurring Task">
+                <lightning-icon size="xx-small" icon-name="utility:error"  variant="error"> </lightning-icon>
+              </span>
+              <p>{record.textErrorSubTitle}</p>
+            </div>
+          </template>
+          <template if:true={record.showDetails}>
+          <article class="slds-box slds-theme_shade slds-m-top_x-small slds-m-horizontal_xx-small slds-p-around_medium" aria-hidden="false">
+            <ul class="slds-list_horizontal slds-wrap">
+              <li class="slds-grid slds-grid_vertical slds-size_1-of-1 slds-p-bottom_small">
+                <lightning-layout multiple-rows style="width: 100%;">
+                  <template for:each={record.info} for:item='recordInfo'>
+				    		    <lightning-layout-item key={recordInfo.name} size={recordInfo.size} small-device-size={recordInfo.smallSize} medium-device-size={recordInfo.mediumSize} large-device-size={recordInfo.largeSize}>
+                      <p class="slds-text-title slds-p-bottom_x-small" style="padding: 0px">{recordInfo.name}</p>
+                      <p class="slds-text-body_medium slds-truncate" title="Adam Chan" style="padding-bottom: 10px">
+                        <a href="#">{recordInfo.value}</a>
+                      </p>
+				    		    </lightning-layout-item>
+                  </template>
+				    	  </lightning-layout>
+              </li>
+            </ul>
+          </article>
+          </template>
+        </div>
+      </div>
+    </div>
+  </li>
+  </template>
+  </ul>
+</template>

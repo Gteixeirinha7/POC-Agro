@@ -1,0 +1,53 @@
+<apex:page applyBodyTag="false" showHeader="false" docType="html-5.0" readOnly="true" extensions="GaugeGoalController" standardController="Goal__c">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
+<script src="https://bernii.github.io/gauge.js/dist/gauge.min.js"></script>
+<div style=" text-align: center; font-size: 30px; width: 100%">{!currentStatus}%</div>
+<canvas id="foo" style="width: 100%;">
+</canvas>
+<script>
+    window.onload = function(){
+    var opts = {
+            angle: 0, // The span of the gauge arc
+            lineWidth: 0.2, // The line thickness
+            radiusScale: 1, // Relative radius
+            pointer: {
+                length: 0.57, // // Relative to gauge radius
+                strokeWidth: 0.064, // The thickness
+                color: '#000000' // Fill color
+            },
+            limitMax: false,     // If false, max value increases automatically if value > maxValue
+            limitMin: false,     // If true, the min value of the gauge will be fixed
+            colorStart: 'red',   // Colors
+            colorStop: 'green',    // just experiment with them
+            strokeColor: '#E0E0E0',  // to see which ones work best for you
+            generateGradient: true,
+            highDpiSupport: true,     // High resolution support
+            percentColors : [
+                [0, '#ff0066'],
+                [0.101, '#ff0066'],
+                [0.201, '#ff0033'],
+                [0.301, '#ee1100'],
+                [0.401, '#cc3300'],
+                [0.501, '#aa5500'],
+                [0.601, '#887700'],
+                [0.701, '#669900'],
+                [0.801, '#44bb00'],
+                [0.901, '#22dd00'],
+                [1, '#00ff00']
+            ],
+            staticLabels: {
+                font: "20px sans-serif",  // Specifies font
+                labels: [0, 25, 50, 75,100],  // Print labels at these values
+                color: "#000000",  // Optional: Label text color
+                fractionDigits: 0  // Optional: Numerical precision. 0=round off.
+            },
+        };
+        var target = document.getElementById('foo'); // your canvas element
+        var gauge = new Gauge(target).setOptions(opts); // create sexy gauge!
+        gauge.maxValue = 100; // set max gauge value
+        gauge.setMinValue(0);  // Prefer setter over gauge.minValue = 0
+        gauge.animationSpeed = 128; // set animation speed (32 is default value)
+        gauge.set(parseFloat('{!currentStatus}')); // set actual value
+    }
+</script>
+</apex:page>

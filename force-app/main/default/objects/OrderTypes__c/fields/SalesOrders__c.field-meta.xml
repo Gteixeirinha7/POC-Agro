@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>SalesOrders__c</fullName>
+    <description>Campo que armazena os tipos de pedidos de venda</description>
+    <externalId>false</externalId>
+    <label>Pedidos de Venda</label>
+    <length>255</length>
+    <required>false</required>
+    <trackTrending>false</trackTrending>
+    <type>Text</type>
+    <unique>false</unique>
+</CustomField>

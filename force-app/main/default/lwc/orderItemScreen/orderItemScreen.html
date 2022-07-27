@@ -1,0 +1,462 @@
+<template>
+    <div class="box-form-pedido">
+        
+        
+        <!-- TITULO -->
+        <div class="row">
+            <div class="col-md-6 col-sm-6 mb-6">
+                <h3 class="titulo">Adicionando <strong>Produtos</strong> (Itens)</h3>
+            </div>
+        </div>
+        <!-- /TITULO -->
+        <template if:true={hasDelimitedLand}>
+            <div class="row">
+              <div class="col-12">
+                <div class="unique-data">
+                  <div class="lb-commom">Área da Propriedade (m²)<lightning-helptext content="Área disponível na propriedade selecionada, levando em consideração a Cultura e Safra escolhida."></lightning-helptext></div>
+                  <div class="demo-only">
+                    <ul class="slds-has-dividers_around-space slds-grid slds-wrap">
+                      <li class="slds-size_1-of-3">
+                        <div class="slds-box slds-box_x-small slds-text-align_center slds-m-around_x-small" style="background-color: white; BORDER-COLOR: #4EB137;">
+                          <div class="slds-tile__title slds-truncate">
+                            <div style="cursor: initial; color: #4EB137; font-size: 18px !important;">Área da Propriedade</div>
+                          </div>
+                          <div class="slds-tile__detail">
+                            <p class="slds-text-heading_medium" style="margin: 0">{delimitedLandMeters} m²</p>
+                          </div>
+                        </div>
+                      </li>
+                      <li class="slds-size_1-of-3">
+                        <div class="slds-box slds-box_x-small slds-text-align_center slds-m-around_x-small" style="background-color: white; BORDER-COLOR: #4EB137;">
+                          <div class="slds-tile__title slds-truncate">
+                            <div style="cursor: initial; color: #4EB137; font-size: 18px !important;">Área Cultivada</div>
+                          </div>
+                          <div class="slds-tile__detail">
+                            <p class="slds-text-heading_medium" style="margin: 0">{totalcultureMeters} m²</p>
+                          </div>
+                        </div>
+                      </li>
+                      <template if:true={hasDelimitedLandCulture}>
+                        <li class="slds-size_1-of-3">
+                          <div class="slds-box slds-box_x-small slds-text-align_center slds-m-around_x-small" style="background-color: white; BORDER-COLOR: #4EB137;">
+                            <div class="slds-tile__title slds-truncate">
+                              <div style="cursor: initial; color: #4EB137; font-size: 18px !important;">Área de <b>{cultureName}</b> </div>
+                            </div>
+                            <div class="slds-tile__detail">
+                              <p class="slds-text-heading_medium" style="margin: 0">{cultureMeters} m²</p>
+                            </div>
+                          </div>
+                        </li>
+                      </template>
+                    </ul>
+                  </div>
+                </div>
+              </div>
+            </div>
+        </template>
+        <div class="row">
+            <div class="col-12">
+                <div class="unique-data">
+                    <div class="lb-commom">
+                        Cultura <span class="field-required">*</span>
+                    </div>
+                    <div class="content cont-label">
+                        <c-custom-lookup    
+                        object-api-name="Culture__c" 
+                        field-api-name="Name"
+                        field-api-names="Name,ExternalId__c"
+                        object-icon-name="custom:custom5"
+                        filter=""
+                        record-id={clienteId}
+                        onselectrecord={handleNewRecordCulture}
+                        selected-record={orderItemObject.Culture}
+                        custom-lookup-name="customLookupCulture"
+                        input-label=""
+                        disabled-custom-lookup={disabledAllFields}>
+                        </c-custom-lookup>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-6">
+                <div class="unique-data">
+                    <div class="lb-commom">
+                        Classe do Produto <span class="field-required">*</span>
+                    </div>
+                    <div class="content cont-label">
+                        <c-custom-lookup
+                        object-api-name="Family__c" 
+                        field-api-name="Name"
+                        field-api-names="Name"
+                        object-icon-name="custom:custom13"
+                        onselectrecord={handleNewRecordFamily}
+                        selected-record={orderItemObject.Family}
+                        filter=""
+                        record-id={clienteId}
+                        custom-lookup-name="customLookupFamily"
+                        disabled-custom-lookup={disabledProduct2}>
+                        </c-custom-lookup>
+                    </div>
+                </div>
+            </div>
+            <div class="col-6">
+                <div class="unique-data">
+                    <div class="lb-commom">
+                        Principio Ativo
+                    </div>
+                    <div class="content cont-label">
+                        <c-custom-lookup-active-principle
+                        object-api-name="Product2" 
+                        field-api-name="ActivePrinciple__c"
+                        field-api-names="ActivePrinciple__c, Family__c, Family__r.Id,Family__r.Name"
+                        object-icon-name="custom:custom13"
+                        onselectrecord={handleNewRecordPrinciple}
+                        selected-record={orderItemObject.Family}
+                        filter="ActivePrinciple__c != null"
+                        record-id={clienteId}
+                        custom-lookup-name="customLookupFamily"
+                        disabled-custom-lookup={disabledProduct2}>
+                        </c-custom-lookup-active-principle>
+                    </div>
+                </div>
+            </div>
+        </div> 
+
+        <div class="row">
+            <div class="col-12">
+                <div class="unique-data">
+                    <div class="lb-commom">
+                        Produto <span class="field-required">*</span>
+                    </div>
+                    <div class="content cont-label">
+                        <c-custom-lookup-product2 
+                        object-api-name="Product2"
+                        field-api-name="Name"
+                        field-api-names=", RemoveFreightValue__c, Brand__c, ActivePrinciple__c, Multiplicity__c, QuantityUnitOfMeasure, ProductCode, GrossWeightUnity__c,Family__c, Family__r.Id, Family__r.Name, GrossWeight__c, ActivitySector__c "
+                        filter="AND IsActive = True AND Family__c = 'replaceFamily' AND Family__c != null AND Id IN (replaceId) AND (ActivitySector__c = 'replaceActivitySector' OR ActivitySector__c = null) "
+                        record-id={clienteId}
+                        family-id={familyId}
+                        product-with-contract={productWithContract}
+                        product-contract={productContract}
+                        principle-name={principleName}
+                        onselectrecordproduct2={handleNewRecordProduct2}
+                        onselectrecordproduct3={productQuantity}
+                        object-icon-name="standard:product"
+                        ids-products={idsProducts}
+                        selected-record-products={orderItemObject.Product2}
+                        disabled-product2={disabledProduct2}
+                        activity-sector={orderObject.ActivitySector}>
+                        </c-custom-lookup-product2>
+                    </div>
+                </div>
+            </div>
+        </div>
+            <div class="row">
+                <div class="col-6">
+                    <div class="unique-data">
+                        <div class="lb-commom">
+                            Lista de Preço
+                        </div>
+                        <div class="content cont-label">
+                            <c-custom-lookup-list-price 
+                            object-api-name="ListPrice" 
+                            field-api-name="Name"
+                            field-api-names=""
+                            filter=""
+                            record-id={clienteId}
+                            object-icon-name="custom:custom18"
+                            selected-record={orderItemObject.ListPrice}>
+                            </c-custom-lookup-list-price>
+                        </div>
+                    </div>
+                </div>
+                <template if:true={orderItemObject.InterestListValueName}>
+                    <div class="col-6">
+                        <div class="unique-data">
+                            <div class="lb-commom">
+                                Lista de {orderItemObject.InterestListValueName}
+                            </div>
+                            <div class="content cont-label">
+                                <c-custom-lookup-list-price 
+                                object-api-name="ListPrice" 
+                                field-api-name="Name"
+                                field-api-names=""
+                                filter=""
+                                record-id={clienteId}
+                                object-icon-name="custom:custom18"
+                                selected-record={orderItemObject.InterestList}>
+                                </c-custom-lookup-list-price>
+                            </div>
+                        </div>
+                    </div>
+                </template>
+            </div>
+
+        <div class="row" if:true={orderItemObject.hasInventory}>
+            <div class="col-6 col-xs-6 col-sm-6 col-md-6 col-lg-6 col-xl-6 col-xxl-6">
+                <div class="unique-data">
+                    <div class="lb-commom">
+                        Estoque Disponível
+                    </div>
+                    <div class="content">
+                        {orderItemObject.stockQuantity} {orderItemObject.QuantityUnitOfMeasure}
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+
+            <div class="col-6 col-xs-6 col-sm-6 col-md-6 col-lg-6 col-xl-6 col-xxl-6">
+                <div class="unique-data">
+                    <div class="lb-commom">
+                        Quantidade <span class="field-required">*</span>
+                    </div>
+                    <div class="content">
+                        <lightning-input type="number" name="inputTextQuantity"
+                        maxlength="15"
+                        disabled={disabledQuantity}
+                        value={orderItemObject.Quantity} variant="label-hidden" onfocusout={handleChangeQuantityFocusOut}
+                        step="0.001"></lightning-input>
+                    </div>
+                </div>
+            </div>
+            <div class="col-6 col-xs-6 col-sm-6 col-md-4 col-lg-4 col-xl-4 col-xxl-4 adj-button">
+                <div class="unique-data">
+                    <div class="content d-flex">
+                        <button class="btn btn-outline-success btn-mais mr-3" onclick={handleOnClickSomar} disabled={disabledProductFields}><img src={cISum}
+                                alt="Somar"></button>
+
+                        <button class="btn btn-outline-secondary btn-mais" onclick={handleOnClickSubtrair} disabled={disabledProductFields}><img src={cISub}
+                                alt="Subtrair"></button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-6">
+                <div class="unique-data">
+                    <div class="lb-commom">
+                        Valor Unitário ({currencyScreen}) <span class="field-required">*</span>
+                    </div>
+                    <div class="content">
+                        <lightning-input 
+                        type="number" 
+                        value={orderItemObject.UnitValue} 
+                        variant="label-hidden"
+                        oncommit={handleCommitUnitPriceFocusOut}
+                        step=".01"
+                        formatter="number"
+                        disabled={disabledProductFieldsBonification}>
+                        </lightning-input>
+                    </div>
+                </div>
+            </div>
+            <div class="col-6">
+                <div class="unique-data">
+                    <div class="lb-commom">
+                        Unidade Medida Comercial
+                    </div>
+                    <div class="content">
+                        {orderItemObject.QuantityUnitOfMeasure}
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-3">
+                <div class="unique-data">
+                    <div class="lb-commom">
+                        Preço de Tabela
+                    </div>
+                    <div class="content">
+                        <lightning-formatted-number value={orderItemObject.PriceListWithoutInterest} format-style="currency" currency-code={currencyScreenFormat}></lightning-formatted-number>
+                    </div>
+                </div>
+            </div>
+            <div class="col-3">
+                <div class="unique-data">
+                    <div class="lb-commom">
+                        Grupo do cliente
+                    </div>
+                    <div class="content">
+                        {orderObject.CustomerGroup}
+                    </div>
+                </div>
+            </div>
+            <template if:true={orderItemObject.InterestListValueName}>
+                <div class="col-6">
+                    <div class="unique-data">
+                        <div class="lb-commom">
+                            {orderItemObject.InterestListValueName}
+                        </div>
+                        <div class="content">
+                            <lightning-formatted-number value={orderItemObject.InterestListValue} format-style="currency" currency-code={currencyScreenFormat} maximum-fraction-digits="2"></lightning-formatted-number>
+                        </div>
+                    </div>
+                </div>
+            </template>
+        </div>
+        <template if:true={showContract}>
+            <div class="row">
+                <div class="col-3">
+                    <div class="unique-data">
+                        <div class="lb-commom">
+                            Quantidade Disponível do Contrato
+                        </div>
+                        <div class="content">
+                            <lightning-formatted-number value={orderItemObject.ContractProductCredit} format-style="decimal" minimum-fraction-digits="1"></lightning-formatted-number>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </template>
+        <div class="row">
+            <div class="col-3">
+                <div class="unique-data">
+                    <div class="lb-commom">
+                        Valor Total Item
+                    </div>
+                    <div class="content">
+                        <lightning-formatted-number value={orderItemObject.TotalValueItem} format-style="currency" currency-code={currencyScreenFormat}></lightning-formatted-number>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-6" if:true={showListPriceDate}>
+                <div class="unique-data">
+                    <div class="lb-commom">
+                        Data Efetiva da Lista de Preço
+                    </div>
+                    <template if:true={orderItemObject.ListPrice}>
+                        <div style="font-weight:500">
+                           <b style="font-size:16px">{listDay}/{listMonth}/{listYear}</b> 
+                        </div>
+                    </template>
+                </div>
+            </div>
+
+            <div class="col-3">
+                <div class="unique-data">
+                    <div class="lb-commom">
+                        Valor do Frete
+                    </div>
+                    <div class="content">
+                        <lightning-formatted-number value={orderItemObject.Freigth} format-style="currency" currency-code={currencyScreenFormat}></lightning-formatted-number>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-3" if:true={orderItemObject.hasCampaign}>
+                <div class="unique-data">
+                    <div class="lb-commom">
+                        Valor de Desconto Campanha ({currencyScreenFormat})
+                    </div>
+                    <div class="content">
+                        <lightning-formatted-number value={campaignDiscountValue} format-style="currency" currency-code={currencyScreenFormat}></lightning-formatted-number>
+                    </div>
+                </div>
+            </div>
+            <div class="col-6" if:true={orderItemObject.hasCampaign}>
+                <div class="unique-data">
+                    <div class="lb-commom">
+                        % Desconto Campanha
+                    </div>
+                    <div class="content">
+                        <lightning-formatted-number value={campaignDiscountPercentage} format-style="percent-fixed" minimum-fraction-digits="3"></lightning-formatted-number>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-6">
+                <div class="unique-data">
+                    <div class="lb-commom">
+                        % Desconto Comercial
+                    </div>
+                    <div class="content">
+                        <lightning-input 
+                        type="number" 
+                        value={orderItemObject.DiscountPercent} 
+                        variant="label-hidden"
+                        oncommit={handleCommitDiscountPercentFocusOut}
+                        formatter="percent-fixed"
+                        step="0.001" disabled={disabledProductFieldsBonification}></lightning-input>
+                    </div>
+                </div>
+            </div>
+            <div class="col-6">
+                <div class="unique-data">
+                    <div class="lb-commom">
+                        Valor de Desconto Comercial ({currencyScreen})
+                    </div>
+                    <div class="content">
+                        <lightning-input 
+                        type="number" 
+                        value={orderItemObject.DiscountValue} 
+                        variant="label-hidden" 
+                        oncommit={handleCommitDiscountValueFocusOut} 
+                        step=".01"
+                        formatter="number"
+                        disabled={disabledProductFieldsBonification}
+                        ></lightning-input>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-6">
+                <div class="unique-data">
+                    <div class="lb-commom">
+                        % Acréscimo Comercial
+                    </div>
+                    <div class="content">
+                        <lightning-input 
+                        type="number" 
+                        value={orderItemObject.AdditionPercent} 
+                        variant="label-hidden"
+                        oncommit={handleCommitAdditionPercent}
+                        formatter="percent-fixed"
+                        step="0.001" disabled={disabledProductFieldsBonification}></lightning-input>
+                    </div>
+                </div>
+            </div>
+            <div class="col-6">
+                <div class="unique-data">
+                    <div class="lb-commom">
+                        Valor de Acréscimo Comercial ({currencyScreen})
+                    </div>
+                    <div class="content">
+                        <lightning-input 
+                        type="number" 
+                        value={orderItemObject.AdditionValue} 
+                        variant="label-hidden" 
+                        oncommit={handleCommitAdditionValue} 
+                        step=".01"
+                        formatter="number"
+                        disabled={disabledProductFieldsBonification}
+                        ></lightning-input>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+    <!-- LOADING SPINNER  -->
+    <template if:true={loading}>
+        <div class="demo-only">
+            <div class="slds-spinner_container" style="position: fixed;">
+                <div role="status" class="slds-spinner slds-spinner_medium slds-spinner_brand">
+                    <div class="slds-spinner__dot-a"></div>
+                    <div class="slds-spinner__dot-b"></div>
+                </div>
+            </div>
+        </div>
+    </template>
+    <!-- LOADING SPINNER  -->
+</template>

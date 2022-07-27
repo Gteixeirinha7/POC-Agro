@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomApplication xmlns="http://soap.sforce.com/2006/04/metadata">
+    <!-- <brand>
+        <headerColor>#7B0D37</headerColor>
+        <logo>LogoForcaAgro</logo>
+        <logoVersion>1</logoVersion>
+        <shouldOverrideOrgTheme>true</shouldOverrideOrgTheme>
+    </brand> -->
+    <description>Aplicativo para reunir todos objetos pertinentes a Força Agro</description>
+    <formFactors>Small</formFactors>
+    <formFactors>Large</formFactors>
+    <isNavAutoTempTabsDisabled>false</isNavAutoTempTabsDisabled>
+    <isNavPersonalizationDisabled>false</isNavPersonalizationDisabled>
+    <label>Força Agro</label>
+    <navType>Standard</navType>
+    <tabs>standard-home</tabs>
+    <tabs>standard-report</tabs>
+    <tabs>standard-Account</tabs>
+    <tabs>PriceListChart</tabs>
+    <tabs>ExclusionListChart</tabs>
+    <tabs>StockListChart</tabs>
+    <tabs>standard-Order</tabs>
+    <tabs>standard-Product2</tabs>
+    <tabs>Crop__c</tabs>
+    <tabs>Culture__c</tabs>
+    <tabs>City__c</tabs>
+    <tabs>Family__c</tabs>
+    <tabs>PaymentCondition__c</tabs>
+    <tabs>ListPrice__c</tabs>
+    <tabs>DistributionCenter__c</tabs>
+    <tabs>Company__c</tabs>
+    <tabs>RelatedSalesOrg__c</tabs>
+    <tabs>Cluster__c</tabs>
+    <tabs>SalesOrg__c</tabs>
+    <tabs>SalesOffice__c</tabs>
+    <tabs>SalesTeam__c</tabs>
+    <tabs>OfferDiscount__c</tabs>
+    <tabs>ProductOfferDiscount__c</tabs>
+    <tabs>ShippingDivision__c</tabs>
+    <tabs>Freight__c</tabs>
+    <tabs>RangeDiscount__c</tabs>
+    <tabs>IntegrationLog__c</tabs>
+    <tabs>FinancialDueDate__c</tabs>
+    <tabs>GrainTableMembers__c</tabs>
+    <tabs>CustomerPerOrg__c</tabs>
+    <tabs>OrderApprovalHistory__c</tabs>
+    <tabs>SalesCondition__c</tabs>
+    <tabs>ProductManagement__c</tabs>
+    <tabs>standard-Campaign</tabs>
+    <tabs>CampaignRule__c</tabs>
+    <tabs>ProjectedMargin__c</tabs>
+    <tabs>Vacation__c</tabs>
+    <tabs>standard-Event</tabs>
+    <uiType>Lightning</uiType>
+    <utilityBar>ForcaAgroUtilityBar</utilityBar>
+</CustomApplication>

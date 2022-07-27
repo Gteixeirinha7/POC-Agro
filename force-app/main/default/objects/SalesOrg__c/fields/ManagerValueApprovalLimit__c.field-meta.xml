@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>ManagerValueApprovalLimit__c</fullName>
+    <description>Limite em R$ a qual o gerente da filial poderá aprovar o pedido.</description>
+    <externalId>false</externalId>
+    <inlineHelpText>Limite em R$ a qual o gerente da filial poderá aprovar o pedido.</inlineHelpText>
+    <label>Limite de Aprovação em R$ do Gerente</label>
+    <precision>18</precision>
+    <required>false</required>
+    <scale>4</scale>
+    <trackTrending>false</trackTrending>
+    <type>Number</type>
+    <unique>false</unique>
+</CustomField>

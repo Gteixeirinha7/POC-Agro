@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CompactLayout xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>GrainTableMembersCompactLayout</fullName>
+    <fields>Name</fields>
+    <fields>BoardMember__c</fields>
+    <fields>Cluster__c</fields>
+    <label>Layout Compacto de Membros da Mesa de Grãos</label>
+</CompactLayout>

@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<WaveXmd xmlns="http://soap.sforce.com/2006/04/metadata">
+    <dataset>Pedidos_com_divis_es_de_remessa</dataset>
+    <measures>
+        <field>OrderItem__c.UnitPrice</field>
+        <isDerived>false</isDerived>
+        <label>UnitPrice</label>
+        <sortIndex>0</sortIndex>
+    </measures>
+</WaveXmd>

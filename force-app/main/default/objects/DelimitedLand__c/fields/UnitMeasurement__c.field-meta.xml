@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>UnitMeasurement__c</fullName>
+    <description>Lista de seleção com todas as unidades de medidas</description>
+    <externalId>false</externalId>
+    <label>Unidade de Medida</label>
+    <required>true</required>
+    <trackHistory>true</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Picklist</type>
+    <valueSet>
+        <restricted>true</restricted>
+        <valueSetDefinition>
+            <sorted>false</sorted>
+            <value>
+                <fullName>Hectare</fullName>
+                <default>false</default>
+                <label>Hectare</label>
+            </value>
+            <value>
+                <fullName>Are</fullName>
+                <default>false</default>
+                <label>Are</label>
+            </value>
+            <value>
+                <fullName>Centiare</fullName>
+                <default>false</default>
+                <label>Centiare</label>
+            </value>
+            <value>
+                <fullName>Alqueire Mineiro</fullName>
+                <default>false</default>
+                <label>Alqueire Mineiro</label>
+            </value>
+            <value>
+                <fullName>Alqueire Goiano</fullName>
+                <default>false</default>
+                <label>Alqueire Goiano</label>
+            </value>
+            <value>
+                <fullName>Alqueire Paulista</fullName>
+                <default>false</default>
+                <label>Alqueire Paulista</label>
+            </value>
+            <value>
+                <fullName>Alqueire do norte</fullName>
+                <default>false</default>
+                <label>Alqueire do norte</label>
+            </value>
+            <value>
+                <fullName>Alqueire do RJ</fullName>
+                <default>false</default>
+                <label>Alqueire do RJ</label>
+            </value>
+            <value>
+                <fullName>Alqueire Baiano</fullName>
+                <default>false</default>
+                <label>Alqueire Baiano</label>
+            </value>
+            <value>
+                <fullName>Litro</fullName>
+                <default>false</default>
+                <label>Litro</label>
+            </value>
+            <value>
+                <fullName>Metro Quadrado</fullName>
+                <default>false</default>
+                <label>Metro Quadrado</label>
+            </value>
+        </valueSetDefinition>
+    </valueSet>
+</CustomField>

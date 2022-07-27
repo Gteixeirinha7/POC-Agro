@@ -1,0 +1,290 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>ProductType__c</fullName>
+    <externalId>false</externalId>
+    <label>Tipo de Produto</label>
+    <required>false</required>
+    <trackHistory>false</trackHistory>
+    <type>Picklist</type>
+    <valueSet>
+        <restricted>true</restricted>
+        <valueSetDefinition>
+            <sorted>false</sorted>
+            <value>
+                <fullName>ABF</fullName>
+                <default>false</default>
+                <label>Resíduo</label>
+            </value>
+            <value>
+                <fullName>BUND</fullName>
+                <default>false</default>
+                <label>Produto do pacote</label>
+            </value>
+            <value>
+                <fullName>CBAU</fullName>
+                <default>false</default>
+                <label>Unidade compatível</label>
+            </value>
+            <value>
+                <fullName>CH00</fullName>
+                <default>false</default>
+                <label>Administr.contratos CH</label>
+            </value>
+            <value>
+                <fullName>CONT</fullName>
+                <default>false</default>
+                <label>Recipiente KANBAN</label>
+            </value>
+            <value>
+                <fullName>COUP</fullName>
+                <default>false</default>
+                <label>Cupom</label>
+            </value>
+            <value>
+                <fullName>DIEN</fullName>
+                <default>false</default>
+                <label>Prestação de serviços</label>
+            </value>
+            <value>
+                <fullName>EPA</fullName>
+                <default>false</default>
+                <label>Pacote do equipamento</label>
+            </value>
+            <value>
+                <fullName>ERSA</fullName>
+                <default>false</default>
+                <label>Peças de reposição</label>
+            </value>
+            <value>
+                <fullName>FERT</fullName>
+                <default>false</default>
+                <label>Produto acabado</label>
+            </value>
+            <value>
+                <fullName>FFFC</fullName>
+                <default>false</default>
+                <label>Classe form-fit-function</label>
+            </value>
+            <value>
+                <fullName>FGTR</fullName>
+                <default>false</default>
+                <label>Bebidas</label>
+            </value>
+            <value>
+                <fullName>FHMI</fullName>
+                <default>false</default>
+                <label>Meio auxiliar de produção</label>
+            </value>
+            <value>
+                <fullName>FOOD</fullName>
+                <default>false</default>
+                <label>Prod.alim.(excl.prd.per.)</label>
+            </value>
+            <value>
+                <fullName>FRIP</fullName>
+                <default>false</default>
+                <label>Produtos perecíveis</label>
+            </value>
+            <value>
+                <fullName>GBRA</fullName>
+                <default>false</default>
+                <label>ETM material utilizável</label>
+            </value>
+            <value>
+                <fullName>HALB</fullName>
+                <default>false</default>
+                <label>Produto semiacabado</label>
+            </value>
+            <value>
+                <fullName>HAWA</fullName>
+                <default>false</default>
+                <label>Produto comercializável</label>
+            </value>
+            <value>
+                <fullName>HERB</fullName>
+                <default>false</default>
+                <label>Material substituível</label>
+            </value>
+            <value>
+                <fullName>HERS</fullName>
+                <default>false</default>
+                <label>Peça de fabricante</label>
+            </value>
+            <value>
+                <fullName>HIBE</fullName>
+                <default>false</default>
+                <label>Mat.aux./de consumo</label>
+            </value>
+            <value>
+                <fullName>IBAU</fullName>
+                <default>false</default>
+                <label>Conjunto de manutenção</label>
+            </value>
+            <value>
+                <fullName>INTR</fullName>
+                <default>false</default>
+                <label>Intramaterial</label>
+            </value>
+            <value>
+                <fullName>KMAT</fullName>
+                <default>false</default>
+                <label>Materiais configuráveis</label>
+            </value>
+            <value>
+                <fullName>LEER</fullName>
+                <default>false</default>
+                <label>Vasilhame</label>
+            </value>
+            <value>
+                <fullName>LEIH</fullName>
+                <default>false</default>
+                <label>Embalagem retornável</label>
+            </value>
+            <value>
+                <fullName>LGUT</fullName>
+                <default>false</default>
+                <label>Vasilhame admin.mercad.</label>
+            </value>
+            <value>
+                <fullName>MAT</fullName>
+                <default>false</default>
+                <label>Material geral</label>
+            </value>
+            <value>
+                <fullName>MODE</fullName>
+                <default>false</default>
+                <label>Moda (sazonal)</label>
+            </value>
+            <value>
+                <fullName>MPO</fullName>
+                <default>false</default>
+                <label>Obj.planej.material</label>
+            </value>
+            <value>
+                <fullName>NLAG</fullName>
+                <default>false</default>
+                <label>Material não estocável</label>
+            </value>
+            <value>
+                <fullName>NOF1</fullName>
+                <default>false</default>
+                <label>Produtos não alimentícios</label>
+            </value>
+            <value>
+                <fullName>PIPE</fullName>
+                <default>false</default>
+                <label>Material pipeline</label>
+            </value>
+            <value>
+                <fullName>PLAN</fullName>
+                <default>false</default>
+                <label>Prod.comercial (planej.)</label>
+            </value>
+            <value>
+                <fullName>PROC</fullName>
+                <default>false</default>
+                <label>Material de processo</label>
+            </value>
+            <value>
+                <fullName>PROD</fullName>
+                <default>false</default>
+                <label>Grupo de produtos</label>
+            </value>
+            <value>
+                <fullName>ROH</fullName>
+                <default>false</default>
+                <label>Matérias-primas</label>
+            </value>
+            <value>
+                <fullName>SERV</fullName>
+                <default>false</default>
+                <label>Serviços</label>
+            </value>
+            <value>
+                <fullName>SUBC</fullName>
+                <default>false</default>
+                <label>Prod.compart.assinatura</label>
+            </value>
+            <value>
+                <fullName>SUBP</fullName>
+                <default>false</default>
+                <label>Prod.parceiro assinatura</label>
+            </value>
+            <value>
+                <fullName>SUBS</fullName>
+                <default>false</default>
+                <label>Produto de assinatura</label>
+            </value>
+            <value>
+                <fullName>SWNV</fullName>
+                <default>false</default>
+                <label>Software não avaliado</label>
+            </value>
+            <value>
+                <fullName>UNBW</fullName>
+                <default>false</default>
+                <label>material não avaliado</label>
+            </value>
+            <value>
+                <fullName>VBRA</fullName>
+                <default>false</default>
+                <label>ETM material de consumo</label>
+            </value>
+            <value>
+                <fullName>VEHI</fullName>
+                <default>false</default>
+                <label>Configuração veículo</label>
+            </value>
+            <value>
+                <fullName>VERP</fullName>
+                <default>false</default>
+                <label>Embalagem</label>
+            </value>
+            <value>
+                <fullName>VKHM</fullName>
+                <default>false</default>
+                <label>Meio auxiliar de vendas</label>
+            </value>
+            <value>
+                <fullName>VOLL</fullName>
+                <default>false</default>
+                <label>Produto</label>
+            </value>
+            <value>
+                <fullName>VVGR</fullName>
+                <default>false</default>
+                <label>Produto concorrente</label>
+            </value>
+            <value>
+                <fullName>WERB</fullName>
+                <default>false</default>
+                <label>Material publicitário</label>
+            </value>
+            <value>
+                <fullName>WERT</fullName>
+                <default>false</default>
+                <label>Material de valor</label>
+            </value>
+            <value>
+                <fullName>WETT</fullName>
+                <default>false</default>
+                <label>Produtos concorrentes</label>
+            </value>
+            <value>
+                <fullName>ZCOM</fullName>
+                <default>false</default>
+                <label>Commodities</label>
+            </value>
+            <value>
+                <fullName>ZIMO</fullName>
+                <default>false</default>
+                <label>Imobilizado</label>
+            </value>
+            <value>
+                <fullName>ZSER</fullName>
+                <default>false</default>
+                <label>Venda de serviços</label>
+            </value>
+        </valueSetDefinition>
+    </valueSet>
+</CustomField>

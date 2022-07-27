@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>CommercialApproval__c</fullName>
+    <defaultValue>false</defaultValue>
+    <description>Campo Obsoleto e não será mais utilizado, só não foi deletado ainda por conta das interdependências de código, 18/05/2021 by Alan</description>
+    <externalId>false</externalId>
+    <label>Aprovação Comercial</label>
+    <trackHistory>false</trackHistory>
+    <type>Checkbox</type>
+</CustomField>

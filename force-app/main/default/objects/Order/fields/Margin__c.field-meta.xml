@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Margin__c</fullName>
+    <externalId>false</externalId>
+    <inlineHelpText>Margem recomposta é calculada com base no valor comercial do produto, já considerando juros/antecipação e desconto comercial, comparando com o custo projetado(ZPRS).
+
+Cálculo: Preço Unitário Sem Campanha - Custo / Preço Unitário Sem Campanha</inlineHelpText>
+    <label>Margem Recomposta</label>
+    <precision>18</precision>
+    <required>false</required>
+    <scale>4</scale>
+    <trackHistory>false</trackHistory>
+    <type>Percent</type>
+</CustomField>

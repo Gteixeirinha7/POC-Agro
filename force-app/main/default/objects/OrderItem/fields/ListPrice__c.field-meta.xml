@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>ListPrice__c</fullName>
+    <deleteConstraint>Restrict</deleteConstraint>
+    <externalId>false</externalId>
+    <label>Catálogo de preço</label>
+    <referenceTo>ListPrice__c</referenceTo>
+    <relationshipLabel>Produtos do pedido</relationshipLabel>
+    <relationshipName>OrderItems</relationshipName>
+    <required>false</required>
+    <trackHistory>true</trackHistory>
+    <type>Lookup</type>
+</CustomField>

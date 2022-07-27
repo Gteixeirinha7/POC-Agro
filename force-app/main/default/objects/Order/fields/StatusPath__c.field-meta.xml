@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>StatusPath__c</fullName>
+    <externalId>false</externalId>
+    <label>Status Caminho</label>
+    <required>false</required>
+    <trackHistory>true</trackHistory>
+    <type>Picklist</type>
+    <valueSet>
+        <valueSetDefinition>
+            <sorted>false</sorted>
+            <value>
+                <fullName>Em digitação</fullName>
+                <default>true</default>
+                <label>Em digitação</label>
+            </value>
+            <value>
+                <fullName>Retorna RTV</fullName>
+                <default>false</default>
+                <label>Retorna RTV</label>
+            </value>
+            <value>
+                <fullName>Em aprovação grãos</fullName>
+                <default>false</default>
+                <label>Em aprovação grãos</label>
+            </value>
+            <value>
+                <fullName>Em aprovação</fullName>
+                <default>false</default>
+                <label>Em aprovação</label>
+            </value>
+            <value>
+                <fullName>Aprovado</fullName>
+                <default>false</default>
+                <label>Aprovado</label>
+            </value>
+            <value>
+                <fullName>Aguardando retorno da integração</fullName>
+                <default>false</default>
+                <label>Aguardando retorno da integração</label>
+            </value>
+            <value>
+                <fullName>Aguardando Contrato de grãos SAP</fullName>
+                <default>false</default>
+                <label>Aguardando Contrato de grãos SAP</label>
+            </value>
+            <value>
+                <fullName>Aguardando Contrato de Insumos SAP</fullName>
+                <default>false</default>
+                <label>Aguardando Contrato de Insumos SAP</label>
+            </value>
+            <value>
+                <fullName>Integrado</fullName>
+                <default>false</default>
+                <label>Integrado</label>
+            </value>
+            <value>
+                <fullName>1</fullName>
+                <default>false</default>
+                <label>Em análise de Crédito</label>
+            </value>
+            <value>
+                <fullName>2</fullName>
+                <default>false</default>
+                <label>Crédito Bloqueado</label>
+            </value>
+            <value>
+                <fullName>3</fullName>
+                <default>false</default>
+                <label>Crédito Liberado</label>
+            </value>
+            <value>
+                <fullName>4</fullName>
+                <default>false</default>
+                <label>Faturado Parcial</label>
+            </value>
+            <value>
+                <fullName>5</fullName>
+                <default>false</default>
+                <label>Concluído</label>
+            </value>
+            <value>
+                <fullName>X</fullName>
+                <default>false</default>
+                <label>Cancelado</label>
+            </value>
+        </valueSetDefinition>
+    </valueSet>
+</CustomField>

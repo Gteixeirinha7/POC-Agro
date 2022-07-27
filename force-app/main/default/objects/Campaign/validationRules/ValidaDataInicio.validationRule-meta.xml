@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>ValidaDataInicio</fullName>
+    <active>true</active>
+    <errorConditionFormula>AND( ISNULL(CreatedDate), 
+StartDate &lt;  TODAY())</errorConditionFormula>
+    <errorDisplayField>StartDate</errorDisplayField>
+    <errorMessage>Data de início deve ser maior ou igual a hoje</errorMessage>
+</ValidationRule>

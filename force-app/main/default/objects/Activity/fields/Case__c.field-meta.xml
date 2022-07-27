@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Case__c</fullName>
+    <deleteConstraint>SetNull</deleteConstraint>
+    <externalId>false</externalId>
+    <label>Ocorrência</label>
+    <lookupFilter>
+        <active>true</active>
+        <errorMessage>Coloque uma ocorrência relacionada ao cliente e safra</errorMessage>
+        <filterItems>
+            <field>$Source.Account__c</field>
+            <operation>equals</operation>
+            <valueField>Case.Account.Id</valueField>
+        </filterItems>
+        <filterItems>
+            <field>$Source.Crop__c</field>
+            <operation>equals</operation>
+            <valueField>Case.Crop__c</valueField>
+        </filterItems>
+        <isOptional>false</isOptional>
+    </lookupFilter>
+    <referenceTo>Case</referenceTo>
+    <relationshipLabel>Visitas</relationshipLabel>
+    <relationshipName>Atividades</relationshipName>
+    <required>false</required>
+    <type>Lookup</type>
+</CustomField>

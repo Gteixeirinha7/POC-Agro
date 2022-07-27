@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<RecordType xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>OcorrenceField</fullName>
+    <active>true</active>
+    <businessProcess>Ocorrência na Lavoura</businessProcess>
+    <label>Ocorrência na Lavoura</label>
+    <picklistValues>
+        <picklist>IncidentTypePicklist__c</picklist>
+        <values>
+            <fullName>Climaticas</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Doencas</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Fertilizacao</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Pragas</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+</RecordType>

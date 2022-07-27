@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ListView xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>All</fullName>
+    <columns>ExternalId__c</columns>
+    <columns>NAME</columns>
+    <columns>Description__c</columns>
+    <columns>Director__c</columns>
+    <columns>LAST_UPDATE</columns>
+    <columns>ManagerPercentApprovalLimit__c</columns>
+    <columns>ManagerValueApprovalLimit__c</columns>
+    <columns>ManagerDolarApprovalLimit__c</columns>
+    <filterScope>Everything</filterScope>
+    <label>Tudo</label>
+</ListView>

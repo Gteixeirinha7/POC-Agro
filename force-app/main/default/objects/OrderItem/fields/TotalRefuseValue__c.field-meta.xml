@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>TotalRefuseValue__c</fullName>
+    <description>Valor Recusado.</description>
+    <externalId>false</externalId>
+    <formula>RefuseQuantity__c * UnitPrice</formula>
+    <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+    <inlineHelpText>Valor Recusado.</inlineHelpText>
+    <label>Valor Recusado</label>
+    <precision>18</precision>
+    <required>false</required>
+    <scale>2</scale>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Currency</type>
+    <unique>false</unique>
+</CustomField>

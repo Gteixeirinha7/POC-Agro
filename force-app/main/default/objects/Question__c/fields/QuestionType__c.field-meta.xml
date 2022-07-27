@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>QuestionType__c</fullName>
+    <description>Este campo indica o tipo de resposta que a pergunta espera, caixa de seleção para Sim/Não, Data para Data (14/08/1989), Valores Predefinidos para uma lista predefinida e campo de texto para livre preenchimento.</description>
+    <externalId>false</externalId>
+    <inlineHelpText>Este campo indica o tipo de resposta que a pergunta espera, caixa de seleção para Sim/Não, Data para Data (14/08/1989), Valores Predefinidos para uma lista predefinida e campo de texto para livre preenchimento.</inlineHelpText>
+    <label>Tipo Resposta</label>
+    <required>true</required>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Picklist</type>
+    <valueSet>
+        <restricted>true</restricted>
+        <valueSetDefinition>
+            <sorted>false</sorted>
+            <value>
+                <fullName>Caixa de Seleção</fullName>
+                <default>false</default>
+                <label>Caixa de Seleção</label>
+            </value>
+            <value>
+                <fullName>Data</fullName>
+                <default>false</default>
+                <label>Data</label>
+            </value>
+            <value>
+                <fullName>Valores Predefinidos</fullName>
+                <default>false</default>
+                <label>Valores Predefinidos</label>
+            </value>
+            <value>
+                <fullName>Texto para livre preenchimento</fullName>
+                <default>false</default>
+                <label>Texto para livre preenchimento</label>
+            </value>
+        </valueSetDefinition>
+    </valueSet>
+</CustomField>

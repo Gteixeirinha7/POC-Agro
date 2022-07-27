@@ -1,0 +1,254 @@
+<template>
+    <div class="slds-modal__container" style={componentStyle}>
+        <header
+            style="position: relative; border-top-right-radius: .25rem; border-top-left-radius: .25rem; padding: 1rem; background-color: #fff;">
+            <div style="float:right">
+                <lightning-button-icon icon-name="utility:close" alternative-text="Fechar" title="Fechar"
+                    onclick={closeModal}> </lightning-button-icon>
+            </div>
+            <div class="header">
+                <lightning-icon icon-name="standard:account" alternative-text="Account" title="Account">
+                </lightning-icon>
+                <h2 class="slds-m-left_x-small slds-text-heading_medium slds-hyphenate" style="font-weight: bold;">
+                    Recomendação de Produtos</h2>
+            </div>
+        </header>
+        <div class="slds-scrollable_y"
+            style="padding-top: 0px;padding: 15px;background-color: #fff; border-bottom-right-radius: 0.25rem; border-bottom-left-radius: 0.25rem; max-height: 30rem">
+            <div>
+                <div class="slds-m-top_medium"
+                    style="padding:15px; border-radius: 5px 5px 0px 0px; box-shadow: 0 0 3px rgb(0 0 0 / 10%);border-bottom: 3px solid #0070d2; border-top: 1px solid #ddd; border-right: 1px solid #ddd; border-left: 1px solid #ddd;">
+                    <lightning-layout multiple-rows horizontal-align="spread" style="width: 100%;">
+                        <lightning-layout-item size="12" small-device-size="12" medium-device-size="12"
+                            large-device-size="12">
+                            <lightning-layout multiple-rows horizontal-align="spread"
+                                style="width: 100%;">
+                                <lightning-layout-item size="3" small-device-size="3" medium-device-size="3"
+                                    large-device-size="3">
+                                    <div class="slds-section slds-is-open slds-card "
+                                        style="padding:10px; border-radius: 5px 5px 0px 0px;margin-bottom: 30px;box-shadow: 0 0 3px rgb(0 0 0 / 10%);border-bottom: 3px solid #0B827C; border-top: 1px solid #0B827C; border-right: 1px solid #ddd; border-left: 1px solid #ddd;">
+                                        <div
+                                            style="margin:auto;display:flex;justify-content:space-between; width: 100%;">
+                                            <lightning-layout multiple-rows horizontal-align="spread"
+                                                style="width: 100%;">
+                                                <lightning-layout-item size="12"
+                                                    class="slds-grid slds-grid_align-spread slds-wrap"
+                                                    style="border-bottom: 1px solid grey;">
+                                                    <lightning-layout multiple-rows>
+                                                        <lightning-layout-item size="12" class="slds-m-bottom_xx-small"
+                                                            style="font-size: 15px;color:#0070d2">
+                                                            <p style="margin: 0px; font-weight: 600;">
+                                                            <lightning-icon icon-name="utility:promotion_segments" size="medium">
+                                                            </lightning-icon>
+                                                            &nbsp;Recomendação por Compra Similar <lightning-helptext content="Recomendação de produto devida a compra do produto: SCOPER 20 Litros, no Pedido (10020)"></lightning-helptext></p>
+                                                        </lightning-layout-item>
+                                                    </lightning-layout>
+                                                </lightning-layout-item>
+                                                <lightning-layout-item size="12"
+                                                    style=" margin: 5px ">
+                                            <lightning-layout multiple-rows horizontal-align="spread"
+                                                style="width: 100%;">
+                                                        <lightning-layout-item>
+                                                            <div class="slds-m-bottom_x-small"
+                                                                style="font-size:1rem;font-weight:bold; margin-top: 10px">
+                                                                ABSOLUTO FIX 10L
+                                                            </div>
+                                                        </lightning-layout-item>
+														<lightning-layout-item size="12" class="slds-m-bottom_xx-small"
+															style="font-size: 13px;color:#999">			
+															<p style="margin: 0px">Cultura: SOJA</p>
+														</lightning-layout-item> 
+														<lightning-layout-item>
+                                								<div class="lb-commom">
+                                								   Preço Sugerido (R$)
+                                								</div>
+                                								<div class="customlookup">
+                                								    <lightning-input type="number" name="inputDueDate" variant="label-hidden" value="120"></lightning-input>
+                                								</div>															
+														</lightning-layout-item>
+														<lightning-layout-item>
+                                								<div class="lb-commom">
+                                								   Quantidade
+                                								</div>
+                                								<div class="customlookup">
+                                								    <lightning-input type="number" name="inputDueDate" variant="label-hidden" value="100"></lightning-input>
+                                								</div>															
+														</lightning-layout-item>
+                                                    </lightning-layout>
+                                                </lightning-layout-item>
+                                                <lightning-layout-item size="12"
+                                                    style=" margin: 5px; ">
+                                                    <lightning-layout multiple-rows horizontal-align="spread"
+                                                        style="width: 100%; text-align: center">
+                                                        <lightning-layout-item size="6">
+												            <lightning-button icon-name="utility:delete" onclick={showError}
+												            	variant="destructive-text" label="Excluir">
+												            </lightning-button>
+                                                        </lightning-layout-item>
+                                                        <lightning-layout-item size="6">
+												            <lightning-button icon-name="utility:success" onclick={showSuccess} 
+												            	variant="success" label="Usar">
+												            </lightning-button>
+                                                        </lightning-layout-item>
+                                                    </lightning-layout>
+                                                </lightning-layout-item>
+                                            </lightning-layout>
+                                        </div>
+                                    </div>
+                                </lightning-layout-item>
+                                
+                                <lightning-layout-item size="3" small-device-size="3" medium-device-size="3"
+                                    large-device-size="3">
+                                    <div class="slds-section slds-is-open slds-card "
+                                        style="padding:10px; border-radius: 5px 5px 0px 0px;margin-bottom: 30px;box-shadow: 0 0 3px rgb(0 0 0 / 10%);border-bottom: 3px solid #0B827C; border-top: 1px solid #0B827C; border-right: 1px solid #ddd; border-left: 1px solid #ddd;">
+                                        <div
+                                            style="margin:auto;display:flex;justify-content:space-between; width: 100%;">
+                                            <lightning-layout multiple-rows horizontal-align="spread"
+                                                style="width: 100%;">
+                                                <lightning-layout-item size="12"
+                                                    class="slds-grid slds-grid_align-spread slds-wrap"
+                                                    style="border-bottom: 1px solid grey;">
+                                                    <lightning-layout multiple-rows>
+                                                        <lightning-layout-item size="12" class="slds-m-bottom_xx-small"
+                                                            style="font-size: 15px;color:#0070d2">
+                                                            <p style="margin: 0px; font-weight: 600;">
+                                                            <lightning-icon icon-name="utility:promotion_segments" size="medium">
+                                                            </lightning-icon>
+                                                            &nbsp;Recomendação por Compra Similar <lightning-helptext content="Recomendação de produto devida a compra do produto: SCOPER 20 Litros, no Pedido (10020)"></lightning-helptext></p>
+                                                        </lightning-layout-item>
+                                                    </lightning-layout>
+                                                </lightning-layout-item>
+                                                <lightning-layout-item size="12"
+                                                    style=" margin: 5px ">
+                                            <lightning-layout multiple-rows horizontal-align="spread"
+                                                style="width: 100%;">
+                                                        <lightning-layout-item>
+                                                            <div class="slds-m-bottom_x-small"
+                                                                style="font-size:1rem;font-weight:bold; margin-top: 10px">
+                                                                BOLD 5L
+                                                            </div>
+                                                        </lightning-layout-item>
+														<lightning-layout-item size="12" class="slds-m-bottom_xx-small"
+															style="font-size: 13px;color:#999">			
+															<p style="margin: 0px">Cultura: SOJA</p>
+														</lightning-layout-item> 
+														<lightning-layout-item>
+                                								<div class="lb-commom">
+                                								   Preço Sugerido (R$)
+                                								</div>
+                                								<div class="customlookup">
+                                								    <lightning-input type="number" name="inputDueDate" variant="label-hidden" value="120"></lightning-input>
+                                								</div>															
+														</lightning-layout-item>
+														<lightning-layout-item>
+                                								<div class="lb-commom">
+                                								   Quantidade
+                                								</div>
+                                								<div class="customlookup">
+                                								    <lightning-input type="number" name="inputDueDate" variant="label-hidden" value="100"></lightning-input>
+                                								</div>															
+														</lightning-layout-item>
+                                                    </lightning-layout>
+                                                </lightning-layout-item>
+                                                <lightning-layout-item size="12"
+                                                    style=" margin: 5px; ">
+                                                    <lightning-layout multiple-rows horizontal-align="spread"
+                                                        style="width: 100%; text-align: center">
+                                                        <lightning-layout-item size="6">
+												            <lightning-button icon-name="utility:delete" onclick={showError}
+												            	variant="destructive-text" label="Excluir">
+												            </lightning-button>
+                                                        </lightning-layout-item>
+                                                        <lightning-layout-item size="6">
+												            <lightning-button icon-name="utility:success" onclick={showSuccess}
+												            	variant="success" label="Usar">
+												            </lightning-button>
+                                                        </lightning-layout-item>
+                                                    </lightning-layout>
+                                                </lightning-layout-item>
+                                            </lightning-layout>
+                                        </div>
+                                    </div>
+                                </lightning-layout-item>
+                                
+                                <lightning-layout-item size="3" small-device-size="3" medium-device-size="3"
+                                    large-device-size="3">
+                                    <div class="slds-section slds-is-open slds-card "
+                                        style="padding:10px; border-radius: 5px 5px 0px 0px;margin-bottom: 30px;box-shadow: 0 0 3px rgb(0 0 0 / 10%);border-bottom: 3px solid #0B827C; border-top: 1px solid #0B827C; border-right: 1px solid #ddd; border-left: 1px solid #ddd;">
+                                        <div
+                                            style="margin:auto;display:flex;justify-content:space-between; width: 100%;">
+                                            <lightning-layout multiple-rows horizontal-align="spread"
+                                                style="width: 100%;">
+                                                <lightning-layout-item size="12"
+                                                    class="slds-grid slds-grid_align-spread slds-wrap"
+                                                    style="border-bottom: 1px solid grey;">
+                                                    <lightning-layout multiple-rows>
+                                                        <lightning-layout-item size="12" class="slds-m-bottom_xx-small"
+                                                            style="font-size: 15px;color:#0070d2">
+                                                            <p style="margin: 0px; font-weight: 600;">
+                                                            <lightning-icon icon-name="utility:promotion_segments" size="medium">
+                                                            </lightning-icon>
+                                                            &nbsp;Recomendação por Compra Similar <lightning-helptext content="Recomendação de produto devida a compra do produto: SCOPER 20 Litros, no Pedido (10020)"></lightning-helptext></p>
+                                                        </lightning-layout-item>
+                                                    </lightning-layout>
+                                                </lightning-layout-item>
+                                                <lightning-layout-item size="12"
+                                                    style=" margin: 5px ">
+                                            <lightning-layout multiple-rows horizontal-align="spread"
+                                                style="width: 100%;">
+                                                        <lightning-layout-item>
+                                                            <div class="slds-m-bottom_x-small"
+                                                                style="font-size:1rem;font-weight:bold; margin-top: 10px">
+                                                                BURNER 10L
+                                                            </div>
+                                                        </lightning-layout-item>
+														<lightning-layout-item size="12" class="slds-m-bottom_xx-small"
+															style="font-size: 13px;color:#999">			
+															<p style="margin: 0px">Cultura: SOJA</p>
+														</lightning-layout-item> 
+														<lightning-layout-item>
+                                								<div class="lb-commom">
+                                								   Preço Sugerido (R$)
+                                								</div>
+                                								<div class="customlookup">
+                                								    <lightning-input type="number" name="inputDueDate" variant="label-hidden" value="120"></lightning-input>
+                                								</div>															
+														</lightning-layout-item>
+														<lightning-layout-item>
+                                								<div class="lb-commom">
+                                								   Quantidade
+                                								</div>
+                                								<div class="customlookup">
+                                								    <lightning-input type="number" name="inputDueDate" variant="label-hidden" value="100"></lightning-input>
+                                								</div>															
+														</lightning-layout-item>
+                                                    </lightning-layout>
+                                                </lightning-layout-item>
+                                                <lightning-layout-item size="12"
+                                                    style=" margin: 5px; ">
+                                                    <lightning-layout multiple-rows horizontal-align="spread"
+                                                        style="width: 100%; text-align: center">
+                                                        <lightning-layout-item size="6">
+												            <lightning-button icon-name="utility:delete" onclick={showError}
+												            	variant="destructive-text" label="Excluir">
+												            </lightning-button>
+                                                        </lightning-layout-item>
+                                                        <lightning-layout-item size="6">
+												            <lightning-button icon-name="utility:success" onclick={showSuccess}
+												            	variant="success" label="Usar">
+												            </lightning-button>
+                                                        </lightning-layout-item>
+                                                    </lightning-layout>
+                                                </lightning-layout-item>
+                                            </lightning-layout>
+                                        </div>
+                                    </div>
+                                </lightning-layout-item>
+                            </lightning-layout>
+                        </lightning-layout-item>
+                    </lightning-layout>
+                </div>
+            </div>
+        </div>
+    </div>
+</template>

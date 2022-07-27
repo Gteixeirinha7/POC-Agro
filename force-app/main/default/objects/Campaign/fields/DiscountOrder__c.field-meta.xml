@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>DiscountOrder__c</fullName>
+    <defaultValue>false</defaultValue>
+    <description>Caso este campo for marcado, o desconto da campanha irá incidir sobre todos os produtos do pedido e não apenas aos produtos da campanha.</description>
+    <externalId>false</externalId>
+    <inlineHelpText>Caso este campo for marcado, o desconto da campanha irá incidir sobre todos os produtos do pedido e não apenas aos produtos da campanha.</inlineHelpText>
+    <label>Desconto aplicado em todo o pedido</label>
+    <trackHistory>true</trackHistory>
+    <type>Checkbox</type>
+</CustomField>

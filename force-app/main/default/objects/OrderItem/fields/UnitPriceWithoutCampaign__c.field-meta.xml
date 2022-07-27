@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>UnitPriceWithoutCampaign__c</fullName>
+    <externalId>false</externalId>  
+    <formula>UnitPrice * (1+(CampaignPercent__c/100)) </formula>
+    <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+    <label>Preço Unitario Sem Campanha</label>
+    <precision>10</precision>
+    <required>false</required>
+    <scale>7</scale>
+    <trackHistory>false</trackHistory>
+    <type>Number</type>
+    <unique>false</unique>
+</CustomField>
